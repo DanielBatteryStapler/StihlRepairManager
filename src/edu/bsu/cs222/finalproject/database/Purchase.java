@@ -4,8 +4,8 @@ import java.sql.Date;
 
 //represents one row in the "Purchase" database table
 public class Purchase {
-    long id;
-    long purchaserId;
-    long itemId;
-    Date date;
+    public long id;
+    public long purchaserId;
+    public long itemId;
+    public Date date;
 }
