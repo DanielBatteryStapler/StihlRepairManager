@@ -61,7 +61,7 @@ public class TemporaryDatabase implements Database {
                 return i;
             }
         }
-        throw new RuntimeException("Attempted to get a User, but no user with that id exists");
+        return null;
     }
 
     public ArrayList<User> searchUsersWithName(String name){
@@ -108,7 +108,7 @@ public class TemporaryDatabase implements Database {
                 return i;
             }
         }
-        throw new RuntimeException("Attempted to get an Item, but no item with that id exists");
+        return null;
     }
 
     public void insertPurchase(Purchase newPurchase){
@@ -144,7 +144,7 @@ public class TemporaryDatabase implements Database {
                 return i;
             }
         }
-        throw new RuntimeException("Attempted to get a Purchase, but no purchase with that id exists");
+        return null;
     }
 
     public ArrayList<Purchase> getPurchasesWithPurchaser(long purchaserId){

@@ -32,6 +32,8 @@ public class TestTemporaryDatabase {
         database.updateUser(userC);
         User userE = database.getUserWithId(userC.id);
         Assert.assertEquals("UserNew", userE.name);
+        database.dropUser(userE.id);
+        Assert.assertNull(database.getUserWithId(userE.id));
     }
 
     @Test
@@ -51,6 +53,8 @@ public class TestTemporaryDatabase {
         database.updateItem(itemC);
         Item itemE = database.getItemWithId(itemC.id);
         Assert.assertEquals("ItemNew", itemE.modelNumber);
+        database.dropItem(itemE.id);
+        Assert.assertNull(database.getItemWithId(itemE.id));
     }
 
     @Test
@@ -65,6 +69,8 @@ public class TestTemporaryDatabase {
         database.updatePurchase(purchaseB);
         Purchase purchaseC = database.getPurchaseWithId(purchaseB.id);
         Assert.assertEquals(26, purchaseC.itemId);
+        database.dropPurchase(purchaseC.id);
+        Assert.assertNull(database.getPurchaseWithId(purchaseC.id));
     }
 
     @Test
