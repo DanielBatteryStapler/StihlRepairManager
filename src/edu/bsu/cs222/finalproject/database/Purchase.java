@@ -8,4 +8,5 @@ public class Purchase {
     public long purchaserId;
     public long itemId;
     public Date date;
+    public String notes;
 }
