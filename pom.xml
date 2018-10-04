@@ -7,6 +7,12 @@
     <groupId>groupId</groupId>
     <artifactId>final-project</artifactId>
     <version>0.0.0</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -14,10 +20,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
