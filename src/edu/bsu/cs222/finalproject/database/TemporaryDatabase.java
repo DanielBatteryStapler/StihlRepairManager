@@ -31,7 +31,7 @@ public class TemporaryDatabase implements Database {
     public void insertUser(User newUser){
         newUser.id = userNextInsert;
         userNextInsert++;
-        userTable.add(newUser);
+        userTable.add(new User(newUser));
     }
 
     public void updateUser(User user){
