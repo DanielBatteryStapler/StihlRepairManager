@@ -87,14 +87,20 @@ public class TestTemporaryDatabase {
         database.insertUser(userC);
 
         {
-            ArrayList<User> users = new ArrayList<>();
-            users.add(userA);
-            users.add(userB);
+            ArrayList<String> users = new ArrayList<>();
+            users.add(userA.name);
+            users.add(userB.name);
 
-            ArrayList<User> gotUsers = database.searchUsersWithName("john");
+            ArrayList<String> gotUsers = new ArrayList<>();
+            {
+                ArrayList<User> gotUsers_ = database.searchUsersWithName("john");
+                for(User i : gotUsers_){
+                    gotUsers.add(i.name);
+                }
+            }
 
-            ArrayList<User> a = new ArrayList<>(users);
-            ArrayList<User> b = new ArrayList<>(gotUsers);
+            ArrayList<String> a = new ArrayList<>(users);
+            ArrayList<String> b = new ArrayList<>(gotUsers);
 
             a.removeAll(gotUsers);
             b.removeAll(users);
@@ -103,17 +109,82 @@ public class TestTemporaryDatabase {
             Assert.assertTrue(b.isEmpty());
         }
         {
-            ArrayList<User> users = new ArrayList<>();
-            users.add(userA);
-            users.add(userC);
+            ArrayList<String> users = new ArrayList<>();
+            users.add(userA.name);
+            users.add(userC.name);
 
-            ArrayList<User> gotUsers = database.searchUsersWithName("smith");
+            ArrayList<String> gotUsers = new ArrayList<>();
+            {
+                ArrayList<User> gotUsers_ = database.searchUsersWithName("smith");
+                for(User i : gotUsers_){
+                    gotUsers.add(i.name);
+                }
+            }
 
-            ArrayList<User> a = new ArrayList<>(users);
-            ArrayList<User> b = new ArrayList<>(gotUsers);
+            ArrayList<String> a = new ArrayList<>(users);
+            ArrayList<String> b = new ArrayList<>(gotUsers);
 
             a.removeAll(gotUsers);
             b.removeAll(users);
+
+            Assert.assertTrue(a.isEmpty());
+            Assert.assertTrue(b.isEmpty());
+        }
+    }
+
+    @Test
+    public void testSearchItemTableWithSerial() {
+        Database database = TemporaryDatabase.createInstance();
+        Item itemA = new Item();
+        itemA.serialNumber = "John Smith";//serial numbers are human names, it makes it easy to see what's going on
+        database.insertItem(itemA);
+        Item itemB = new Item();
+        itemB.serialNumber = "Johnathan White";
+        database.insertItem(itemB);
+        Item itemC = new Item();
+        itemC.serialNumber = "Mary Smith";
+        database.insertItem(itemC);
+
+        {
+            ArrayList<String> items = new ArrayList<>();
+            items.add(itemA.serialNumber);
+            items.add(itemB.serialNumber);
+
+            ArrayList<String> gotItems = new ArrayList<>();
+            {
+                ArrayList<Item> gotItems_ = database.searchItemsWithSerial("john");
+                for(Item i : gotItems_){
+                    gotItems.add(i.serialNumber);
+                }
+            }
+
+            ArrayList<String> a = new ArrayList<>(items);
+            ArrayList<String> b = new ArrayList<>(gotItems);
+
+            a.removeAll(gotItems);
+            b.removeAll(items);
+
+            Assert.assertTrue(a.isEmpty());
+            Assert.assertTrue(b.isEmpty());
+        }
+        {
+            ArrayList<String> items = new ArrayList<>();
+            items.add(itemA.serialNumber);
+            items.add(itemC.serialNumber);
+
+            ArrayList<String> gotItems = new ArrayList<>();
+            {
+                ArrayList<Item> gotItems_ = database.searchItemsWithSerial("smith");
+                for(Item i : gotItems_){
+                    gotItems.add(i.serialNumber);
+                }
+            }
+
+            ArrayList<String> a = new ArrayList<>(items);
+            ArrayList<String> b = new ArrayList<>(gotItems);
+
+            a.removeAll(gotItems);
+            b.removeAll(items);
 
             Assert.assertTrue(a.isEmpty());
             Assert.assertTrue(b.isEmpty());
@@ -134,14 +205,20 @@ public class TestTemporaryDatabase {
         database.insertPurchase(purchaseC);
 
         {
-            ArrayList<Purchase> purchases = new ArrayList<>();
-            purchases.add(purchaseA);
-            purchases.add(purchaseC);
+            ArrayList<String> purchases = new ArrayList<>();
+            purchases.add(String.valueOf(purchaseA.purchaserId));
+            purchases.add(String.valueOf(purchaseC.purchaserId));
 
-            ArrayList<Purchase> gotPurchases = database.getPurchasesWithPurchaser(1);
+            ArrayList<String> gotPurchases = new ArrayList<>();
+            {
+                ArrayList<Purchase> gotPurchases_ = database.getPurchasesWithPurchaser(1);
+                for(Purchase i : gotPurchases_){
+                    gotPurchases.add(String.valueOf(i.purchaserId));
+                }
+            }
 
-            ArrayList<Purchase> a = new ArrayList<>(purchases);
-            ArrayList<Purchase> b = new ArrayList<>(gotPurchases);
+            ArrayList<String> a = new ArrayList<>(purchases);
+            ArrayList<String> b = new ArrayList<>(gotPurchases);
 
             a.removeAll(gotPurchases);
             b.removeAll(purchases);
@@ -150,13 +227,19 @@ public class TestTemporaryDatabase {
             Assert.assertTrue(b.isEmpty());
         }
         {
-            ArrayList<Purchase> purchases = new ArrayList<>();
-            purchases.add(purchaseB);
+            ArrayList<String> purchases = new ArrayList<>();
+            purchases.add(String.valueOf(purchaseB.purchaserId));
 
-            ArrayList<Purchase> gotPurchases = database.getPurchasesWithPurchaser(2);
+            ArrayList<String> gotPurchases = new ArrayList<>();
+            {
+                ArrayList<Purchase> gotPurchases_ = database.getPurchasesWithPurchaser(2);
+                for(Purchase i : gotPurchases_){
+                    gotPurchases.add(String.valueOf(i.purchaserId));
+                }
+            }
 
-            ArrayList<Purchase> a = new ArrayList<>(purchases);
-            ArrayList<Purchase> b = new ArrayList<>(gotPurchases);
+            ArrayList<String> a = new ArrayList<>(purchases);
+            ArrayList<String> b = new ArrayList<>(gotPurchases);
 
             a.removeAll(gotPurchases);
             b.removeAll(purchases);

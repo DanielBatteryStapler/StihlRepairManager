@@ -38,7 +38,7 @@ public class TemporaryDatabase implements Database {
         for(User i : userTable){
             if(i.id == user.id){
                 userTable.remove(i);
-                userTable.add(user);
+                userTable.add(new User(user));
                 return;
             }
         }
@@ -58,7 +58,7 @@ public class TemporaryDatabase implements Database {
     public User getUserWithId(long userId){
         for(User i : userTable){
             if(i.id == userId){
-                return i;
+                return new User(i);
             }
         }
         return null;
@@ -68,7 +68,7 @@ public class TemporaryDatabase implements Database {
         ArrayList<User> output = new ArrayList<>();
         for(User i : userTable){
             if(i.name.toLowerCase().contains(name.toLowerCase())){
-                output.add(i);
+                output.add(new User(i));
             }
         }
         return output;
@@ -78,14 +78,14 @@ public class TemporaryDatabase implements Database {
     public void insertItem(Item newItem){
         newItem.id = itemNextInsert;
         itemNextInsert++;
-        itemTable.add(newItem);
+        itemTable.add(new Item(newItem));
     }
 
     public void updateItem(Item item){
         for(Item i : itemTable){
             if(i.id == item.id){
                 itemTable.remove(i);
-                itemTable.add(item);
+                itemTable.add(new Item(item));
                 return;
             }
         }
@@ -105,23 +105,33 @@ public class TemporaryDatabase implements Database {
     public Item getItemWithId(long itemId){
         for(Item i : itemTable){
             if(i.id == itemId){
-                return i;
+                return new Item(i);
             }
         }
         return null;
     }
 
+    public ArrayList<Item> searchItemsWithSerial(String serialNumber){
+        ArrayList<Item> output = new ArrayList<>();
+        for(Item i : itemTable){
+            if(i.serialNumber.toLowerCase().contains(serialNumber.toLowerCase())){
+                output.add(new Item(i));
+            }
+        }
+        return output;
+    }
+
     public void insertPurchase(Purchase newPurchase){
         newPurchase.id = purchaseNextInsert;
         purchaseNextInsert++;
-        purchaseTable.add(newPurchase);
+        purchaseTable.add(new Purchase(newPurchase));
     }
 
     public void updatePurchase(Purchase purchase){
         for(Purchase i : purchaseTable){
             if(i.id == purchase.id){
                 purchaseTable.remove(i);
-                purchaseTable.add(purchase);
+                purchaseTable.add(new Purchase(purchase));
                 return;
             }
         }
@@ -141,7 +151,7 @@ public class TemporaryDatabase implements Database {
     public Purchase getPurchaseWithId(long purchaseId){
         for(Purchase i : purchaseTable){
             if(i.id == purchaseId){
-                return i;
+                return new Purchase(i);
             }
         }
         return null;
@@ -151,7 +161,7 @@ public class TemporaryDatabase implements Database {
         ArrayList<Purchase> output = new ArrayList<>();
         for(Purchase i : purchaseTable){
             if(i.purchaserId == purchaserId){
-                output.add(i);
+                output.add(new Purchase(i));
             }
         }
         return output;

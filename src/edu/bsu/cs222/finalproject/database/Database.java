@@ -15,6 +15,7 @@ public interface Database{
     void updateItem(Item item);
     void dropItem(long itemId);
     Item getItemWithId(long itemId);
+    ArrayList<Item> searchItemsWithSerial(String serialNumber);
 
     void insertPurchase(Purchase newPurchase);
     void updatePurchase(Purchase purchase);
