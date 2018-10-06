@@ -28,6 +28,11 @@ public class TemporaryDatabase implements Database {
         //there is no auxiliary initialization on a TemporaryDatabase, it's all in memory, so it's always ready to be used
     }
 
+    public String connectToServer(String address, String username, String password){
+        //you don't login to this database, so just
+        return null;
+    }
+
     public void insertUser(User newUser){
         newUser.id = userNextInsert;
         userNextInsert++;
@@ -58,6 +63,15 @@ public class TemporaryDatabase implements Database {
     public User getUserWithId(long userId){
         for(User i : userTable){
             if(i.id == userId){
+                return new User(i);
+            }
+        }
+        return null;
+    }
+
+    public User getUserWithPhoneNumber(String phoneNumber){
+        for(User i : userTable){
+            if(i.phoneNumber.equals(phoneNumber)){
                 return new User(i);
             }
         }

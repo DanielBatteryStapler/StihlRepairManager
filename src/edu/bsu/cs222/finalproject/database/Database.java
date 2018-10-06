@@ -5,10 +5,13 @@ import java.util.ArrayList;
 public interface Database{
     boolean isUsable();
 
+    String connectToServer(String address, String username, String password);//returns a string with an error for the database, null on no error
+
     void insertUser(User newUser);//sets the "id" of the user to match the internal database id
     void updateUser(User user);
     void dropUser(long userId);
     User getUserWithId(long userId);
+    User getUserWithPhoneNumber(String phoneNumber);
     ArrayList<User> searchUsersWithName(String name);
 
     void insertItem(Item newItem);
