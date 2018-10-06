@@ -17,9 +17,11 @@ import javafx.stage.Stage;
 public class UserSelector extends GridPane {
 
     private User selectedUser;
+    private GridPane lastUiInsert;
 
     UserSelector(Stage rootWindow, WorkingLayer workingLayer){
         selectedUser = null;
+        lastUiInsert = null;
 
         setAlignment(Pos.CENTER);
         setHgap(10);
@@ -60,7 +62,13 @@ public class UserSelector extends GridPane {
                         }
                     );
                     gridPane.add(newUser, 0, 1);
+
+                    if(lastUiInsert != null) {
+                        getChildren().remove(lastUiInsert);
+                    }
+
                     add(gridPane, 0, 3, 2, 1);
+                    lastUiInsert = gridPane;
                 }
                 else{
                     GridPane gridPane = new GridPane();
@@ -81,11 +89,20 @@ public class UserSelector extends GridPane {
                     addressData.setText("Address: " + selectedUser.address);
                     gridPane.add(addressData, 0, 2);
 
+                    if(lastUiInsert != null) {
+                        getChildren().remove(lastUiInsert);
+                    }
+
                     add(gridPane, 0, 3, 2, 1);
+                    lastUiInsert = gridPane;
                 }
             }
         );
         add(search, 0, 2, 2, 1);
+    }
+
+    void setUser(User user) {
+        selectedUser = user;
     }
 
     User getUser() {
