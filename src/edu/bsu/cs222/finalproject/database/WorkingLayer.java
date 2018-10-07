@@ -17,4 +17,8 @@ public class WorkingLayer {
     public User getUserWithPhoneNumber(String phoneNumber){
         return database.getUserWithPhoneNumber(phoneNumber);
     }
+
+    public void addNewUser(User newUser){
+        database.insertUser(newUser);
+    }
 }

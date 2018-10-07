@@ -43,8 +43,9 @@ public class UserSelector extends GridPane {
         Button search = new Button();
         search.setText("Search");
         search.setOnAction((ActionEvent event) -> {
-                selectedUser = workingLayer.getUserWithPhoneNumber(phoneNumber.getText());
-                if(selectedUser == null){
+                User user = workingLayer.getUserWithPhoneNumber(phoneNumber.getText());
+                if(user == null){
+                    selectedUser = null;
                     GridPane gridPane = new GridPane();
                     gridPane.setAlignment(Pos.CENTER);
                     gridPane.setHgap(10);
@@ -58,7 +59,10 @@ public class UserSelector extends GridPane {
                     Button newUser = new Button();
                     newUser.setText("Create One");
                     newUser.setOnAction((ActionEvent eventB) -> {
-                            System.out.println("Not Done Yet");
+                            UserCreator userCreator = new UserCreator(workingLayer, rootWindow);
+                            userCreator.setUserSelectorCallback(this);
+                            userCreator.setPhoneNumber(phoneNumber.getText());
+                            userCreator.show();
                         }
                     );
                     gridPane.add(newUser, 0, 1);
@@ -71,30 +75,7 @@ public class UserSelector extends GridPane {
                     lastUiInsert = gridPane;
                 }
                 else{
-                    GridPane gridPane = new GridPane();
-                    gridPane.setAlignment(Pos.CENTER);
-                    gridPane.setHgap(10);
-                    gridPane.setVgap(10);
-                    //gridPane.setPadding(new Insets(25, 25, 25, 25));
-
-                    Label phoneNumberData = new Label();
-                    phoneNumberData.setText("Phone Number: " + selectedUser.phoneNumber);
-                    gridPane.add(phoneNumberData, 0, 0);
-
-                    Label nameData = new Label();
-                    nameData.setText("Name: " + selectedUser.name);
-                    gridPane.add(nameData, 0, 1);
-
-                    Label addressData = new Label();
-                    addressData.setText("Address: " + selectedUser.address);
-                    gridPane.add(addressData, 0, 2);
-
-                    if(lastUiInsert != null) {
-                        getChildren().remove(lastUiInsert);
-                    }
-
-                    add(gridPane, 0, 3, 2, 1);
-                    lastUiInsert = gridPane;
+                    setUser(user);
                 }
             }
         );
@@ -102,10 +83,38 @@ public class UserSelector extends GridPane {
     }
 
     void setUser(User user) {
-        selectedUser = user;
+        if(user.id == -1){
+            //if the id is -1, that means that it was not inserted into a database, so it can't be selected
+            throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
+        }
+        selectedUser = new User(user);
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        //gridPane.setPadding(new Insets(25, 25, 25, 25));
+
+        Label phoneNumberData = new Label();
+        phoneNumberData.setText("Phone Number: " + selectedUser.phoneNumber);
+        gridPane.add(phoneNumberData, 0, 0);
+
+        Label nameData = new Label();
+        nameData.setText("Name: " + selectedUser.name);
+        gridPane.add(nameData, 0, 1);
+
+        Label addressData = new Label();
+        addressData.setText("Address: " + selectedUser.address);
+        gridPane.add(addressData, 0, 2);
+
+        if(lastUiInsert != null) {
+            getChildren().remove(lastUiInsert);
+        }
+
+        add(gridPane, 0, 3, 2, 1);
+        lastUiInsert = gridPane;
     }
 
     User getUser() {
-        return selectedUser;
+        return new User(selectedUser);
     }
 }
