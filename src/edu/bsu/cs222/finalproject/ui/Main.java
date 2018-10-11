@@ -33,6 +33,7 @@ public class Main extends Application {
     @Override
     public void start(Stage _stage) throws Exception{
         stage = _stage;
+
         ConnectToDatabase.showScene(this);
     }
 

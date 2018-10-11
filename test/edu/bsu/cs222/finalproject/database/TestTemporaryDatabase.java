@@ -1,4 +1,4 @@
-package edu.bsu.cs222.finalproject.Database;
+package edu.bsu.cs222.finalproject.database;
 
 import edu.bsu.cs222.finalproject.database.*;
 
