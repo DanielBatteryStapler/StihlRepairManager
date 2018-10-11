@@ -7,6 +7,12 @@ public interface Database{
 
     String connectToServer(String address, String username, String password);//returns a string with an error for the database, null on no error
 
+    void insertEmployee(Employee newEmployee);
+    void updateEmployee(Employee employee);
+    void dropEmployee(long employeeId);
+    Employee getEmployeeWithId(long employeeId);
+    Employee getEmployeeWithNumber(String employeeNumber);
+
     void insertUser(User newUser);//sets the "id" of the user to match the internal database id
     void updateUser(User user);
     void dropUser(long userId);

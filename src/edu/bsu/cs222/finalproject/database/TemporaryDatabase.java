@@ -3,6 +3,8 @@ package edu.bsu.cs222.finalproject.database;
 import java.util.ArrayList;
 
 public class TemporaryDatabase implements Database {
+    private ArrayList<Employee> employeeTable;
+    private long employeeNextInsert;
     private ArrayList<User> userTable;
     private long userNextInsert;
     private ArrayList<Item> itemTable;
@@ -11,6 +13,8 @@ public class TemporaryDatabase implements Database {
     private long purchaseNextInsert;
 
     private TemporaryDatabase(){
+        employeeTable = new ArrayList<>();
+        employeeNextInsert = 0;
         userTable = new ArrayList<>();
         userNextInsert = 0;
         itemTable = new ArrayList<>();
@@ -30,6 +34,51 @@ public class TemporaryDatabase implements Database {
 
     public String connectToServer(String address, String username, String password){
         //you don't login to this database, so just
+        return null;
+    }
+
+    public void insertEmployee(Employee newEmployee){
+        newEmployee.id = employeeNextInsert;
+        employeeNextInsert++;
+        employeeTable.add(new Employee(newEmployee));
+    }
+
+    public void updateEmployee(Employee employee){
+        for(Employee i : employeeTable){
+            if(i.id == employee.id){
+                employeeTable.remove(i);
+                employeeTable.add(new Employee(employee));
+                return;
+            }
+        }
+        throw new RuntimeException("Attempted to update an Employee, but no employee with that id exists");
+    }
+
+    public void dropEmployee(long employeeId){
+        for(Employee i : employeeTable){
+            if(i.id == employeeId){
+                employeeTable.remove(i);
+                return;
+            }
+        }
+        throw new RuntimeException("Attempted to remove an Employee, but no employee with that id exists");
+    }
+
+    public Employee getEmployeeWithId(long employeeId){
+        for(Employee i : employeeTable){
+            if(i.id == employeeId){
+                return new Employee(i);
+            }
+        }
+        return null;
+    }
+
+    public Employee getEmployeeWithNumber(String employeeNumber){
+        for(Employee i : employeeTable){
+            if(i.number.equals(employeeNumber)){
+                return new Employee(i);
+            }
+        }
         return null;
     }
 
