@@ -32,7 +32,7 @@ public class ConnectToDatabase {
     private Main main = null;
 
     @FXML
-    void connectToDatabase(Event e){
+    void connectToDatabase(){
         Database database = TemporaryDatabase.createInstance();
         database.connectToServer(addressField.getText(), usernameField.getText(), passwordField.getText());
         {
