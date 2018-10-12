@@ -1,85 +1,66 @@
 package edu.bsu.cs222.finalproject.ui;
 
-import edu.bsu.cs222.finalproject.database.Database;
-import edu.bsu.cs222.finalproject.database.TemporaryDatabase;
 import edu.bsu.cs222.finalproject.database.User;
-import edu.bsu.cs222.finalproject.database.WorkingLayer;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
-public class UserSelector extends GridPane {
+import java.io.File;
 
-    private User selectedUser;
-    private GridPane lastUiInsert;
+public class UserSelector extends StackPane {
 
-    UserSelector(Stage rootWindow, WorkingLayer workingLayer){
-        selectedUser = null;
-        lastUiInsert = null;
+    public static UserSelector instance() throws Exception{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation((new File("fxml/UserSelector.fxml")).toURI().toURL());
+        Pane rootGrid = loader.load();
+        UserSelector controller = loader.getController();
+        controller.getChildren().add(rootGrid);
 
-        setAlignment(Pos.CENTER);
-        setHgap(10);
-        setVgap(10);
-        //setPadding(new Insets(25, 25, 25, 25));
+        rootGrid.getChildren().remove(controller.userDataPane);
+        rootGrid.getChildren().remove(controller.newUserPane);
 
+        return controller;
+    }
 
-        Label titleLabel = new Label();
-        titleLabel.setText("Select Customer:");
-        add(titleLabel, 0, 0, 3, 1);
+    private User selectedUser = null;
 
-        Label phoneLabel = new Label();
-        phoneLabel.setText("Phone Number:");
-        add(phoneLabel, 0, 1, 1, 1);
+    @FXML TextField phoneField = null;
 
-        TextField phoneNumber = new TextField();
-        add(phoneNumber, 1, 1, 1, 1);
+    @FXML StackPane presentingPane = null;
 
-        Button search = new Button();
-        search.setText("Search");
-        search.setOnAction((ActionEvent event) -> {
-                User user = workingLayer.getUserWithPhoneNumber(phoneNumber.getText());
-                if(user == null){
-                    selectedUser = null;
-                    GridPane gridPane = new GridPane();
-                    gridPane.setAlignment(Pos.CENTER);
-                    gridPane.setHgap(10);
-                    gridPane.setVgap(10);
-                    //gridPane.setPadding(new Insets(25, 25, 25, 25));
+    @FXML Node userDataPane = null;
+    @FXML Label nameData = null;
+    @FXML Label phoneData = null;
+    @FXML Label addressData = null;
 
-                    Label message = new Label();
-                    message.setText("User Does not Exist, ");
-                    gridPane.add(message, 0, 0);
+    @FXML Node newUserPane = null;
 
-                    Button newUser = new Button();
-                    newUser.setText("Create One");
-                    newUser.setOnAction((ActionEvent eventB) -> {
-                            UserCreator userCreator = new UserCreator(workingLayer, rootWindow);
-                            userCreator.setUserSelectorCallback(this);
-                            userCreator.setPhoneNumber(phoneNumber.getText());
-                            userCreator.show();
-                        }
-                    );
-                    gridPane.add(newUser, 0, 1);
+    @FXML
+    void searchPhoneNumber(){
+        Main main = Main.getInstance();
+        User user = main.workingLayer.getUserWithPhoneNumber(phoneField.getText());
+        if(user == null){
+            selectedUser = null;
 
-                    if(lastUiInsert != null) {
-                        getChildren().remove(lastUiInsert);
-                    }
+            presentingPane.getChildren().clear();
+            presentingPane.getChildren().add(newUserPane);
+        }
+        else{
+            setUser(user);
+        }
+    }
 
-                    add(gridPane, 0, 3, 2, 1);
-                    lastUiInsert = gridPane;
-                }
-                else{
-                    setUser(user);
-                }
-            }
-        );
-        add(search, 0, 2, 2, 1);
+    @FXML
+    void createNewUser() throws Exception{
+        Main main = Main.getInstance();
+        UserCreator userCreator = UserCreator.createInstance(main.stage);
+        userCreator.setUserSelectorCallback(this);
+        userCreator.setPhoneNumber(phoneField.getText());
+        userCreator.show();
     }
 
     void setUser(User user) {
@@ -88,33 +69,16 @@ public class UserSelector extends GridPane {
             throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
         }
         selectedUser = new User(user);
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        //gridPane.setPadding(new Insets(25, 25, 25, 25));
-
-        Label phoneNumberData = new Label();
-        phoneNumberData.setText("Phone Number: " + selectedUser.phoneNumber);
-        gridPane.add(phoneNumberData, 0, 0);
-
-        Label nameData = new Label();
+        phoneData.setText("Phone Number: " + selectedUser.phoneNumber);
         nameData.setText("Name: " + selectedUser.name);
-        gridPane.add(nameData, 0, 1);
-
-        Label addressData = new Label();
         addressData.setText("Address: " + selectedUser.address);
-        gridPane.add(addressData, 0, 2);
 
-        if(lastUiInsert != null) {
-            getChildren().remove(lastUiInsert);
-        }
-
-        add(gridPane, 0, 3, 2, 1);
-        lastUiInsert = gridPane;
+        presentingPane.getChildren().clear();
+        presentingPane.getChildren().add(userDataPane);
     }
 
     User getUser() {
         return new User(selectedUser);
     }
+
 }

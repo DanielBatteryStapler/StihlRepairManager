@@ -3,23 +3,22 @@ package edu.bsu.cs222.finalproject.ui;
 import edu.bsu.cs222.finalproject.database.Database;
 import edu.bsu.cs222.finalproject.database.TemporaryDatabase;
 import edu.bsu.cs222.finalproject.database.User;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 import java.io.File;
 
 public class ConnectToDatabase {
-    static void showScene(Main main) throws Exception{
+    static void showScene() throws Exception{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation((new File("fxml/ConnectToDatabase.fxml")).toURI().toURL());
-        Pane loadedPane = loader.load();
-        ConnectToDatabase controller = loader.getController();
-        controller.main = main;
+        Parent loadedPane = loader.load();
+        //ConnectToDatabase controller = loader.getController();
 
+        Main main = Main.getInstance();
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);
         main.stage.show();
@@ -29,10 +28,8 @@ public class ConnectToDatabase {
     @FXML TextField usernameField = null;
     @FXML TextField passwordField = null;
 
-    private Main main = null;
-
     @FXML
-    void connectToDatabase(){
+    void connectToDatabase() throws Exception{
         Database database = TemporaryDatabase.createInstance();
         database.connectToServer(addressField.getText(), usernameField.getText(), passwordField.getText());
         {
@@ -42,8 +39,9 @@ public class ConnectToDatabase {
             user.address = "555 Fifth Avenue";
             database.insertUser(user);
         }
+        Main main = Main.getInstance();
         main.workingLayer.initialize(database);
         //now that the database is connected, show the real ui
-        main.setupMainSelectionScene();
+        MainSelection.showScene();
     }
 }
