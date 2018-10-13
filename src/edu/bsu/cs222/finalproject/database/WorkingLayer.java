@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 
 public class WorkingLayer {
-    private Database database;
+    public Database database;
 
     public WorkingLayer(){
         database = null;
@@ -15,14 +15,6 @@ public class WorkingLayer {
             throw new RuntimeException("Attempted to initialize a WorkingLayer with an unusable database");
         }
         database = workingDatabase;
-    }
-
-    public User getUserWithPhoneNumber(String phoneNumber){
-        return database.getUserWithPhoneNumber(phoneNumber);
-    }
-
-    public void addNewUser(User newUser){
-        database.insertUser(newUser);
     }
 
     public Purchase addNewPurchase(User existingPurchaser, Item newItem){

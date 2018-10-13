@@ -2,17 +2,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.MainSelection" alignment="center">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
+    <Label fx:id="welcomeText"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Label text="Select an Action"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"
+          GridPane.columnIndex="0" GridPane.rowIndex="1"
           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button text="Add Purchase" onAction="#addPurchase"
-            GridPane.columnIndex="0" GridPane.rowIndex="1"
+            GridPane.columnIndex="0" GridPane.rowIndex="2"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

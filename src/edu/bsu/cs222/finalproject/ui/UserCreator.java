@@ -38,7 +38,7 @@ public class UserCreator {
         user.name = nameField.getText();
         user.phoneNumber = phoneField.getText();
         user.address = addressField.getText();
-        Main.getInstance().workingLayer.addNewUser(user);
+        Main.getInstance().workingLayer.database.insertUser(user);
         if(callback != null){
             callback.setUser(user);
         }
