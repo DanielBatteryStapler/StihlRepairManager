@@ -6,8 +6,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.UserSelector" alignment="center"
-          style="-fx-border-color: lightgray; -fx-border-width: 2; -fx-border-style: dashed;">
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.UserSelector" alignment="TOP_CENTER"
+          style="-fx-border-color: lightgray; -fx-border-width: 2; -fx-border-style: dashed;" minHeight="210">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
     <Label text="Select a User"
            GridPane.columnIndex="0" GridPane.rowIndex="0"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>

@@ -16,7 +16,25 @@
     <Label text="Add a new Purchase"
             GridPane.columnIndex="0" GridPane.rowIndex="1"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <UserSelector fx:factory="instance"
+    <UserSelector fx:id="userField" fx:factory="instance"
             GridPane.columnIndex="0" GridPane.rowIndex="2"
-            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+    <Label text="Item Model:"
+           GridPane.columnIndex="0" GridPane.rowIndex="3"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label text="Item Serial Number:"
+           GridPane.columnIndex="0" GridPane.rowIndex="4"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <TextField fx:id="modelField"
+           GridPane.columnIndex="1" GridPane.rowIndex="3"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <TextField fx:id="serialField"
+           GridPane.columnIndex="1" GridPane.rowIndex="4"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#submit" text="Submit"
+           GridPane.columnIndex="0" GridPane.rowIndex="5"
+           GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+    <Label fx:id="errorLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="6"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>
