@@ -30,7 +30,7 @@ public class Login {
     void submit() throws Exception{
         Main main = Main.getInstance();
 
-        Employee employee = main.workingLayer.database.getEmployeeWithNumber(employeeNumberField.getText());
+        Employee employee = main.workingLayer.getEmployeeWithNumber(employeeNumberField.getText());
         if(employee == null){
             errorText.setText("Invalid Employee Number");
         }

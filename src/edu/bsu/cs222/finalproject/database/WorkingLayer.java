@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 
 public class WorkingLayer {
-    public Database database;
+    private Database database;
 
     public WorkingLayer(){
         database = null;
@@ -26,5 +26,18 @@ public class WorkingLayer {
         purchase.notes = "";//right now there are no notes, this will be added to ui later
         database.insertPurchase(purchase);
         return purchase;
+    }
+
+    public void insertUser(User user) {
+        database.insertUser(user);
+    }
+
+    public User getUserWithPhoneNumber(String phoneNumber) {
+        return database.getUserWithPhoneNumber(phoneNumber);
+    }
+
+
+    public Employee getEmployeeWithNumber(String employeeNumber) {
+        return database.getEmployeeWithNumber(employeeNumber);
     }
 }

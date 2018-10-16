@@ -42,7 +42,7 @@ public class UserSelector extends StackPane {
     @FXML
     void searchPhoneNumber(){
         Main main = Main.getInstance();
-        User user = main.workingLayer.database.getUserWithPhoneNumber(phoneField.getText());
+        User user = main.workingLayer.getUserWithPhoneNumber(phoneField.getText());
         if(user == null){
             selectedUser = null;
 
