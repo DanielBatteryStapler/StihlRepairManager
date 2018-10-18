@@ -31,4 +31,9 @@ public class MainSelection {
     void addPurchase() throws Exception{
         AddPurchase.showScene();
     }
+
+    @FXML
+    void listPurchases() throws Exception{
+        ListPurchases.showScene();
+    }
 }

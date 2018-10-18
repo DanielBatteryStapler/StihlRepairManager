@@ -35,10 +35,11 @@ public class AddPurchase {
     @FXML Label errorLabel = null;
 
     @FXML
-    void submit() throws Exception{
+    void submit() {
         User user = userField.getUser();
         if(user == null){
             errorLabel.setText("You must Select a User First");
+            return;
         }
         Item item = new Item();
         item.modelNumber = modelField.getText();
