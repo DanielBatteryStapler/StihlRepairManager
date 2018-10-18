@@ -37,8 +37,8 @@ public class UserCreator {
         User user = new User();
         user.name = nameField.getText();
 
-        if (isPhoneNumberValid(phoneField.getText()) && convertPhoneNumberString(phoneField.getText()) != 0) {
-            user.phoneNumber = convertPhoneNumberString(phoneField.getText());
+        if (isPhoneNumberValid(phoneField.getText()) && makePhoneNumberAllNumbers(phoneField.getText()) != null) {
+            user.phoneNumber = makePhoneNumberAllNumbers(phoneField.getText());
         }
         else {
             //throw a tantrum
@@ -64,27 +64,26 @@ public class UserCreator {
         stage.show();
     }
 
-    Boolean isPhoneNumberValid(String phoneNumber) {
-        phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+    private Boolean isPhoneNumberValid(String phoneNumber) {
+        phoneNumber = phoneNumber.replaceAll("\\D+", "");
 
         int iterator;
 
-        for (iterator = 0;iterator < phoneNumber.length();iterator++);
-
-        if (iterator == 10) {
-            return true;
-        }
+        for (iterator = 0;iterator < phoneNumber.length();iterator++)
+            if (iterator == 10)
+                return true;
 
         return false;
     }
 
-    int convertPhoneNumberString(String phoneNumber) {
-        phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+    private String makePhoneNumberAllNumbers(String phoneNumber) {
+        phoneNumber = phoneNumber.replaceAll("\\D+", "");
 
         try {
-            return (int) Integer.parseInt(phoneNumber);
+            Integer.parseInt(phoneNumber); //double check that it's all ints
+            return phoneNumber;
         } catch (NumberFormatException e) {
-            return 0;
+            return null;
         }
     }
 }
