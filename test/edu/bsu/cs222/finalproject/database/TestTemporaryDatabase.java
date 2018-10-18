@@ -19,14 +19,20 @@ public class TestTemporaryDatabase {
         Database database = TemporaryDatabase.createInstance();
         User userA = new User();
         userA.name = "UserA";
+        userA.phoneNumber = "5555555555";
         User userB = new User();
         userB.name = "UserB";
+        userB.phoneNumber = "6666666666";
         database.insertUser(userA);
         database.insertUser(userB);
         User userC = database.getUserWithId(userA.id);
         User userD = database.getUserWithId(userB.id);
         Assert.assertEquals("UserA", userC.name);
         Assert.assertEquals("UserB", userD.name);
+        User userG = database.getUserWithPhoneNumber("5555555555");
+        User userF = database.getUserWithPhoneNumber("6666666666");
+        Assert.assertEquals("UserA", userG.name);
+        Assert.assertEquals("UserB", userF.name);
         userC.name = "UserNew";
         database.updateUser(userC);
         User userE = database.getUserWithId(userC.id);
@@ -54,6 +60,33 @@ public class TestTemporaryDatabase {
         Assert.assertEquals("ItemNew", itemE.modelNumber);
         database.dropItem(itemE.id);
         Assert.assertNull(database.getItemWithId(itemE.id));
+    }
+
+    @Test
+    public void testEmployeeTableInTemporaryDatabase() {
+        Database database = TemporaryDatabase.createInstance();
+        Employee employeeA = new Employee();
+        employeeA.name = "EmployeeA";
+        employeeA.number = "1";
+        Employee employeeB = new Employee();
+        employeeB.name = "EmployeeB";
+        employeeB.number = "2";
+        database.insertEmployee(employeeA);
+        database.insertEmployee(employeeB);
+        Employee employeeC = database.getEmployeeWithId(employeeA.id);
+        Employee employeeD = database.getEmployeeWithId(employeeB.id);
+        Assert.assertEquals("EmployeeA", employeeC.name);
+        Assert.assertEquals("EmployeeB", employeeD.name);
+        Employee employeeF = database.getEmployeeWithNumber("1");
+        Employee employeeG = database.getEmployeeWithNumber("2");
+        Assert.assertEquals("EmployeeA", employeeF.name);
+        Assert.assertEquals("EmployeeB", employeeG.name);
+        employeeC.name = "EmployeeNew";
+        database.updateEmployee(employeeC);
+        Employee employeeE = database.getEmployeeWithId(employeeC.id);
+        Assert.assertEquals("EmployeeNew", employeeE.name);
+        database.dropEmployee(employeeE.id);
+        Assert.assertNull(database.getItemWithId(employeeE.id));
     }
 
     @Test

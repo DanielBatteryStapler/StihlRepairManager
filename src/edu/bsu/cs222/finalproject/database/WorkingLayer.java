@@ -1,6 +1,7 @@
 package edu.bsu.cs222.finalproject.database;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class WorkingLayer {
@@ -39,5 +40,13 @@ public class WorkingLayer {
 
     public Employee getEmployeeWithNumber(String employeeNumber) {
         return database.getEmployeeWithNumber(employeeNumber);
+    }
+
+    public ArrayList<Purchase> getPurchasesWithPurchaser(long purchaser) {
+        return database.getPurchasesWithPurchaser(purchaser);
+    }
+
+    public Item getItemWithId(long itemId) {
+        return database.getItemWithId(itemId);
     }
 }

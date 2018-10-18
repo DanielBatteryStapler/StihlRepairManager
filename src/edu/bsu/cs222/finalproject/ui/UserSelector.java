@@ -78,6 +78,9 @@ public class UserSelector extends StackPane {
     }
 
     User getUser() {
+        if(selectedUser == null){
+            return null;
+        }
         return new User(selectedUser);
     }
 

@@ -39,6 +39,7 @@ public class AddPurchase {
         User user = userField.getUser();
         if(user == null){
             errorLabel.setText("You must Select a User First");
+            return;
         }
         Item item = new Item();
         item.modelNumber = modelField.getText();
