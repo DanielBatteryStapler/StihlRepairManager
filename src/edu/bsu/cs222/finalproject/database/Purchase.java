@@ -22,7 +22,7 @@ public class Purchase {
 
     public long id;
     long purchaserId;
-    long itemId;
-    Date date;
+    public long itemId;
+    public Date date;
     String notes;
 }
