@@ -36,7 +36,14 @@ public class UserCreator {
     void submit(){
         User user = new User();
         user.name = nameField.getText();
-        user.phoneNumber = phoneField.getText();
+
+        if (isPhoneNumberValid(phoneField.getText()) && convertPhoneNumberString(phoneField.getText()) != 0) {
+            user.phoneNumber = convertPhoneNumberString(phoneField.getText());
+        }
+        else {
+            //throw a tantrum
+        }
+
         user.address = addressField.getText();
         Main.getInstance().workingLayer.insertUser(user);
         if(callback != null){
@@ -55,5 +62,29 @@ public class UserCreator {
 
     void show(){
         stage.show();
+    }
+
+    Boolean isPhoneNumberValid(String phoneNumber) {
+        phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+
+        int iterator;
+
+        for (iterator = 0;iterator < phoneNumber.length();iterator++);
+
+        if (iterator == 10) {
+            return true;
+        }
+
+        return false;
+    }
+
+    int convertPhoneNumberString(String phoneNumber) {
+        phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+
+        try {
+            return (int) Integer.parseInt(phoneNumber);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 }

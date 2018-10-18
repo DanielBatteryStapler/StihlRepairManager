@@ -6,7 +6,7 @@ public class User {
         id = -1;
         name = "";
         address = "";
-        phoneNumber = "";
+        phoneNumber = 0;
         notes = "";
     }
 
@@ -21,6 +21,6 @@ public class User {
     public long id;
     public String name;
     public String address;
-    public String phoneNumber;
+    public int phoneNumber;
     String notes;
 }
