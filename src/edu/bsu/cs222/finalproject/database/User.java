@@ -22,5 +22,5 @@ public class User {
     public String name;
     public String address;
     public String phoneNumber;
-    public String notes;
+    String notes;
 }

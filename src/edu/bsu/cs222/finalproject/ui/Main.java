@@ -8,7 +8,7 @@ public class Main extends Application {
 
     private static Main singletonInstance = null;
 
-    public static Main getInstance(){
+    static Main getInstance(){
         return singletonInstance;
     }
 
@@ -30,7 +30,7 @@ public class Main extends Application {
         {
             User user = new User();
             user.name = "John Smith";
-            user.phoneNumber = "555-5555";
+            user.phoneNumber = "555-555-5555";
             user.address = "555 Fifth Avenue";
             database.insertUser(user);
         }

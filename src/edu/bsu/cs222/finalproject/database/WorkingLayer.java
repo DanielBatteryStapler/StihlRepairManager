@@ -11,7 +11,7 @@ public class WorkingLayer {
     }
 
     public void initialize(Database workingDatabase){
-        if(workingDatabase.isUsable() == false){
+        if(!workingDatabase.isUsable()){
             throw new RuntimeException("Attempted to initialize a WorkingLayer with an unusable database");
         }
         database = workingDatabase;
