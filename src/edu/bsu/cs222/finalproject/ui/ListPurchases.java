@@ -13,14 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.io.File;
 import java.util.ArrayList;
 
 public class ListPurchases {
     static void showScene() throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((new File("fxml/ListPurchases.fxml")).toURI().toURL());
+        loader.setLocation(System.class.getResource("/fxml/ListPurchases.fxml"));
         Parent loadedPane = loader.load();
         //ListPurchases controller = loader.getController();
 

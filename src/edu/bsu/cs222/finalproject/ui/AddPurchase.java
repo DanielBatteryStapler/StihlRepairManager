@@ -9,12 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.File;
-
 public class AddPurchase {
     static void showScene() throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((new File("fxml/AddPurchase.fxml")).toURI().toURL());
+        loader.setLocation(System.class.getResource("/fxml/AddPurchase.fxml"));
         Parent loadedPane = loader.load();
         //AddPurchase controller = loader.getController();
 

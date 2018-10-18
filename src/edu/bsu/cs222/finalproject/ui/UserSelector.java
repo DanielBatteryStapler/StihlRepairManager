@@ -9,13 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-import java.io.File;
-
 public class UserSelector extends StackPane {
 
     public static UserSelector instance() throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((new File("fxml/UserSelector.fxml")).toURI().toURL());
+        loader.setLocation(System.class.getResource("/fxml/UserSelector.fxml"));
         Pane rootGrid = loader.load();
         UserSelector controller = loader.getController();
         controller.getChildren().add(rootGrid);

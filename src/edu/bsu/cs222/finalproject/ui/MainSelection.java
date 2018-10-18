@@ -6,12 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
-import java.io.File;
-
 public class MainSelection {
     static void showScene() throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((new File("fxml/MainSelection.fxml")).toURI().toURL());
+        loader.setLocation(System.class.getResource("/fxml/MainSelection.fxml"));
         Parent loadedPane = loader.load();
         MainSelection controller = loader.getController();
 

@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.io.File;
 
 public class UserCreator {
     private UserSelector callback = null;
@@ -16,7 +15,7 @@ public class UserCreator {
 
     static UserCreator createInstance(Stage rootStage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((new File("fxml/UserCreator.fxml")).toURI().toURL());
+        loader.setLocation(System.class.getResource("/fxml/UserCreator.fxml"));
         Parent loadedPane = loader.load();
         UserCreator creator = loader.getController();
 

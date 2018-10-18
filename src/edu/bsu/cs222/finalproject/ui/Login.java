@@ -8,12 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.File;
-
 public class Login {
     static void showScene() throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation((new File("fxml/Login.fxml")).toURI().toURL());
+        loader.setLocation(System.class.getResource("/fxml/Login.fxml"));
         Parent loadedPane = loader.load();
         //Login controller = loader.getController();
 
