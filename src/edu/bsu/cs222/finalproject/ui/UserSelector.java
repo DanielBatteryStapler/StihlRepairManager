@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+import java.util.function.Consumer;
+
 public class UserSelector extends StackPane {
 
     public static UserSelector instance() throws Exception{
@@ -25,6 +27,7 @@ public class UserSelector extends StackPane {
     }
 
     private User selectedUser = null;
+    private Consumer<User> callback = null;
 
     @FXML TextField phoneField = null;
 
@@ -34,6 +37,10 @@ public class UserSelector extends StackPane {
     @FXML UserViewer userViewer = null;
 
     @FXML Node newUserPane = null;
+
+    void setCallback(Consumer<User> callback){
+        this.callback = callback;
+    }
 
     @FXML
     void searchPhoneNumber(){
@@ -57,6 +64,7 @@ public class UserSelector extends StackPane {
         userCreator.setCallback(user -> setUser(user));
         userCreator.setPhoneNumber(phoneField.getText());
         userCreator.show();
+
     }
 
     void setUser(User user) {
@@ -75,6 +83,9 @@ public class UserSelector extends StackPane {
 
             presentingPane.getChildren().clear();
             presentingPane.getChildren().add(userDataPane);
+            if(callback != null) {
+                callback.accept(user);
+            }
         }
     }
 

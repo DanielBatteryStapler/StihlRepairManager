@@ -49,7 +49,7 @@ public class PurchaseEditor {
     @FXML TextField serialField = null;
 
     void setCallback(Consumer<Purchase> callback){
-        callback = callback;
+        this.callback = callback;
     }
 
     void show(){

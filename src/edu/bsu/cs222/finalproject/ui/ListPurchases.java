@@ -22,7 +22,10 @@ public class ListPurchases {
         Parent loadedPane = loader.load();
         ListPurchases controller = loader.getController();
 
-        {
+        {//setup the userSelector callback
+            controller.userField.setCallback(user -> controller.search());
+        }
+        {//setup the table
             TableColumn dateCol = new TableColumn("Date");
             dateCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("Date"));
             TableColumn modelCol = new TableColumn("Model #");
@@ -42,10 +45,7 @@ public class ListPurchases {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        editor.setCallback(purchase -> {
-                            controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
-                            controller.search();
-                        });
+                        editor.setCallback(purchase -> controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId)));
                         editor.show();
                     }
                 });
@@ -67,9 +67,7 @@ public class ListPurchases {
     @FXML UserSelector userField = null;
     @FXML Label errorLabel = null;
     @FXML TableView dataTable = null;
-    @FXML Button search = null;
 
-    @FXML
     void search() {
         User user = userField.getUser();
         if(user == null){
@@ -91,10 +89,7 @@ public class ListPurchases {
     void createNewPurchase() throws Exception{
         Main main = Main.getInstance();
         PurchaseCreator purchaseCreator = PurchaseCreator.createInstance(main.stage);
-        purchaseCreator.setCallback(purchase -> {
-            userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
-            search();
-        });
+        purchaseCreator.setCallback(purchase -> userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId)));
         purchaseCreator.setUser(userField.getUser());
         purchaseCreator.show();
     }
