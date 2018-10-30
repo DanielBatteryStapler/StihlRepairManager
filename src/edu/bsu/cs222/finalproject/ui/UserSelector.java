@@ -31,9 +31,7 @@ public class UserSelector extends StackPane {
     @FXML StackPane presentingPane = null;
 
     @FXML Node userDataPane = null;
-    @FXML Label nameData = null;
-    @FXML Label phoneData = null;
-    @FXML Label addressData = null;
+    @FXML UserViewer userViewer = null;
 
     @FXML Node newUserPane = null;
 
@@ -66,10 +64,8 @@ public class UserSelector extends StackPane {
             //if the id is -1, that means that it was not inserted into a database, so it can't be selected
             throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
         }
-        selectedUser = new User(user);
-        phoneData.setText("Phone Number: " + selectedUser.phoneNumber);
-        nameData.setText("Name: " + selectedUser.name);
-        addressData.setText("Address: " + selectedUser.address);
+        selectedUser = user;
+        userViewer.setUser(user);
 
         presentingPane.getChildren().clear();
         presentingPane.getChildren().add(userDataPane);

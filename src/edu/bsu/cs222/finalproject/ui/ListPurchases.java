@@ -9,10 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.ArrayList;
 
 public class ListPurchases {
@@ -20,7 +19,35 @@ public class ListPurchases {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(System.class.getResource("/fxml/ListPurchases.fxml"));
         Parent loadedPane = loader.load();
-        //ListPurchases controller = loader.getController();
+        ListPurchases controller = loader.getController();
+
+        {
+            TableColumn dateCol = new TableColumn("Date");
+            dateCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("Date"));
+            TableColumn modelCol = new TableColumn("Model #");
+            modelCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("ModelNumber"));
+            TableColumn serialCol = new TableColumn("Serial #");
+            serialCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("SerialNumber"));
+            controller.dataTable.getColumns().addAll(dateCol, modelCol, serialCol);
+
+            controller.dataTable.setRowFactory(table -> {
+                TableRow<PurchaseViewData> row = new TableRow<>();
+                row.setOnMouseClicked(mouseEvent -> {
+                    if(mouseEvent.getClickCount() == 2 && !row.isEmpty()){
+                        Main main = Main.getInstance();
+                        PurchaseEditor editor = null;
+                        try {
+                            editor = PurchaseEditor.createInstance(main.stage, row.getItem().purchase);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        editor.setUpdateCallback(controller.search);
+                        editor.show();
+                    }
+                });
+                return row;
+            });
+        }
 
         Main main = Main.getInstance();
         Scene scene = new Scene(loadedPane);
@@ -36,6 +63,7 @@ public class ListPurchases {
     @FXML UserSelector userField = null;
     @FXML Label errorLabel = null;
     @FXML TableView dataTable = null;
+    @FXML Button search = null;
 
     @FXML
     void search() {
@@ -51,18 +79,8 @@ public class ListPurchases {
             purchaseData.add(new PurchaseViewData(purchase));
         }
 
-        dataTable.getColumns().clear();//clear the table first
-
         ObservableList<PurchaseViewData> observableListData = FXCollections.observableList(purchaseData);
         dataTable.setItems(observableListData);
-
-        TableColumn dateCol = new TableColumn("Date");
-        dateCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("Date"));
-        TableColumn modelCol = new TableColumn("Model #");
-        modelCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("ModelNumber"));
-        TableColumn serialCol = new TableColumn("Serial #");
-        serialCol.setCellValueFactory(new PropertyValueFactory<PurchaseViewData, String>("SerialNumber"));
-        dataTable.getColumns().addAll(dateCol, modelCol, serialCol);
     }
 
     public class PurchaseViewData{
@@ -72,10 +90,12 @@ public class ListPurchases {
             Item item = main.workingLayer.getItemWithId(purchase.itemId);
             modelNumber = item.modelNumber;
             serialNumber = item.serialNumber;
+            this.purchase = new Purchase(purchase);
         }
         String date;
         String modelNumber;
         String serialNumber;
+        Purchase purchase;
         public String getDate(){
             return date;
         }

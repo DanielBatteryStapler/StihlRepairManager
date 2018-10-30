@@ -49,4 +49,20 @@ public class WorkingLayer {
     public Item getItemWithId(long itemId) {
         return database.getItemWithId(itemId);
     }
+
+    public User getUserWithId(long purchaserId) {
+        return database.getUserWithId(purchaserId);
+    }
+
+    public void updateItem(Item item) {
+        database.updateItem(item);
+    }
+
+    public void deletePurchase(Purchase purchase) {
+        database.dropPurchase(purchase.purchaserId);
+    }
+
+    public void deleteItem(Item item) {
+        database.dropItem(item.id);
+    }
 }
