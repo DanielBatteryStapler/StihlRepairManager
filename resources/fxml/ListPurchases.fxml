@@ -28,4 +28,7 @@
     <TableView fx:id="dataTable" minWidth="400"
             GridPane.columnIndex="0" GridPane.rowIndex="5"
             GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+    <Button onAction="#createNewPurchase" text="Create New"
+            GridPane.columnIndex="0" GridPane.rowIndex="6"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
 </GridPane>

@@ -26,11 +26,6 @@ public class MainSelection {
     Label welcomeText = null;
 
     @FXML
-    void addPurchase() throws Exception{
-        AddPurchase.showScene();
-    }
-
-    @FXML
     void listPurchases() throws Exception{
         ListPurchases.showScene();
     }

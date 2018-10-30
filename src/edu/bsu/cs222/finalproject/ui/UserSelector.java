@@ -54,21 +54,28 @@ public class UserSelector extends StackPane {
     void createNewUser() throws Exception{
         Main main = Main.getInstance();
         UserCreator userCreator = UserCreator.createInstance(main.stage);
-        userCreator.setUserSelectorCallback(this);
+        userCreator.setCallback(user -> setUser(user));
         userCreator.setPhoneNumber(phoneField.getText());
         userCreator.show();
     }
 
     void setUser(User user) {
-        if(user.id == -1){
-            //if the id is -1, that means that it was not inserted into a database, so it can't be selected
-            throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
+        if(user == null) {
+            selectedUser = null;
+            userViewer.setUser(null);
+            presentingPane.getChildren().clear();
         }
-        selectedUser = user;
-        userViewer.setUser(user);
+        else{
+            if (user.id == -1) {
+                //if the id is -1, that means that it was not inserted into a database, so it can't be selected
+                throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
+            }
+            selectedUser = new User(user);
+            userViewer.setUser(user);
 
-        presentingPane.getChildren().clear();
-        presentingPane.getChildren().add(userDataPane);
+            presentingPane.getChildren().clear();
+            presentingPane.getChildren().add(userDataPane);
+        }
     }
 
     User getUser() {

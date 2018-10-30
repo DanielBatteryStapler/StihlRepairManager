@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.database.Purchase;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.function.Consumer;
+
 public class UserCreator {
-    private UserSelector callback = null;
     private Stage stage;
+    private Consumer<User> callback = null;
 
     static UserCreator createInstance(Stage rootStage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
@@ -46,13 +49,13 @@ public class UserCreator {
         user.address = addressField.getText();
         Main.getInstance().workingLayer.insertUser(user);
         if(callback != null){
-            callback.setUser(user);
+            callback.accept(user);
         }
         stage.close();
     }
 
-    void setUserSelectorCallback(UserSelector callbackSelector){
-        callback = callbackSelector;
+    void setCallback(Consumer<User> callback){
+        this.callback = callback;
     }
 
     void setPhoneNumber(String number){

@@ -5,6 +5,7 @@ import edu.bsu.cs222.finalproject.database.Purchase;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,7 +42,10 @@ public class ListPurchases {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        editor.setUpdateCallback(controller.search);
+                        editor.setCallback(purchase -> {
+                            controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+                            controller.search();
+                        });
                         editor.show();
                     }
                 });
@@ -81,6 +85,18 @@ public class ListPurchases {
 
         ObservableList<PurchaseViewData> observableListData = FXCollections.observableList(purchaseData);
         dataTable.setItems(observableListData);
+    }
+
+    @FXML
+    void createNewPurchase() throws Exception{
+        Main main = Main.getInstance();
+        PurchaseCreator purchaseCreator = PurchaseCreator.createInstance(main.stage);
+        purchaseCreator.setCallback(purchase -> {
+            userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+            search();
+        });
+        purchaseCreator.setUser(userField.getUser());
+        purchaseCreator.show();
     }
 
     public class PurchaseViewData{

@@ -28,13 +28,21 @@ public class UserViewer extends StackPane {
     @FXML Label addressData = null;
 
     void setUser(User user) {
-        if(user.id == -1){
-            //if the id is -1, that means that it was not inserted into a database, so it can't be selected
-            throw new RuntimeException("Attempted to set a UserViewer to be selecting a user that isn't in a database");
+        if(user == null){
+            selectedUser = null;
+            phoneData.setText("");
+            nameData.setText("");
+            addressData.setText("");
         }
-        selectedUser = new User(user);
-        phoneData.setText("Phone Number: " + selectedUser.phoneNumber);
-        nameData.setText("Name: " + selectedUser.name);
-        addressData.setText("Address: " + selectedUser.address);
+        else {
+            if (user.id == -1) {
+                //if the id is -1, that means that it was not inserted into a database, so it can't be selected
+                throw new RuntimeException("Attempted to set a UserViewer to be selecting a user that isn't in a database");
+            }
+            selectedUser = new User(user);
+            phoneData.setText("Phone Number: " + selectedUser.phoneNumber);
+            nameData.setText("Name: " + selectedUser.name);
+            addressData.setText("Address: " + selectedUser.address);
+        }
     }
 }

@@ -13,10 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.function.Consumer;
+
 public class PurchaseEditor {
     private Stage stage;
     private Purchase purchase;
-    private Button updateCallback = null;
+    private Consumer<Purchase> callback = null;
 
     static PurchaseEditor createInstance(Stage rootStage, Purchase purchase) throws Exception{
         FXMLLoader loader = new FXMLLoader();
@@ -46,8 +48,8 @@ public class PurchaseEditor {
     @FXML TextField modelField = null;
     @FXML TextField serialField = null;
 
-    void setUpdateCallback(Button callback){
-        updateCallback = callback;
+    void setCallback(Consumer<Purchase> callback){
+        callback = callback;
     }
 
     void show(){
@@ -68,8 +70,8 @@ public class PurchaseEditor {
         item.serialNumber = serialField.getText();
 
         main.workingLayer.updateItem(item);
-        if(updateCallback != null){
-            updateCallback.fire();
+        if(callback != null){
+            callback.accept(purchase);
         }
     }
 
