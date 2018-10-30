@@ -31,4 +31,10 @@ public interface Database{
     void dropPurchase(long purchaseId);
     Purchase getPurchaseWithId(long purchaseId);
     ArrayList<Purchase> getPurchasesWithPurchaser(long purchaserId);
+
+    void insertRepair(Repair newPurchase);
+    void updateRepair(Repair purchase);
+    void dropRepair(long purchaseId);
+    Repair getRepairWithId(long purchaseId);
+    ArrayList<Repair> getRepairsOnItem(long itemId);
 }

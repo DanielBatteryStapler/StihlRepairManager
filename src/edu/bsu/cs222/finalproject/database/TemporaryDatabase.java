@@ -11,6 +11,8 @@ public class TemporaryDatabase implements Database {
     private long itemNextInsert;
     private ArrayList<Purchase> purchaseTable;
     private long purchaseNextInsert;
+    private ArrayList<Repair> repairTable;
+    private long repairNextInsert;
 
     private TemporaryDatabase(){
         employeeTable = new ArrayList<>();
@@ -21,6 +23,8 @@ public class TemporaryDatabase implements Database {
         itemNextInsert = 0;
         purchaseTable = new ArrayList<>();
         purchaseNextInsert = 0;
+        repairTable = new ArrayList<>();
+        repairNextInsert = 0;
     }
 
     public static TemporaryDatabase createInstance(){
@@ -225,6 +229,52 @@ public class TemporaryDatabase implements Database {
         for(Purchase i : purchaseTable){
             if(i.purchaserId == purchaserId){
                 output.add(new Purchase(i));
+            }
+        }
+        return output;
+    }
+
+    public void insertRepair(Repair newRepair){
+        newRepair.id = repairNextInsert;
+        repairNextInsert++;
+        repairTable.add(new Repair(newRepair));
+    }
+
+    public void updateRepair(Repair repair){
+        for(Repair i : repairTable){
+            if(i.id == repair.id){
+                repairTable.remove(i);
+                repairTable.add(new Repair(repair));
+                return;
+            }
+        }
+        throw new RuntimeException("Attempted to update a Repair, but no repair with that id exists");
+    }
+
+    public void dropRepair(long repairId){
+        for(Repair i : repairTable){
+            if(i.id == repairId){
+                repairTable.remove(i);
+                return;
+            }
+        }
+        throw new RuntimeException("Attempted to remove a Repair, but no Repair with that id exists");
+    }
+
+    public Repair getRepairWithId(long repairId){
+        for(Repair i : repairTable){
+            if(i.id == repairId){
+                return new Repair(i);
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Repair> getRepairsOnItem(long itemId){
+        ArrayList<Repair> output = new ArrayList<>();
+        for(Repair i : repairTable){
+            if(i.itemId == itemId){
+                output.add(new Repair(i));
             }
         }
         return output;
