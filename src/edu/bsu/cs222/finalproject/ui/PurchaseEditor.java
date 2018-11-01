@@ -70,9 +70,11 @@ public class PurchaseEditor {
         item.serialNumber = serialField.getText();
 
         main.workingLayer.updateItem(item);
+        
         if(callback != null){
             callback.accept(purchase);
         }
+        stage.close();
     }
 
     @FXML
@@ -83,6 +85,9 @@ public class PurchaseEditor {
         main.workingLayer.deletePurchase(purchase);
         main.workingLayer.deleteItem(item);
 
+        if(callback != null){
+            callback.accept(purchase);
+        }
         stage.close();
     }
 }
