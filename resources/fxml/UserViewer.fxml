@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.UserViewer" alignment="TOP_CENTER"
+          style="-fx-border-color: lightgray; -fx-border-width: 2; -fx-border-style: dashed;">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="5"/>
+    </padding>
+    <Label fx:id="nameData"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label fx:id="phoneData"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label fx:id="addressData"
+           GridPane.columnIndex="0" GridPane.rowIndex="2"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+</GridPane>

@@ -6,13 +6,10 @@
 <?import javafx.scene.control.Button?>
 <?import edu.bsu.cs222.finalproject.ui.UserSelector?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.AddPurchase" alignment="center">
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.PurchaseCreator" alignment="center">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
-    <Button text="Back to Selection" onAction="#backToSelection"
-            GridPane.columnIndex="0" GridPane.rowIndex="0"
-            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Label text="Add a new Purchase"
             GridPane.columnIndex="0" GridPane.rowIndex="1"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
@@ -33,7 +30,10 @@
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button onAction="#submit" text="Submit"
            GridPane.columnIndex="0" GridPane.rowIndex="5"
-           GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#cancel" text="Cancel"
+            GridPane.columnIndex="1" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Label fx:id="errorLabel"
            GridPane.columnIndex="0" GridPane.rowIndex="6"
            GridPane.columnSpan="2" GridPane.rowSpan="1"/>

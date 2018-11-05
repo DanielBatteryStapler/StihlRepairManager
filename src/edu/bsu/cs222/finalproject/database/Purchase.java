@@ -21,8 +21,8 @@ public class Purchase {
     }
 
     public long id;
-    long purchaserId;
+    public long purchaserId;
     public long itemId;
     public Date date;
-    String notes;
+    public String notes;
 }

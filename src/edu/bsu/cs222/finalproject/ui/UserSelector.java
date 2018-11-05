@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+import java.util.function.Consumer;
+
 public class UserSelector extends StackPane {
 
     public static UserSelector instance() throws Exception{
@@ -25,17 +27,20 @@ public class UserSelector extends StackPane {
     }
 
     private User selectedUser = null;
+    private Consumer<User> callback = null;
 
     @FXML TextField phoneField = null;
 
     @FXML StackPane presentingPane = null;
 
     @FXML Node userDataPane = null;
-    @FXML Label nameData = null;
-    @FXML Label phoneData = null;
-    @FXML Label addressData = null;
+    @FXML UserViewer userViewer = null;
 
     @FXML Node newUserPane = null;
+
+    void setCallback(Consumer<User> callback){
+        this.callback = callback;
+    }
 
     @FXML
     void searchPhoneNumber(){
@@ -56,23 +61,32 @@ public class UserSelector extends StackPane {
     void createNewUser() throws Exception{
         Main main = Main.getInstance();
         UserCreator userCreator = UserCreator.createInstance(main.stage);
-        userCreator.setUserSelectorCallback(this);
+        userCreator.setCallback(user -> setUser(user));
         userCreator.setPhoneNumber(phoneField.getText());
         userCreator.show();
+
     }
 
     void setUser(User user) {
-        if(user.id == -1){
-            //if the id is -1, that means that it was not inserted into a database, so it can't be selected
-            throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
+        if(user == null) {
+            selectedUser = null;
+            userViewer.setUser(null);
+            presentingPane.getChildren().clear();
         }
-        selectedUser = new User(user);
-        phoneData.setText("Phone Number: " + selectedUser.phoneNumber);
-        nameData.setText("Name: " + selectedUser.name);
-        addressData.setText("Address: " + selectedUser.address);
+        else{
+            if (user.id == -1) {
+                //if the id is -1, that means that it was not inserted into a database, so it can't be selected
+                throw new RuntimeException("Attempted to set a UserSelector to be selecting a user that isn't in a database");
+            }
+            selectedUser = new User(user);
+            userViewer.setUser(user);
 
-        presentingPane.getChildren().clear();
-        presentingPane.getChildren().add(userDataPane);
+            presentingPane.getChildren().clear();
+            presentingPane.getChildren().add(userDataPane);
+            if(callback != null) {
+                callback.accept(user);
+            }
+        }
     }
 
     User getUser() {

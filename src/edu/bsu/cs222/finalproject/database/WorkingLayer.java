@@ -30,11 +30,12 @@ public class WorkingLayer {
     }
 
     public void insertUser(User user) {
+        user.phoneNumber = phoneNumberMutators.makePhoneNumberAllNumbers(user.phoneNumber);
         database.insertUser(user);
     }
 
     public User getUserWithPhoneNumber(String phoneNumber) {
-        return database.getUserWithPhoneNumber(phoneNumber);
+        return database.getUserWithPhoneNumber(phoneNumberMutators.makePhoneNumberAllNumbers(phoneNumber));
     }
 
 
@@ -48,5 +49,23 @@ public class WorkingLayer {
 
     public Item getItemWithId(long itemId) {
         return database.getItemWithId(itemId);
+    }
+
+    public User getUserWithId(long purchaserId) {
+        User user = database.getUserWithId(purchaserId);
+        user.phoneNumber = phoneNumberMutators.makePhoneNumberEasyToRead(user.phoneNumber);
+        return user;
+    }
+
+    public void updateItem(Item item) {
+        database.updateItem(item);
+    }
+
+    public void deletePurchase(Purchase purchase) {
+        database.dropPurchase(purchase.purchaserId);
+    }
+
+    public void deleteItem(Item item) {
+        database.dropItem(item.id);
     }
 }
