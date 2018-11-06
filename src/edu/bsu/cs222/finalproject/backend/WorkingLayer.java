@@ -68,4 +68,8 @@ public class WorkingLayer {
     public void deleteItem(Item item) {
         database.dropItem(item.id);
     }
+
+    public ArrayList<Repair> getRepairsWithUser(long id) {
+        return database.getRepairsWithUser(id);
+    }
 }

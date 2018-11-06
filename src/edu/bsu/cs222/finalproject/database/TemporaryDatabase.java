@@ -279,4 +279,14 @@ public class TemporaryDatabase implements Database {
         }
         return output;
     }
+
+    public ArrayList<Repair> getRepairsWithUser(long userId){
+        ArrayList<Repair> output = new ArrayList<>();
+        for(Repair i : repairTable){
+            if(i.userId == userId){
+                output.add(new Repair(i));
+            }
+        }
+        return output;
+    }
 }

@@ -6,6 +6,7 @@ import java.sql.Date;
 public class Repair {
     public Repair(){
         id = -1;
+        userId = -1;
         itemId = -1;
         dateStarted = null;
         dateCompleted = null;
@@ -15,6 +16,7 @@ public class Repair {
 
     public Repair(Repair c){
         id = c.id;
+        userId = c.userId;
         itemId = c.itemId;
         dateStarted = c.dateStarted;
         dateCompleted = c.dateCompleted;
@@ -23,6 +25,7 @@ public class Repair {
     }
 
     public long id;
+    public long userId;
     public long itemId;
     public Date dateStarted;
     public Date dateCompleted;

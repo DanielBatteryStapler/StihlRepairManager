@@ -6,14 +6,14 @@
 <?import edu.bsu.cs222.finalproject.ui.UserSelector?>
 <?import javafx.scene.control.TableView?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.ListPurchases" alignment="center">
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.UserLookup" alignment="center">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
     <Button text="Back to Selection" onAction="#backToSelection"
             GridPane.columnIndex="0" GridPane.rowIndex="0"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Label text="List Purchases for User"
+    <Label text="Lookup User"
             GridPane.columnIndex="0" GridPane.rowIndex="1"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <UserSelector fx:id="userField" fx:factory="instance"

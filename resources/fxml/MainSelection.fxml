@@ -14,7 +14,7 @@
     <Label text="Select an Action"
           GridPane.columnIndex="0" GridPane.rowIndex="1"
           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="List Purchases" onAction="#listPurchases"
+    <Button text="User Lookup" onAction="#userLookup"
             GridPane.columnIndex="0" GridPane.rowIndex="2"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button text="Add Purchase" onAction="#addPurchase"

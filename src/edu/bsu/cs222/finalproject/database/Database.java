@@ -37,4 +37,5 @@ public interface Database{
     void dropRepair(long purchaseId);
     Repair getRepairWithId(long purchaseId);
     ArrayList<Repair> getRepairsOnItem(long itemId);
+    ArrayList<Repair> getRepairsWithUser(long userId);
 }

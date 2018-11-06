@@ -1,6 +1,5 @@
 package edu.bsu.cs222.finalproject.ui;
 
-import edu.bsu.cs222.finalproject.database.Purchase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,8 +27,8 @@ public class MainSelection {
     Label welcomeText = null;
 
     @FXML
-    void listPurchases() throws Exception{
-        ListPurchases.showScene();
+    void userLookup() throws Exception{
+        UserLookup.showScene();
     }
 
     @FXML
