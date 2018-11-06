@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextField?>
 
 <?import edu.bsu.cs222.finalproject.ui.UserViewer?>
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.PurchaseEditor" alignment="center">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
@@ -35,7 +33,10 @@
     <Button onAction="#updatePurchase" text="Update"
             GridPane.columnIndex="1" GridPane.rowIndex="4"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button onAction="#deletePurchase" text="Delete"
+    <Button onAction="#createRepair" text="Create Repair Ticket"
             GridPane.columnIndex="2" GridPane.rowIndex="4"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#deletePurchase" text="Delete"
+            GridPane.columnIndex="3" GridPane.rowIndex="4"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

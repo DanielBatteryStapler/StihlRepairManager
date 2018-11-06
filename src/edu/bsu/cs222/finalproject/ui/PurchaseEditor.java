@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 
 public class PurchaseEditor {
     private Stage stage;
+    private Stage rootStage;
     private Purchase purchase;
     private Consumer<Purchase> callback = null;
 
@@ -23,6 +24,7 @@ public class PurchaseEditor {
         Parent loadedPane = loader.load();
         PurchaseEditor editor = loader.getController();
         editor.purchase = purchase;
+        editor.rootStage = rootStage;
 
         {
             Main main = Main.getInstance();
@@ -86,5 +88,20 @@ public class PurchaseEditor {
             callback.accept(null);
         }
         stage.close();
+    }
+
+    @FXML
+    void createRepair() throws Exception{
+        Main main = Main.getInstance();
+        RepairCreator creator = RepairCreator.createInstance(rootStage);
+        creator.setItem(main.workingLayer.getItemWithId(purchase.itemId));
+        creator.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+        creator.setCallback(repair -> {
+            if(callback != null){
+                callback.accept(purchase);
+            }
+        });
+        stage.close();
+        creator.show();
     }
 }
