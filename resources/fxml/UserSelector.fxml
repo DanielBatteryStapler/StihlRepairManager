@@ -18,7 +18,7 @@
     <Label text="Phone Number:"
            GridPane.columnIndex="0" GridPane.rowIndex="1"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <TextField fx:id="phoneField"
+    <TextField fx:id="phoneField" onAction="#searchPhoneNumber"
            GridPane.columnIndex="1" GridPane.rowIndex="1"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button text="Search" onAction="#searchPhoneNumber"

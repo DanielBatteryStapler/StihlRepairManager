@@ -15,7 +15,7 @@
     <Label text="Employee Number:"
            GridPane.columnIndex="0" GridPane.rowIndex="1"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <TextField fx:id="employeeNumberField"
+    <TextField fx:id="employeeNumberField" onAction="#submit"
            GridPane.columnIndex="1" GridPane.rowIndex="1"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button text="Submit" onAction="#submit"
