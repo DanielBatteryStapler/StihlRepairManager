@@ -20,15 +20,23 @@ public class WorkingLayer {
         database = workingDatabase;
     }
 
-    public Purchase addNewPurchase(User existingPurchaser, Item newItem){
-        database.insertItem(newItem);
+    public Purchase makeNewPurchase(User existingPurchaser, Item existingItem){
         Purchase purchase = new Purchase();
-        purchase.itemId = newItem.id;
+        purchase.itemId = existingItem.id;
         purchase.purchaserId = existingPurchaser.id;
         purchase.date = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
         purchase.notes = "";//right now there are no notes, this will be added to ui later
         database.insertPurchase(purchase);
         return purchase;
+    }
+
+    public Repair makeNewRepair(Item existingItem, User existingUser){
+        Repair repair = new Repair();
+        repair.itemId = existingItem.id;
+        repair.userId = existingUser.id;
+        repair.dateStarted = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
+        database.insertRepair(repair);
+        return repair;
     }
 
     public void insertUser(User user){
@@ -71,5 +79,21 @@ public class WorkingLayer {
 
     public ArrayList<Repair> getRepairsWithUser(long id) {
         return database.getRepairsWithUser(id);
+    }
+
+    public ArrayList<Item> searchItemsWithSerial(String serialNumber) {
+        return database.searchItemsWithSerial(serialNumber);
+    }
+
+    public void insertItem(Item item) {
+        database.insertItem(item);
+    }
+
+    public void updateRepair(Repair repair) {
+        database.updateRepair(repair);
+    }
+
+    public void deleteRepair(Repair repair) {
+        database.dropRepair(repair.id);
     }
 }

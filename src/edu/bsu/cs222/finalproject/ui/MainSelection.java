@@ -1,6 +1,5 @@
 package edu.bsu.cs222.finalproject.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +34,13 @@ public class MainSelection {
     void addPurchase() throws Exception{
         Main main = Main.getInstance();
         PurchaseCreator creator = PurchaseCreator.createInstance(main.stage);
+        creator.show();
+    }
+
+    @FXML
+    void addRepair() throws Exception{
+        Main main = Main.getInstance();
+        RepairCreator creator = RepairCreator.createInstance(main.stage);
         creator.show();
     }
 }

@@ -10,7 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
@@ -110,6 +113,21 @@ public class UserLookup {
         purchaseCreator.show();
     }
 
+    @FXML
+    void createNewRepair() throws Exception{
+        Main main = Main.getInstance();
+        RepairCreator repairCreator = RepairCreator.createInstance(main.stage);
+        repairCreator.setCallback(repair -> {
+            try {
+                userField.setUser(main.workingLayer.getUserWithId(repair.userId));
+            }
+            catch(Exception e){
+                e.printStackTrace();//print any errors that occur
+            }
+        });
+        repairCreator.setUser(userField.getUser());
+        repairCreator.show();
+    }
 
 
     static public class UserLookupViewData{
@@ -196,7 +214,22 @@ public class UserLookup {
                 editor.show();
             }
             else{//if purchase is null, then it must be a repair
+                RepairEditor editor = null;
+                try {
+                    editor = RepairEditor.createInstance(main.stage, row.getItem().repair);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
+                editor.setCallback(repair -> {
+                    try {
+                        controller.userField.setUser(main.workingLayer.getUserWithId(repair.userId));
+                    } catch (Exception e) {
+                        e.printStackTrace();//print any errors that occur
+                    }
+                });
+
+                editor.show();
             }
         }
     }

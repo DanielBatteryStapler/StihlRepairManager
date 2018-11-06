@@ -1,28 +1,27 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.database.Item;
-import edu.bsu.cs222.finalproject.database.Purchase;
-import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.function.Consumer;
 
-public class PurchaseCreator {
+public class ItemCreator {
     private Stage stage;
     private Stage rootStage;
-    private Consumer<Purchase> callback = null;
+    private Consumer<Item> callback = null;
 
-    static PurchaseCreator createInstance(Stage rootStage) throws Exception{
+    static ItemCreator createInstance(Stage rootStage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/PurchaseCreator.fxml"));
+        loader.setLocation(System.class.getResource("/fxml/ItemCreator.fxml"));
         Parent loadedPane = loader.load();
-        PurchaseCreator creator = loader.getController();
+        ItemCreator creator = loader.getController();
 
         creator.rootStage = rootStage;
         creator.stage = new Stage();
@@ -33,37 +32,42 @@ public class PurchaseCreator {
         return creator;
     }
 
-    void setCallback(Consumer<Purchase> callback){
+    void setCallback(Consumer<Item> callback){
         this.callback = callback;
     }
 
-    void setUser(User user){
-        userField.setUser(user);
+    void setSerialNumber(String serialNumber){
+        serialField.setText(serialNumber);
     }
 
     void show(){
         stage.show();
     }
 
-    @FXML UserSelector userField = null;
+    @FXML TextField modelField = null;
+    @FXML TextField serialField= null;
     @FXML Label errorLabel = null;
 
     @FXML
-    void submit() throws Exception{
-        User user = userField.getUser();
-        if(user == null){
-            errorLabel.setText("You must Select a User First");
+    void submit() {
+
+        if(modelField.getText().equals("") || serialField.getText().equals("")){
+            errorLabel.setText("Model # and Serial # Must Be Filled Out");
             return;
         }
-        Item item = new Item();//make a dummy item first
-        Main main = Main.getInstance();
-        main.workingLayer.insertItem(item);
-        Purchase purchase = main.workingLayer.makeNewPurchase(user, item);
 
-        PurchaseEditor editor = PurchaseEditor.createInstance(rootStage, purchase);
-        editor.setCallback(callback);
+        Item newItem = new Item();
+        newItem.modelNumber = modelField.getText();
+        newItem.serialNumber = serialField.getText();
+
+        Main main = Main.getInstance();
+        main.workingLayer.insertItem(newItem);
+
+        if(callback != null){
+            callback.accept(newItem);
+        }
+
         stage.close();
-        editor.show();
     }
 
     @FXML

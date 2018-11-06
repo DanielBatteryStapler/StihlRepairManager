@@ -5,7 +5,6 @@ import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -47,7 +46,7 @@ public class UserSelector extends StackPane {
     void searchPhoneNumber() throws Exception{
         Main main = Main.getInstance();
         if(!PhoneNumber.isValid(phoneField.getText())){
-            selectedUser = null;
+            setUser(null);
 
             presentingPane.getChildren().clear();
             presentingPane.getChildren().add(newUserPane);

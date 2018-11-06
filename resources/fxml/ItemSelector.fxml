@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import edu.bsu.cs222.finalproject.ui.ItemViewer?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.ItemSelector" alignment="TOP_CENTER"
+          style="-fx-border-color: lightgray; -fx-border-width: 2; -fx-border-style: dashed;" minHeight="210">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Select an Item"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label text="Serial Number:"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <TextField fx:id="serialField" onAction="#searchSerialNumber"
+           GridPane.columnIndex="1" GridPane.rowIndex="1"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Search" onAction="#searchSerialNumber"
+            GridPane.columnIndex="0" GridPane.rowIndex="2"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <!--dummy pane that is empty by default, is populated by UserDataPane and NewUserPane by the controller-->
+    <StackPane fx:id="presentingPane"
+               GridPane.columnIndex="0" GridPane.rowIndex="3"
+               GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+
+    <!--removed by the controller and moved into the PresentingPane when showing user data-->
+    <GridPane fx:id="itemDataPane" vgap="10" hgap="10" alignment="center">
+        <ItemViewer fx:id="itemViewer" fx:factory="instance"
+               GridPane.columnIndex="0" GridPane.rowIndex="0"
+               GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    </GridPane>
+    <!--also controlled by the controller, just like the UserDataPane-->
+    <GridPane fx:id="newItemPane" vgap="10" hgap="10" alignment="center">
+        <Label text="Item does not exist."
+               GridPane.columnIndex="0" GridPane.rowIndex="0"
+               GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+        <Button text="Create New Item" onAction="#createNewItem"
+                GridPane.columnIndex="0" GridPane.rowIndex="1"
+                GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    </GridPane>
+
+</GridPane>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import edu.bsu.cs222.finalproject.ui.ItemViewer?>
+<?import edu.bsu.cs222.finalproject.ui.UserViewer?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.RepairEditor" alignment="center">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+    <Label text="Edit Repair"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+
+    <Label fx:id="dateStarted"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+           GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+
+    <UserViewer fx:id="userViewer" fx:factory="instance"
+            GridPane.columnIndex="0" GridPane.rowIndex="2"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <ItemViewer fx:id="itemViewer" fx:factory="instance"
+            GridPane.columnIndex="1" GridPane.rowIndex="2"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+
+    <TextArea fx:id="descriptionField"
+            GridPane.columnIndex="1" GridPane.rowIndex="3"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+    <TextArea fx:id="descriptionCompletedField"
+              GridPane.columnIndex="0" GridPane.rowIndex="4"
+              GridPane.columnSpan="3" GridPane.rowSpan="1"/>
+
+    <Button onAction="#exit" text="Back"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#updateRepair" text="Update"
+            GridPane.columnIndex="1" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#deleteRepair" text="Delete"
+            GridPane.columnIndex="2" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+</GridPane>
