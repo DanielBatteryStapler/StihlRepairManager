@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 
 public class PurchaseCreator {
     private Stage stage;
+    private Stage rootStage;
     private Consumer<Purchase> callback = null;
 
     static PurchaseCreator createInstance(Stage rootStage) throws Exception{
@@ -24,6 +25,7 @@ public class PurchaseCreator {
         Parent loadedPane = loader.load();
         PurchaseCreator creator = loader.getController();
 
+        creator.rootStage = rootStage;
         creator.stage = new Stage();
         creator.stage.initOwner(rootStage);
         creator.stage.initModality(Modality.APPLICATION_MODAL);
@@ -45,26 +47,23 @@ public class PurchaseCreator {
     }
 
     @FXML UserSelector userField = null;
-    @FXML TextField modelField = null;
-    @FXML TextField serialField = null;
     @FXML Label errorLabel = null;
 
     @FXML
-    void submit() {
+    void submit() throws Exception{
         User user = userField.getUser();
         if(user == null){
             errorLabel.setText("You must Select a User First");
             return;
         }
-        Item item = new Item();
-        item.modelNumber = modelField.getText();
-        item.serialNumber = serialField.getText();
+        Item item = new Item();//make a dummy item first
         Main main = Main.getInstance();
         Purchase purchase = main.workingLayer.addNewPurchase(user, item);
-        if(callback != null){
-            callback.accept(purchase);
-        }
+
+        PurchaseEditor editor = PurchaseEditor.createInstance(rootStage, purchase);
+        editor.setCallback(callback);
         stage.close();
+        editor.show();
     }
 
     @FXML
