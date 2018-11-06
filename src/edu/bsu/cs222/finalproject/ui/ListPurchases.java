@@ -45,7 +45,16 @@ public class ListPurchases {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        editor.setCallback(purchase -> controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId)));
+
+                            editor.setCallback(purchase -> {
+                                try {
+                                    controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+                                }
+                                catch(Exception e){
+                                    e.printStackTrace();//print any errors that occur
+                                }
+                            });
+
                         editor.show();
                     }
                 });
@@ -89,7 +98,14 @@ public class ListPurchases {
     void createNewPurchase() throws Exception{
         Main main = Main.getInstance();
         PurchaseCreator purchaseCreator = PurchaseCreator.createInstance(main.stage);
-        purchaseCreator.setCallback(purchase -> userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId)));
+        purchaseCreator.setCallback(purchase -> {
+            try {
+                userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+            }
+            catch(Exception e){
+                e.printStackTrace();//print any errors that occur
+            }
+        });
         purchaseCreator.setUser(userField.getUser());
         purchaseCreator.show();
     }

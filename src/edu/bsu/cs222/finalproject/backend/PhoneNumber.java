@@ -8,20 +8,32 @@ public class PhoneNumber {
     public static Boolean isValid(String phoneNumber) {
         char[] phoneCheck = phoneNumber.toCharArray();
 
+        int numOfNums = 0;
+
         for (char iterator : phoneCheck){
             if (("" + iterator).matches("\\D")) {
-                return false;
+                if(iterator != '-' && iterator != '(' && iterator != ')') {//if it is not one of the special allowed characters
+                    return false;
+                }
+            }
+            else{
+                numOfNums++;
             }
         }
-        return true;
+        return numOfNums == 10;
     }
 
-    public static String toNormalized(String phoneNumber) {
-        phoneNumber = phoneNumber.replaceAll("\\D", "");
-        return phoneNumber;
+    public static String toNormalized(String phoneNumber) throws Exception{
+        if(isValid(phoneNumber)){
+            phoneNumber = phoneNumber.replaceAll("\\D", "");
+            return phoneNumber;
+        }
+        else{
+            throw new Exception("Attempted to normalize an invalid phone number");
+        }
     }
 
-    public static String toFormatted(String phoneNumber) {
+    public static String toFormatted(String phoneNumber) throws Exception{
         if (isValid(phoneNumber)) {
             StringBuilder mutableNumber = new StringBuilder(phoneNumber);
             mutableNumber.insert(3,'-');
@@ -29,7 +41,7 @@ public class PhoneNumber {
             return (mutableNumber.toString());
         }
        else {
-           return phoneNumber;
+            throw new Exception("Attempted to format an invalid phone number");
         }
     }
 }

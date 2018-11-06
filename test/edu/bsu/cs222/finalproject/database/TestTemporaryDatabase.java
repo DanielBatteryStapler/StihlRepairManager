@@ -130,7 +130,7 @@ public class TestTemporaryDatabase {
                     gotUsers.add(i.name);
                 }
             }
-
+            
             ArrayList<String> a = new ArrayList<>(users);
             ArrayList<String> b = new ArrayList<>(gotUsers);
 

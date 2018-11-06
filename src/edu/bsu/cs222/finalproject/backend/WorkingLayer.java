@@ -31,12 +31,12 @@ public class WorkingLayer {
         return purchase;
     }
 
-    public void insertUser(User user) {
+    public void insertUser(User user) throws Exception{
         user.phoneNumber = PhoneNumber.toNormalized(user.phoneNumber);
         database.insertUser(user);
     }
 
-    public User getUserWithPhoneNumber(String phoneNumber) {
+    public User getUserWithPhoneNumber(String phoneNumber) throws Exception{
         return database.getUserWithPhoneNumber(PhoneNumber.toNormalized(phoneNumber));
     }
 
@@ -53,7 +53,7 @@ public class WorkingLayer {
         return database.getItemWithId(itemId);
     }
 
-    public User getUserWithId(long purchaserId) {
+    public User getUserWithId(long purchaserId) throws Exception{
         User user = database.getUserWithId(purchaserId);
         user.phoneNumber = PhoneNumber.toFormatted(user.phoneNumber);
         return user;

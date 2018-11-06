@@ -43,7 +43,7 @@ public class UserSelector extends StackPane {
     }
 
     @FXML
-    void searchPhoneNumber(){
+    void searchPhoneNumber() throws Exception{
         Main main = Main.getInstance();
         User user = main.workingLayer.getUserWithPhoneNumber(phoneField.getText());
         if(user == null){
