@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +41,12 @@ public class UserViewer extends StackPane {
                 throw new RuntimeException("Attempted to set a UserViewer to be selecting a user that isn't in a database");
             }
             selectedUser = new User(user);
-            phoneData.setText("Phone Number: " + selectedUser.phoneNumber);
+            try {
+                phoneData.setText("Phone Number: " + PhoneNumber.toFormatted(selectedUser.phoneNumber));
+            }
+            catch(Exception e){//just print the error
+                e.printStackTrace();
+            }
             nameData.setText("Name: " + selectedUser.name);
             addressData.setText("Address: " + selectedUser.address);
         }

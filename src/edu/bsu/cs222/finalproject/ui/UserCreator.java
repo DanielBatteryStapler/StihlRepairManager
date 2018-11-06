@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.database.*;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class UserCreator {
         User user = new User();
         user.name = nameField.getText();
 
-        user.phoneNumber = phoneField.getText();
+        user.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
         user.address = addressField.getText();
         Main.getInstance().workingLayer.insertUser(user);
         if (callback != null) {

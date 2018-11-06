@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,16 +46,22 @@ public class UserSelector extends StackPane {
     @FXML
     void searchPhoneNumber() throws Exception{
         Main main = Main.getInstance();
-        User user = main.workingLayer.getUserWithPhoneNumber(phoneField.getText());
+        if(!PhoneNumber.isValid(phoneField.getText())){
+            selectedUser = null;
+
+            presentingPane.getChildren().clear();
+            presentingPane.getChildren().add(newUserPane);
+            return;
+        }
+        User user = main.workingLayer.getUserWithPhoneNumber(PhoneNumber.toNormalized(phoneField.getText()));
         if(user == null){
             selectedUser = null;
 
             presentingPane.getChildren().clear();
             presentingPane.getChildren().add(newUserPane);
+            return;
         }
-        else{
-            setUser(user);
-        }
+        setUser(user);
     }
 
     @FXML

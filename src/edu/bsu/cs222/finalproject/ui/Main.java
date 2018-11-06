@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.backend.WorkingLayer;
 import edu.bsu.cs222.finalproject.database.*;
 import javafx.application.Application;
@@ -31,7 +32,7 @@ public class Main extends Application {
         {
             User user = new User();
             user.name = "John Smith";
-            user.phoneNumber = "555-555-5555";
+            user.phoneNumber = PhoneNumber.toNormalized("555-555-5555");
             user.address = "555 Fifth Avenue";
             database.insertUser(user);
         }
