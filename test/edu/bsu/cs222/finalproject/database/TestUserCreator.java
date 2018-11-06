@@ -13,7 +13,7 @@ public class TestUserCreator {
         Method method = null;
 
         try {
-            method = UserCreator.class.getDeclaredMethod("isPhoneNumberValid", String.class);
+            method = UserCreator.class.getDeclaredMethod("isValid", String.class);
             method.setAccessible(true);
 
             Assert.assertEquals(0, method.invoke("1234567890"));

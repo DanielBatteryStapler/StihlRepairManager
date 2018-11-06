@@ -1,4 +1,4 @@
-package edu.bsu.cs222.finalproject;
+package edu.bsu.cs222.finalproject.backend;
 
 import javax.print.*;
 

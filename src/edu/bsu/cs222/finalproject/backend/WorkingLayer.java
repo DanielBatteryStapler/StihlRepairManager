@@ -1,4 +1,6 @@
-package edu.bsu.cs222.finalproject.database;
+package edu.bsu.cs222.finalproject.backend;
+
+import edu.bsu.cs222.finalproject.database.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -30,12 +32,12 @@ public class WorkingLayer {
     }
 
     public void insertUser(User user) {
-        user.phoneNumber = phoneNumberMutators.makePhoneNumberAllNumbers(user.phoneNumber);
+        user.phoneNumber = PhoneNumber.toNormalized(user.phoneNumber);
         database.insertUser(user);
     }
 
     public User getUserWithPhoneNumber(String phoneNumber) {
-        return database.getUserWithPhoneNumber(phoneNumberMutators.makePhoneNumberAllNumbers(phoneNumber));
+        return database.getUserWithPhoneNumber(PhoneNumber.toNormalized(phoneNumber));
     }
 
 
@@ -53,7 +55,7 @@ public class WorkingLayer {
 
     public User getUserWithId(long purchaserId) {
         User user = database.getUserWithId(purchaserId);
-        user.phoneNumber = phoneNumberMutators.makePhoneNumberEasyToRead(user.phoneNumber);
+        user.phoneNumber = PhoneNumber.toFormatted(user.phoneNumber);
         return user;
     }
 
