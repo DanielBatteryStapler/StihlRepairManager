@@ -67,7 +67,7 @@ public class UserSelector extends StackPane {
     void createNewUser() throws Exception{
         Main main = Main.getInstance();
         UserCreator userCreator = UserCreator.createInstance(main.stage);
-        userCreator.setCallback(user -> setUser(user));
+        userCreator.setCallback(this::setUser);
         userCreator.setPhoneNumber(phoneField.getText());
         userCreator.show();
 

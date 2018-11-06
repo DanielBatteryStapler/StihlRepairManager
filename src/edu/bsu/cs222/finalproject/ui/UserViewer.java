@@ -4,9 +4,7 @@ import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -22,15 +20,12 @@ public class UserViewer extends StackPane {
         return controller;
     }
 
-    private User selectedUser = null;
-
     @FXML Label nameData = null;
     @FXML Label phoneData = null;
     @FXML Label addressData = null;
 
     void setUser(User user) {
         if(user == null){
-            selectedUser = null;
             phoneData.setText("");
             nameData.setText("");
             addressData.setText("");
@@ -40,15 +35,14 @@ public class UserViewer extends StackPane {
                 //if the id is -1, that means that it was not inserted into a database, so it can't be selected
                 throw new RuntimeException("Attempted to set a UserViewer to be selecting a user that isn't in a database");
             }
-            selectedUser = new User(user);
             try {
-                phoneData.setText("Phone Number: " + PhoneNumber.toFormatted(selectedUser.phoneNumber));
+                phoneData.setText("Phone Number: " + PhoneNumber.toFormatted(user.phoneNumber));
             }
             catch(Exception e){//just print the error
                 e.printStackTrace();
             }
-            nameData.setText("Name: " + selectedUser.name);
-            addressData.setText("Address: " + selectedUser.address);
+            nameData.setText("Name: " + user.name);
+            addressData.setText("Address: " + user.address);
         }
     }
 }

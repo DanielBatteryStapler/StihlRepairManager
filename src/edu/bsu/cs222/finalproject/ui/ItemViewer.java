@@ -19,14 +19,11 @@ public class ItemViewer extends StackPane {
         return controller;
     }
 
-    private Item selectedItem = null;
-
     @FXML Label modelData = null;
     @FXML Label serialData = null;
 
     void setItem(Item item) {
         if(item == null){
-            selectedItem = null;
             modelData.setText("");
             serialData.setText("");
         }
@@ -35,9 +32,8 @@ public class ItemViewer extends StackPane {
                 //if the id is -1, that means that it was not inserted into a database, so it can't be selected
                 throw new RuntimeException("Attempted to set a ItemViewer to be selecting a item that isn't in a database");
             }
-            selectedItem = new Item(item);
-            modelData.setText("Model #: " + selectedItem.modelNumber);
-            serialData.setText("Serial #: " + selectedItem.serialNumber);
+            modelData.setText("Model #: " + item.modelNumber);
+            serialData.setText("Serial #: " + item.serialNumber);
         }
     }
 }

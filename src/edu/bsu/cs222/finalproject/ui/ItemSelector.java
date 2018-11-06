@@ -43,7 +43,7 @@ public class ItemSelector extends StackPane {
     }
 
     @FXML
-    void searchSerialNumber() throws Exception{
+    void searchSerialNumber() {
         Main main = Main.getInstance();
 
         ArrayList<Item> items = main.workingLayer.searchItemsWithSerial(serialField.getText());
@@ -63,7 +63,7 @@ public class ItemSelector extends StackPane {
     void createNewItem() throws Exception{
         Main main = Main.getInstance();
         ItemCreator itemCreator = ItemCreator.createInstance(main.stage);
-        itemCreator.setCallback(item -> setItem(item));
+        itemCreator.setCallback(this::setItem);
         itemCreator.setSerialNumber(serialField.getText());
         itemCreator.show();
 

@@ -61,8 +61,7 @@ public class WorkingLayer {
     }
 
     public User getUserWithId(long purchaserId){
-        User user = database.getUserWithId(purchaserId);
-        return user;
+        return database.getUserWithId(purchaserId);
     }
 
     public void updateItem(Item item) {
@@ -71,10 +70,6 @@ public class WorkingLayer {
 
     public void deletePurchase(Purchase purchase) {
         database.dropPurchase(purchase.purchaserId);
-    }
-
-    public void deleteItem(Item item) {
-        database.dropItem(item.id);
     }
 
     public ArrayList<Repair> getRepairsWithUser(long id) {

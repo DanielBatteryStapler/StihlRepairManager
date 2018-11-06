@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 public class Config {
@@ -13,7 +14,7 @@ public class Config {
 
     public void initialize(URL configFile) throws Exception{
         File file = new File(configFile.toURI());
-        String jsonData = new String(Files.readAllBytes(file.toPath()), "UTF-8");
+        String jsonData = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
         JSONObject pageJson = new JSONObject(jsonData);
 
         databaseAddress = pageJson.getString("databaseAddress");

@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 
 public class ItemCreator {
     private Stage stage;
-    private Stage rootStage;
     private Consumer<Item> callback = null;
 
     static ItemCreator createInstance(Stage rootStage) throws Exception{
@@ -23,7 +22,6 @@ public class ItemCreator {
         Parent loadedPane = loader.load();
         ItemCreator creator = loader.getController();
 
-        creator.rootStage = rootStage;
         creator.stage = new Stage();
         creator.stage.initOwner(rootStage);
         creator.stage.initModality(Modality.APPLICATION_MODAL);

@@ -7,7 +7,6 @@ public class User {
         name = "";
         address = "";
         phoneNumber = "";
-        notes = "";
     }
 
     public User(User cpy){
@@ -15,12 +14,10 @@ public class User {
         name = cpy.name;
         address = cpy.address;
         phoneNumber = cpy.phoneNumber;
-        notes = cpy.notes;
     }
 
     public long id;
     public String name;
     public String address;
     public String phoneNumber;
-    String notes;
 }

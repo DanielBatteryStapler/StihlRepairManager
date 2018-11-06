@@ -1,7 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.backend.PhoneNumber;
-import edu.bsu.cs222.finalproject.database.*;
 import edu.bsu.cs222.finalproject.database.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.util.function.Consumer;
 
 public class UserCreator {

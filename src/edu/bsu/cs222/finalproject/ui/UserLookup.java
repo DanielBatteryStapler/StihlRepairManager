@@ -193,43 +193,41 @@ public class UserLookup {
             return serialNumber;
         }
 
-        public void onClick(UserLookup controller, TableRow<UserLookupViewData> row){
+        void onClick(UserLookup controller, TableRow<UserLookupViewData> row){
             Main main = Main.getInstance();
             if(purchase != null) {
-                PurchaseEditor editor = null;
                 try {
-                    editor = PurchaseEditor.createInstance(main.stage, row.getItem().purchase);
+                    PurchaseEditor editor = PurchaseEditor.createInstance(main.stage, row.getItem().purchase);
+
+                    editor.setCallback(purchase -> {
+                        try {
+                            controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+                        } catch (Exception e) {
+                            e.printStackTrace();//print any errors that occur
+                        }
+                    });
+
+                    editor.show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                editor.setCallback(purchase -> {
-                    try {
-                        controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
-                    } catch (Exception e) {
-                        e.printStackTrace();//print any errors that occur
-                    }
-                });
-
-                editor.show();
             }
             else{//if purchase is null, then it must be a repair
-                RepairEditor editor = null;
                 try {
-                    editor = RepairEditor.createInstance(main.stage, row.getItem().repair);
+                    RepairEditor editor = RepairEditor.createInstance(main.stage, row.getItem().repair);
+
+                    editor.setCallback(repair -> {
+                        try {
+                            controller.userField.setUser(main.workingLayer.getUserWithId(repair.userId));
+                        } catch (Exception e) {
+                            e.printStackTrace();//print any errors that occur
+                        }
+                    });
+
+                    editor.show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                editor.setCallback(repair -> {
-                    try {
-                        controller.userField.setUser(main.workingLayer.getUserWithId(repair.userId));
-                    } catch (Exception e) {
-                        e.printStackTrace();//print any errors that occur
-                    }
-                });
-
-                editor.show();
             }
         }
     }
