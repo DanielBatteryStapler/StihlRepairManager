@@ -17,4 +17,7 @@
     <Button text="List Purchases" onAction="#listPurchases"
             GridPane.columnIndex="0" GridPane.rowIndex="2"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Add Purchase" onAction="#addPurchase"
+            GridPane.columnIndex="0" GridPane.rowIndex="3"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

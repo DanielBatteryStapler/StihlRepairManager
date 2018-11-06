@@ -1,5 +1,7 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.database.Purchase;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,5 +30,12 @@ public class MainSelection {
     @FXML
     void listPurchases() throws Exception{
         ListPurchases.showScene();
+    }
+
+    @FXML
+    void addPurchase() throws Exception{
+        Main main = Main.getInstance();
+        PurchaseCreator creator = PurchaseCreator.createInstance(main.stage);
+        creator.show();
     }
 }
