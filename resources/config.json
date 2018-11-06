@@ -1,0 +1,6 @@
+{
+  "databaseAddress": "example ip",
+  "databaseUsername": "example name",
+  "databasePassword": "example password",
+  "databaseName": "example database name"
+}

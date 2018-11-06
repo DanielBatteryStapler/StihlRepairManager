@@ -36,7 +36,7 @@ public class TemporaryDatabase implements Database {
         //there is no auxiliary initialization on a TemporaryDatabase, it's all in memory, so it's always ready to be used
     }
 
-    public String connectToServer(String address, String username, String password){
+    public String connectToServer(String address, String username, String password, String database){
         //you don't login to this database, so just
         return null;
     }

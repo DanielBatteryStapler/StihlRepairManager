@@ -38,24 +38,7 @@ public class ListPurchases {
                 TableRow<PurchaseViewData> row = new TableRow<>();
                 row.setOnMouseClicked(mouseEvent -> {
                     if(mouseEvent.getClickCount() == 2 && !row.isEmpty()){
-                        Main main = Main.getInstance();
-                        PurchaseEditor editor = null;
-                        try {
-                            editor = PurchaseEditor.createInstance(main.stage, row.getItem().purchase);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                            editor.setCallback(purchase -> {
-                                try {
-                                    controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
-                                }
-                                catch(Exception e){
-                                    e.printStackTrace();//print any errors that occur
-                                }
-                            });
-
-                        editor.show();
+                       row.getItem().onClick(controller, row);
                     }
                 });
                 return row;
@@ -126,11 +109,34 @@ public class ListPurchases {
         public String getDate(){
             return date;
         }
+
         public String getModelNumber(){
             return modelNumber;
         }
+
         public String getSerialNumber(){
             return serialNumber;
+        }
+
+        public void onClick(ListPurchases controller, TableRow<PurchaseViewData> row){
+            Main main = Main.getInstance();
+            PurchaseEditor editor = null;
+            try {
+                editor = PurchaseEditor.createInstance(main.stage, row.getItem().purchase);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            editor.setCallback(purchase -> {
+                try {
+                    controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+                }
+                catch(Exception e){
+                    e.printStackTrace();//print any errors that occur
+                }
+            });
+
+            editor.show();
         }
     }
 }

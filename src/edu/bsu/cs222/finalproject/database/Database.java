@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface Database{
     boolean isUsable();
 
-    String connectToServer(String address, String username, String password);//returns a string with an error for the database, null on no error
+    String connectToServer(String address, String username, String password, String database);//returns a string with an error for the database, null on no error
 
     void insertEmployee(Employee newEmployee);
     void updateEmployee(Employee employee);

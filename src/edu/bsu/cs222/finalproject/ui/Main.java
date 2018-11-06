@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.Config;
 import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.backend.WorkingLayer;
 import edu.bsu.cs222.finalproject.database.*;
@@ -14,6 +15,7 @@ public class Main extends Application {
         return singletonInstance;
     }
 
+    Config config = new Config();
     WorkingLayer workingLayer = new WorkingLayer();
     Stage stage = null;
     Employee currentEmployee = null;
@@ -24,11 +26,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage _stage) throws Exception{
+        config.initialize(System.class.getResource("/config.json"));
+
         singletonInstance = this;
         stage = _stage;
 
         Database database = TemporaryDatabase.createInstance();
-        database.connectToServer("", "", "");
+        database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
         {
             User user = new User();
             user.name = "John Smith";

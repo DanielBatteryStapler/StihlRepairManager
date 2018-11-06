@@ -1,0 +1,6 @@
+{
+  "databaseAddress": "exampleAddress",
+  "databaseUsername": "exampleUsername",
+  "databasePassword": "examplePassword",
+  "databaseName": "exampleName"
+}
