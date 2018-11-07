@@ -18,14 +18,15 @@ public class RepairEditor {
     private Consumer<Repair> callback = null;
 
     static RepairEditor createInstance(Stage rootStage, Repair repair) throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/RepairEditor.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/RepairEditor.fxml"));
         Parent loadedPane = loader.load();
         RepairEditor editor = loader.getController();
         editor.repair = new Repair(repair);
 
         {
-            Main main = Main.getInstance();
             editor.userViewer.setUser(main.workingLayer.getUserWithId(repair.userId));
             editor.itemViewer.setItem(main.workingLayer.getItemWithId(repair.itemId));
 

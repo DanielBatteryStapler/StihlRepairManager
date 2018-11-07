@@ -14,8 +14,10 @@ import java.util.function.Consumer;
 public class UserSelector extends StackPane {
 
     public static UserSelector instance() throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/UserSelector.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/UserSelector.fxml"));
         Pane rootGrid = loader.load();
         UserSelector controller = loader.getController();
         controller.getChildren().add(rootGrid);

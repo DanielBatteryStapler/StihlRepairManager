@@ -11,8 +11,10 @@ import javafx.scene.layout.StackPane;
 public class UserViewer extends StackPane {
 
     public static UserViewer instance() throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/UserViewer.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/UserViewer.fxml"));
         Pane rootGrid = loader.load();
         UserViewer controller = loader.getController();
         controller.getChildren().add(rootGrid);

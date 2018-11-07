@@ -19,8 +19,10 @@ public class RepairCreator {
     private Consumer<Repair> callback = null;
 
     static RepairCreator createInstance(Stage rootStage) throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/RepairCreator.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/RepairCreator.fxml"));
         Parent loadedPane = loader.load();
         RepairCreator creator = loader.getController();
 

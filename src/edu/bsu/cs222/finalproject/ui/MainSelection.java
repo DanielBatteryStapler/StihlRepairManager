@@ -8,8 +8,10 @@ import javafx.scene.control.Label;
 
 public class MainSelection {
     static void showScene() throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/MainSelection.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/MainSelection.fxml"));
         Parent loadedPane = loader.load();
         MainSelection controller = loader.getController();
 

@@ -19,8 +19,10 @@ public class PurchaseCreator {
     private Consumer<Purchase> callback = null;
 
     static PurchaseCreator createInstance(Stage rootStage) throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/PurchaseCreator.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/PurchaseCreator.fxml"));
         Parent loadedPane = loader.load();
         PurchaseCreator creator = loader.getController();
 

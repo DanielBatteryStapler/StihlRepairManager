@@ -20,8 +20,10 @@ import java.util.ArrayList;
 
 public class UserLookup {
     static void showScene() throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/UserLookup.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/UserLookup.fxml"));
         Parent loadedPane = loader.load();
         UserLookup controller = loader.getController();
 
@@ -50,7 +52,6 @@ public class UserLookup {
             });
         }
 
-        Main main = Main.getInstance();
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);
         main.stage.show();

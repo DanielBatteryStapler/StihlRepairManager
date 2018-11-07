@@ -19,15 +19,16 @@ public class PurchaseEditor {
     private Consumer<Purchase> callback = null;
 
     static PurchaseEditor createInstance(Stage rootStage, Purchase purchase) throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/PurchaseEditor.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/PurchaseEditor.fxml"));
         Parent loadedPane = loader.load();
         PurchaseEditor editor = loader.getController();
         editor.purchase = purchase;
         editor.rootStage = rootStage;
 
         {
-            Main main = Main.getInstance();
             editor.userViewer.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
             Item item = main.workingLayer.getItemWithId(purchase.itemId);
             editor.modelField.setText(item.modelNumber);

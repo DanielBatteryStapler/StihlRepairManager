@@ -17,8 +17,10 @@ public class UserCreator {
     private Consumer<User> callback = null;
 
     static UserCreator createInstance(Stage rootStage) throws Exception {
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/UserCreator.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/UserCreator.fxml"));
         Parent loadedPane = loader.load();
         UserCreator creator = loader.getController();
 
