@@ -10,7 +10,7 @@ public class ConfigTest {
     @Test
     public void testLoadConfig() throws Exception{
         Config config = new Config();
-        config.initialize(new File("test/resources/testConfig.json").toPath().toUri().toURL());
+        config.initialize(System.class.getResource("/testConfig.json"));
         Assert.assertEquals("exampleAddress", config.getDatabaseAddress());
         Assert.assertEquals("exampleUsername", config.getDatabaseUsername());
         Assert.assertEquals("examplePassword", config.getDatabasePassword());
