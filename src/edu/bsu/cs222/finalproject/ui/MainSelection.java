@@ -14,9 +14,7 @@ public class MainSelection {
         loader.setLocation(main.getClass().getResource("/fxml/MainSelection.fxml"));
         Parent loadedPane = loader.load();
         MainSelection controller = loader.getController();
-
-        Main main = Main.getInstance();
-
+        
         controller.welcomeText.setText("Welcome, " + main.currentEmployee.name + "!");
 
         Scene scene = new Scene(loadedPane);
