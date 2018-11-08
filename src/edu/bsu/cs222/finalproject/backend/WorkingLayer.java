@@ -28,6 +28,10 @@ public class WorkingLayer {
         database.insertUser(user);
     }
 
+    public void updateUser(User user) {
+        database.updateUser(user);
+    }
+
     public void deleteUser(User user) {
         database.dropUser(user.id);
     }
@@ -38,6 +42,10 @@ public class WorkingLayer {
 
     public User getUserWithId(long purchaserId){
         return database.getUserWithId(purchaserId);
+    }
+
+    public ArrayList<User> getUsersWithName(String name) {
+        return database.searchUsersWithName(name);
     }
 
 /*  Item Methods
@@ -77,8 +85,16 @@ public class WorkingLayer {
         return repair;
     }
 
+    public Repair getRepairWithId(long repairId) {
+        return database.getRepairWithId(repairId);
+    }
+
     public ArrayList<Repair> getRepairsWithUser(long id) {
         return database.getRepairsWithUser(id);
+    }
+
+    public ArrayList<Repair> getRepairsOnItems(long itemId) {
+        return database.getRepairsOnItem(itemId);
     }
 
     public void updateRepair(Repair repair) {
@@ -111,6 +127,14 @@ public class WorkingLayer {
         database.dropPurchase(purchase.purchaserId);
     }
 
+    public Purchase getPurchaseWithId(long purchaseId) {
+        return database.getPurchaseWithId(purchaseId);
+    }
+
+    public void updatePurchase(Purchase purchase) {
+        database.updatePurchase(purchase);
+    }
+
 /*  Employee Methods
 -------------------------------------------------------------------------------------------------
 */
@@ -119,4 +143,19 @@ public class WorkingLayer {
         return database.getEmployeeWithNumber(employeeNumber);
     }
 
+    public Employee getEmployeeWithId(long employeeId) {
+        return database.getEmployeeWithId(employeeId);
+    }
+
+    public void insertEmployee(Employee employee) {
+        database.insertEmployee(employee);
+    }
+
+    public void deleteEmployee(Employee employee) {
+        database.dropEmployee(employee.id);
+    }
+
+    public void updateEmployee(Employee employee) {
+        database.updateEmployee(employee);
+    }
 }
