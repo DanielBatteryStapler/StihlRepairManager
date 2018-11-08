@@ -1,6 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
-import edu.bsu.cs222.finalproject.backend.Print;
+import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.database.Item;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.User;
@@ -66,7 +66,7 @@ public class RepairCreator {
         }
 
         Main main = Main.getInstance();
-        Repair repair = main.workingLayer.makeNewRepair(item, user);
+        Repair repair = main.workingLayer.makeNewRepair(user, item);
 
         RepairEditor editor = RepairEditor.createInstance(rootStage, repair);
         editor.setCallback(callback);
