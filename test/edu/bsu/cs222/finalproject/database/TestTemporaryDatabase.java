@@ -1,7 +1,5 @@
 package edu.bsu.cs222.finalproject.database;
 
-import edu.bsu.cs222.finalproject.database.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -4,6 +4,7 @@ import edu.bsu.cs222.finalproject.database.Item;
 import edu.bsu.cs222.finalproject.database.Purchase;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.User;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 
 public class UserLookup {
+    @SuppressWarnings("unchecked") //Needed for line 49 because it should be able to figure out type safety but decides that it can't
+    //For a better explanation: https://stackoverflow.com/questions/1445233/is-it-possible-to-solve-the-a-generic-array-of-t-is-created-for-a-varargs-param
+
     static void showScene() throws Exception{
         Main main = Main.getInstance();
 
@@ -31,14 +35,18 @@ public class UserLookup {
             controller.userField.setCallback(user -> controller.search());
         }
         {//setup the table
-            TableColumn dateCol = new TableColumn("Date");
+            TableColumn<UserLookupViewData, String> dateCol = new TableColumn<UserLookupViewData, String>("Date");
             dateCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("Date"));
-            TableColumn typeCol = new TableColumn("Type");
+
+            TableColumn<UserLookupViewData, String> typeCol = new TableColumn<UserLookupViewData, String>("Type");
             typeCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("Type"));
-            TableColumn modelCol = new TableColumn("Model #");
+
+            TableColumn<UserLookupViewData, String> modelCol = new TableColumn<UserLookupViewData, String>("Model #");
             modelCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("ModelNumber"));
-            TableColumn serialCol = new TableColumn("Serial #");
+
+            TableColumn<UserLookupViewData, String> serialCol = new TableColumn<UserLookupViewData, String>("Serial #");
             serialCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("SerialNumber"));
+
             controller.dataTable.getColumns().addAll(dateCol, typeCol, modelCol, serialCol);
 
             controller.dataTable.setRowFactory(table -> {
@@ -64,7 +72,7 @@ public class UserLookup {
 
     @FXML UserSelector userField = null;
     @FXML Label errorLabel = null;
-    @FXML TableView dataTable = null;
+    @FXML TableView<UserLookupViewData> dataTable = null;
 
     @FXML
     void search() {
@@ -93,7 +101,7 @@ public class UserLookup {
         ObservableList<UserLookupViewData> observableListData = FXCollections.observableList(viewData);
         dataTable.setItems(observableListData);
         dataTable.getSortOrder().add(dataTable.getColumns().get(0));//sort by the first  in the table
-        TableColumn firstColumn = ((TableColumn)dataTable.getColumns().get(0));
+        TableColumn<UserLookupViewData, ?> firstColumn = ((TableColumn<UserLookupViewData, ?>)dataTable.getColumns().get(0));
         firstColumn.setSortType(TableColumn.SortType.DESCENDING);
         firstColumn.setSortable(true);
     }
