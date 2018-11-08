@@ -25,8 +25,8 @@ public class Print {
 
             Desktop.getDesktop().print(ticketPdf);
 
-            ticketHtml.delete();
-            ticketPdf.delete();
+            ticketHtml.deleteOnExit();
+            ticketPdf.deleteOnExit();
 
         } catch (IOException e) {
             System.err.println("ticket writer fault");
