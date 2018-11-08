@@ -1,9 +1,10 @@
-package edu.bsu.cs222.finalproject.ui;
+package edu.bsu.cs222.finalproject;
 
 import edu.bsu.cs222.finalproject.backend.Config;
 import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.backend.WorkingLayer;
 import edu.bsu.cs222.finalproject.database.*;
+import edu.bsu.cs222.finalproject.ui.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,14 +12,14 @@ public class Main extends Application {
 
     private static Main singletonInstance = null;
 
-    static Main getInstance(){
+    public static Main getInstance(){
         return singletonInstance;
     }
 
     Config config = new Config();
-    WorkingLayer workingLayer = new WorkingLayer();
-    Stage stage = null;
-    Employee currentEmployee = null;
+    public WorkingLayer workingLayer = new WorkingLayer();
+    public Stage stage = null;
+    public Employee currentEmployee = null;
 
     public static void main(String[] args) {
         Application.launch(args);

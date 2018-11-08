@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Created-By: TeamA
 
-Main-Class: edu.bsu.cs222.finalproject.ui.Main
+Main-Class: edu.bsu.cs222.finalproject.Main

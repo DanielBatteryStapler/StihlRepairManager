@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.database.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Login {
-    static void showScene() throws Exception{
+    public static void showScene() throws Exception{
         Main main = Main.getInstance();
 
         FXMLLoader loader = new FXMLLoader();

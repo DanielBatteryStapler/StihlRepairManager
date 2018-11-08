@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.database.Item;
 import edu.bsu.cs222.finalproject.database.Purchase;
 import edu.bsu.cs222.finalproject.database.Repair;

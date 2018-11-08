@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.database.Item;
 
 import javafx.fxml.FXML;
@@ -46,7 +47,7 @@ public class ItemCreator {
     }
 
     @FXML TextField modelField = null;
-    @FXML TextField serialField= null;
+    @FXML TextField serialField = null;
     @FXML Label errorLabel = null;
 
     @FXML
