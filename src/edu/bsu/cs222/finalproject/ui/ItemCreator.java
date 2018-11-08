@@ -1,6 +1,7 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.database.Item;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +18,10 @@ public class ItemCreator {
     private Consumer<Item> callback = null;
 
     static ItemCreator createInstance(Stage rootStage) throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/ItemCreator.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/ItemCreator.fxml"));
         Parent loadedPane = loader.load();
         ItemCreator creator = loader.getController();
 

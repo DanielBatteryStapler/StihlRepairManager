@@ -32,12 +32,9 @@ public class UserCreator {
         return creator;
     }
 
-    @FXML
-    TextField nameField = null;
-    @FXML
-    TextField phoneField = null;
-    @FXML
-    TextField addressField = null;
+    @FXML TextField nameField = null;
+    @FXML TextField phoneField = null;
+    @FXML TextField addressField = null;
 
     @FXML
     void submit() throws Exception{

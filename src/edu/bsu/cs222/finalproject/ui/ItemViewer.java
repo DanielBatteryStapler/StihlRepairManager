@@ -10,8 +10,10 @@ import javafx.scene.layout.StackPane;
 public class ItemViewer extends StackPane {
 
     public static ItemViewer instance() throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/ItemViewer.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/ItemViewer.fxml"));
         Pane rootGrid = loader.load();
         ItemViewer controller = loader.getController();
         controller.getChildren().add(rootGrid);

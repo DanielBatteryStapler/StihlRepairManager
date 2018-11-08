@@ -1,4 +1,5 @@
 package edu.bsu.cs222.finalproject.backend;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +21,6 @@ import org.xhtmlrenderer.pdf.*;
 import sun.security.krb5.internal.Ticket;
 
 public class Print {
-
     public static void printRepair(Repair repair)
     {
 
@@ -55,7 +55,6 @@ public class Print {
         output += "</body></html>";
         return output;
     }
-
 
 
 }

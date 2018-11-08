@@ -10,12 +10,13 @@ import javafx.scene.control.TextField;
 
 public class Login {
     static void showScene() throws Exception{
+        Main main = Main.getInstance();
+
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(System.class.getResource("/fxml/Login.fxml"));
+        loader.setLocation(main.getClass().getResource("/fxml/Login.fxml"));
         Parent loadedPane = loader.load();
         //Login controller = loader.getController();
 
-        Main main = Main.getInstance();
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);
         main.stage.show();
