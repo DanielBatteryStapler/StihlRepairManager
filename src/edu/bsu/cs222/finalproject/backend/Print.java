@@ -13,21 +13,19 @@ public class Print {
     public static Boolean printRepair(Repair repair) {
 
         try {
-            File ticketHtml = File.createTempFile("ticket", ".html");
+            File ticketHtml = new File ("ticket.html");
 
             FileWriter  ticketWriter = new FileWriter(ticketHtml);
             ticketWriter.write(generateRepairDoc(repair));
             ticketWriter.close();
 
-            File ticketPdf = File.createTempFile("ticket", ".pdf");
+            File ticketPdf = new File ("ticket.pdf");
 
             ToPDF.createPDF(ticketHtml.getPath(), ticketPdf.getPath());
 
             Desktop.getDesktop().print(ticketPdf);
 
-            Boolean first = ticketHtml.delete();
-            Boolean second = ticketPdf.delete();
-            return first && second;//return true(success on print) if it is able to delete the two temporary files it created
+            return true;
         } catch (IOException e) {
             System.err.println("ticket writer fault");
             e.printStackTrace();
