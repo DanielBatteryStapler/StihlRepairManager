@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.database.Item;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.User;
@@ -20,7 +21,6 @@ public class RepairCreator {
 
     static RepairCreator createInstance(Stage rootStage) throws Exception{
         Main main = Main.getInstance();
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(main.getClass().getResource("/fxml/RepairCreator.fxml"));
         Parent loadedPane = loader.load();

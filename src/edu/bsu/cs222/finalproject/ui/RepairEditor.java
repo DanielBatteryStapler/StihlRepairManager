@@ -1,5 +1,6 @@
 package edu.bsu.cs222.finalproject.ui;
 
+import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.database.Repair;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,6 @@ public class RepairEditor {
 
     static RepairEditor createInstance(Stage rootStage, Repair repair) throws Exception{
         Main main = Main.getInstance();
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(main.getClass().getResource("/fxml/RepairEditor.fxml"));
         Parent loadedPane = loader.load();

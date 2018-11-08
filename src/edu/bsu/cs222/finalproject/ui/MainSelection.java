@@ -16,7 +16,6 @@ public class MainSelection {
         MainSelection controller = loader.getController();
         
         controller.welcomeText.setText("Welcome, " + main.currentEmployee.name + "!");
-
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);
         main.stage.show();
