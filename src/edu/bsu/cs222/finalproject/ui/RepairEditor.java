@@ -2,6 +2,7 @@ package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.database.Repair;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -88,6 +89,20 @@ public class RepairEditor {
 
         if(callback != null){
             callback.accept(null);
+        }
+        stage.close();
+    }
+
+    public void printRepair(ActionEvent actionEvent) {
+        Main main = Main.getInstance();
+
+        repair.description = descriptionField.getText();
+        repair.descriptionCompleted = descriptionCompletedField.getText();
+
+        main.workingLayer.updateRepair(repair);
+        Print.printRepair(repair);
+        if(callback != null){
+            callback.accept(repair);
         }
         stage.close();
     }

@@ -40,4 +40,7 @@
     <Button onAction="#deleteRepair" text="Delete"
             GridPane.columnIndex="2" GridPane.rowIndex="5"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#printRepair" text="print"
+            GridPane.columnIndex="3" GridPane.rowIndex="5"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>
