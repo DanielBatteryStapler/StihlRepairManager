@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Print {
-    public static void printRepair(Repair repair) {
+    public static Boolean printRepair(Repair repair) {
 
         try {
             File ticketHtml = File.createTempFile("ticket", ".html");
@@ -25,9 +25,9 @@ public class Print {
 
             Desktop.getDesktop().print(ticketPdf);
 
-            ticketHtml.deleteOnExit();
-            ticketPdf.deleteOnExit();
-
+            Boolean first = ticketHtml.delete();
+            Boolean second = ticketPdf.delete();
+            return first && second;//return true(success on print) if it is able to delete the two temporary files it created
         } catch (IOException e) {
             System.err.println("ticket writer fault");
             e.printStackTrace();
@@ -35,8 +35,7 @@ public class Print {
             System.err.println("error in PDF creation");
             e.printStackTrace();
         }
-
-
+        return false;
     }
     private static String generateRepairDoc(Repair repair) {
         String output = "<!DOCTYPE html>";
