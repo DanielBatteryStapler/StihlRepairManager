@@ -65,7 +65,7 @@ public class RepairCreator {
         }
 
         Main main = Main.getInstance();
-        Repair repair = main.workingLayer.makeNewRepair(item, user);
+        Repair repair = main.workingLayer.makeNewRepair(user, item);
 
         RepairEditor editor = RepairEditor.createInstance(rootStage, repair);
         editor.setCallback(callback);

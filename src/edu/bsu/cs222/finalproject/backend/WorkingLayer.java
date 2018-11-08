@@ -30,7 +30,7 @@ public class WorkingLayer {
         return purchase;
     }
 
-    public Repair makeNewRepair(Item existingItem, User existingUser){
+    public Repair makeNewRepair(User existingUser, Item existingItem){
         Repair repair = new Repair();
         repair.itemId = existingItem.id;
         repair.userId = existingUser.id;
