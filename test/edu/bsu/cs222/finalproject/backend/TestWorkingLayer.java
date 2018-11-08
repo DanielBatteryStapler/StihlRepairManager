@@ -80,4 +80,23 @@ public class TestWorkingLayer {
 
         Assert.assertEquals(outOfDatabaseRepair.id, temp.getRepairWithId(outOfDatabaseRepair.id).id);
     }
+
+    @Test
+    public void testInsertAndDrop() {
+        User user = initExampleUser();
+        Item item = initExampleItem();
+
+        WorkingLayer workingLayer = new WorkingLayer();
+        TemporaryDatabase temp = TemporaryDatabase.createInstance();
+
+        workingLayer.initialize(temp);
+
+        workingLayer.insertItem(item);
+        workingLayer.insertUser(user);
+
+        Assert.assertEquals(item.id, workingLayer.getItemWithId(item.id).id);
+        Assert.assertEquals(user.id, workingLayer.getUserWithId(user.id).id);
+
+        //TODO: Add drop tests
+    }
 }

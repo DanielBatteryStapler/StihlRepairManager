@@ -20,15 +20,53 @@ public class WorkingLayer {
         database = workingDatabase;
     }
 
-    public Purchase makeNewPurchase(User existingPurchaser, Item existingItem){
-        Purchase purchase = new Purchase();
-        purchase.itemId = existingItem.id;
-        purchase.purchaserId = existingPurchaser.id;
-        purchase.date = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
-        purchase.notes = "";//right now there are no notes, this will be added to ui later
-        database.insertPurchase(purchase);
-        return purchase;
+/*  User Methods
+-------------------------------------------------------------------------------------------------
+*/
+
+    public void insertUser(User user){
+        database.insertUser(user);
     }
+
+    public void deleteUser(User user) {
+        database.dropUser(user.id);
+    }
+
+    public User getUserWithPhoneNumber(String phoneNumber){
+        return database.getUserWithPhoneNumber(phoneNumber);
+    }
+
+    public User getUserWithId(long purchaserId){
+        return database.getUserWithId(purchaserId);
+    }
+
+/*  Item Methods
+-------------------------------------------------------------------------------------------------
+*/
+
+    public Item getItemWithId(long itemId) {
+        return database.getItemWithId(itemId);
+    }
+
+    public void updateItem(Item item) {
+        database.updateItem(item);
+    }
+
+    public void insertItem(Item item) {
+        database.insertItem(item);
+    }
+
+    public void deleteItem(Item item) {
+        database.dropItem(item.id);
+    }
+
+    public ArrayList<Item> searchItemsWithSerial(String serialNumber) {
+        return database.searchItemsWithSerial(serialNumber);
+    }
+
+/*  Repair Methods
+-------------------------------------------------------------------------------------------------
+*/
 
     public Repair makeNewRepair(User existingUser, Item existingItem){
         Repair repair = new Repair();
@@ -39,49 +77,8 @@ public class WorkingLayer {
         return repair;
     }
 
-    public void insertUser(User user){
-        database.insertUser(user);
-    }
-
-    public User getUserWithPhoneNumber(String phoneNumber){
-        return database.getUserWithPhoneNumber(phoneNumber);
-    }
-
-
-    public Employee getEmployeeWithNumber(String employeeNumber) {
-        return database.getEmployeeWithNumber(employeeNumber);
-    }
-
-    public ArrayList<Purchase> getPurchasesWithPurchaser(long purchaser) {
-        return database.getPurchasesWithPurchaser(purchaser);
-    }
-
-    public Item getItemWithId(long itemId) {
-        return database.getItemWithId(itemId);
-    }
-
-    public User getUserWithId(long purchaserId){
-        return database.getUserWithId(purchaserId);
-    }
-
-    public void updateItem(Item item) {
-        database.updateItem(item);
-    }
-
-    public void deletePurchase(Purchase purchase) {
-        database.dropPurchase(purchase.purchaserId);
-    }
-
     public ArrayList<Repair> getRepairsWithUser(long id) {
         return database.getRepairsWithUser(id);
-    }
-
-    public ArrayList<Item> searchItemsWithSerial(String serialNumber) {
-        return database.searchItemsWithSerial(serialNumber);
-    }
-
-    public void insertItem(Item item) {
-        database.insertItem(item);
     }
 
     public void updateRepair(Repair repair) {
@@ -91,4 +88,35 @@ public class WorkingLayer {
     public void deleteRepair(Repair repair) {
         database.dropRepair(repair.id);
     }
+
+/*  Purchase Methods
+-------------------------------------------------------------------------------------------------
+*/
+
+    public Purchase makeNewPurchase(User existingPurchaser, Item existingItem){
+        Purchase purchase = new Purchase();
+        purchase.itemId = existingItem.id;
+        purchase.purchaserId = existingPurchaser.id;
+        purchase.date = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
+        purchase.notes = "";//right now there are no notes, this will be added to ui later
+        database.insertPurchase(purchase);
+        return purchase;
+    }
+
+    public ArrayList<Purchase> getPurchasesWithPurchaser(long purchaser) {
+        return database.getPurchasesWithPurchaser(purchaser);
+    }
+
+    public void deletePurchase(Purchase purchase) {
+        database.dropPurchase(purchase.purchaserId);
+    }
+
+/*  Employee Methods
+-------------------------------------------------------------------------------------------------
+*/
+
+    public Employee getEmployeeWithNumber(String employeeNumber) {
+        return database.getEmployeeWithNumber(employeeNumber);
+    }
+
 }
