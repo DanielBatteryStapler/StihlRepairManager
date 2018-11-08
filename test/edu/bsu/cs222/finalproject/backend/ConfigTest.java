@@ -8,7 +8,7 @@ public class ConfigTest {
     @Test
     public void testLoadConfig() throws Exception{
         Config config = new Config();
-        config.initialize(getClass().getResource("/testConfig.json"));
+        config.initialize(getClass().getResourceAsStream("/testConfig.json"));
         Assert.assertEquals("exampleAddress", config.getDatabaseAddress());
         Assert.assertEquals("exampleUsername", config.getDatabaseUsername());
         Assert.assertEquals("examplePassword", config.getDatabasePassword());

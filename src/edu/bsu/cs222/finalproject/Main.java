@@ -27,7 +27,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage _stage) throws Exception{
-        config.initialize(getClass().getResource("/config.json"));
+        config.initialize(getClass().getResourceAsStream("/config.json"));
 
         singletonInstance = this;
         stage = _stage;

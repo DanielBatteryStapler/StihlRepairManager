@@ -63,7 +63,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.12</version>
         </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
+
+    
 
     <build>
         <plugins>
@@ -93,6 +101,24 @@
                     <descriptorRefs>jar-with-dependencies</descriptorRefs>
                 </configuration>
             </plugin>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                        <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                        <outputDirectory>${project.build.directory}</outputDirectory>
+                        <overWriteReleases>false</overWriteReleases>
+                        <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+                </plugin>
         </plugins>
 
         <directory>target</directory>

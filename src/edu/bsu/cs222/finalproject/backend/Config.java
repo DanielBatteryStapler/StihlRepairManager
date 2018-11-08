@@ -2,19 +2,21 @@ package edu.bsu.cs222.finalproject.backend;
 
 import org.json.JSONObject;
 
-import java.io.File;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.StringWriter;
+
+import org.apache.commons.io.IOUtils;
 
 public class Config {
     public Config(){
 
     }
 
-    public void initialize(URL configFile) throws Exception{
-        File file = new File(configFile.toURI());
-        String jsonData = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+    public void initialize(InputStream configFile) throws Exception{
+        // File file = new File(configFile.toURI());
+        StringWriter writer = new StringWriter();
+        IOUtils.copy(configFile, writer, "UTF-8");
+        String jsonData = writer.toString();
         JSONObject pageJson = new JSONObject(jsonData);
 
         databaseAddress = pageJson.getString("databaseAddress");
