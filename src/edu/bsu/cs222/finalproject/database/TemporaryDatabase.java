@@ -234,6 +234,17 @@ public class TemporaryDatabase implements Database {
         return output;
     }
 
+    public Purchase getPurchaseOnItem(long itemId){
+        Purchase output = null;
+        for(Purchase i : purchaseTable){
+            if(i.itemId == itemId){
+                output = new Purchase(i);
+                break;
+            }
+        }
+        return output;
+    }
+
     public void insertRepair(Repair newRepair){
         newRepair.id = repairNextInsert;
         repairNextInsert++;

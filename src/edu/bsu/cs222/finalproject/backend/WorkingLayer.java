@@ -93,7 +93,7 @@ public class WorkingLayer {
         return database.getRepairsWithUser(id);
     }
 
-    public ArrayList<Repair> getRepairsOnItems(long itemId) {
+    public ArrayList<Repair> getRepairsOnItem(long itemId) {
         return database.getRepairsOnItem(itemId);
     }
 
@@ -133,6 +133,10 @@ public class WorkingLayer {
 
     public void updatePurchase(Purchase purchase) {
         database.updatePurchase(purchase);
+    }
+
+    public Purchase getPurchaseOnItem(long itemId) {
+        return database.getPurchaseOnItem(itemId);
     }
 
 /*  Employee Methods

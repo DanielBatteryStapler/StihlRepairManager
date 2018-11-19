@@ -16,10 +16,13 @@
     <Button text="User Lookup" onAction="#userLookup"
             GridPane.columnIndex="0" GridPane.rowIndex="2"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Add Purchase" onAction="#addPurchase"
+    <Button text="Item Lookup" onAction="#itemLookup"
             GridPane.columnIndex="0" GridPane.rowIndex="3"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Add Repair" onAction="#addRepair"
+    <Button text="Add Purchase" onAction="#addPurchase"
             GridPane.columnIndex="0" GridPane.rowIndex="4"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Add Repair" onAction="#addRepair"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

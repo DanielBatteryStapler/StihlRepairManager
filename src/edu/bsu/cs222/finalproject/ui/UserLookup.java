@@ -36,17 +36,17 @@ public class UserLookup {
             controller.userField.setCallback(user -> controller.search());
         }
         {//setup the table
-            TableColumn<UserLookupViewData, String> dateCol = new TableColumn<UserLookupViewData, String>("Date");
-            dateCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("Date"));
+            TableColumn<UserLookupViewData, String> dateCol = new TableColumn<>("Date");
+            dateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
 
-            TableColumn<UserLookupViewData, String> typeCol = new TableColumn<UserLookupViewData, String>("Type");
-            typeCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("Type"));
+            TableColumn<UserLookupViewData, String> typeCol = new TableColumn<>("Type");
+            typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
 
-            TableColumn<UserLookupViewData, String> modelCol = new TableColumn<UserLookupViewData, String>("Model #");
-            modelCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("ModelNumber"));
+            TableColumn<UserLookupViewData, String> modelCol = new TableColumn<>("Model #");
+            modelCol.setCellValueFactory(new PropertyValueFactory<>("ModelNumber"));
 
-            TableColumn<UserLookupViewData, String> serialCol = new TableColumn<UserLookupViewData, String>("Serial #");
-            serialCol.setCellValueFactory(new PropertyValueFactory<UserLookupViewData, String>("SerialNumber"));
+            TableColumn<UserLookupViewData, String> serialCol = new TableColumn<>("Serial #");
+            serialCol.setCellValueFactory(new PropertyValueFactory<>("SerialNumber"));
 
             controller.dataTable.getColumns().addAll(dateCol, typeCol, modelCol, serialCol);
 
@@ -102,7 +102,7 @@ public class UserLookup {
         ObservableList<UserLookupViewData> observableListData = FXCollections.observableList(viewData);
         dataTable.setItems(observableListData);
         dataTable.getSortOrder().add(dataTable.getColumns().get(0));//sort by the first  in the table
-        TableColumn<UserLookupViewData, ?> firstColumn = ((TableColumn<UserLookupViewData, ?>)dataTable.getColumns().get(0));
+        TableColumn<UserLookupViewData, ?> firstColumn = dataTable.getColumns().get(0);
         firstColumn.setSortType(TableColumn.SortType.DESCENDING);
         firstColumn.setSortable(true);
     }
