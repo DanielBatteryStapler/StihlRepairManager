@@ -2,6 +2,7 @@ package edu.bsu.cs222.finalproject;
 
 import edu.bsu.cs222.finalproject.backend.Config;
 import edu.bsu.cs222.finalproject.backend.PhoneNumber;
+import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.backend.WorkingLayer;
 import edu.bsu.cs222.finalproject.database.*;
 import edu.bsu.cs222.finalproject.ui.Login;
@@ -34,20 +35,34 @@ public class Main extends Application {
 
         Database database = TemporaryDatabase.createInstance();
         database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+
+        workingLayer.initialize(database);
+
+        User user = new User();
         {
-            User user = new User();
             user.name = "John Smith";
             user.phoneNumber = PhoneNumber.toNormalized("555-555-5555");
             user.address = "555 Fifth Avenue";
-            database.insertUser(user);
+            workingLayer.insertUser(user);
+        }
+        Item item = new Item();
+        {
+            item.serialNumber = "#5555";
+            item.modelNumber = "#5555";
+            workingLayer.insertItem(item);
+            workingLayer.makeNewPurchase(user, item);
+        }
+        {
+            Repair repair = workingLayer.makeNewRepair(user, item);
+            repair.description = "description of needed repairs....";
+            workingLayer.updateRepair(repair);
         }
         {
             Employee employee = new Employee();
             employee.name = "Eugene Smithson";
             employee.number = "88";
-            database.insertEmployee(employee);
+            workingLayer.insertEmployee(employee);
         }
-        workingLayer.initialize(database);
 
         Login.showScene();
     }

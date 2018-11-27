@@ -1,0 +1,53 @@
+body {
+    display:                grid;
+    grid-template-areas:
+                            "header header"
+                            "itemList customerInfo"
+                            "itemList description"
+                            "footer footer";
+    grid-template-columns:  60% 1fr;
+}
+
+#header {
+    grid-area:              header;
+    display:                grid;
+    grid-template-areas:
+                            "headerText headerImages";
+    grid-template-columns:  auto auto;
+}
+
+#headerImages {
+    grid-area:              headerImages;
+    display:                block;
+}
+
+#headerText {
+    grid-area:              headerText;
+    display:                block;
+    text-align:             right;
+}
+
+img {
+    display:                inline-block;
+    height:                 80px;
+}
+
+#itemList {
+    grid-area:              itemList;
+    display:                block;
+}
+
+#customerInfo {
+    grid-area:              customerInfo;
+    display:                block;
+}
+
+#description {
+    grid-area:              description;
+    display:                block;
+}
+
+#footer {
+    grid-area:              footer;
+    display:                block;
+}
