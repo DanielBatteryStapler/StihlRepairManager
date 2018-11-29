@@ -39,4 +39,6 @@ public interface Database{
     Repair getRepairWithId(long repairId);
     ArrayList<Repair> getRepairsOnItem(long itemId);
     ArrayList<Repair> getRepairsWithUser(long userId);
+    Repair getLatestRepair();
+    ArrayList<Repair> getInProgressRepairs();
 }

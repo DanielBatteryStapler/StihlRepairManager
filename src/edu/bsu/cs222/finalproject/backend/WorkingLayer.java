@@ -105,6 +105,14 @@ public class WorkingLayer {
         database.dropRepair(repair.id);
     }
 
+    public Repair getLatestRepair(){
+        return database.getLatestRepair();
+    }
+
+    public ArrayList<Repair> getInProgressRepairs(){
+        return database.getInProgressRepairs();
+    }
+
 /*  Purchase Methods
 -------------------------------------------------------------------------------------------------
 */

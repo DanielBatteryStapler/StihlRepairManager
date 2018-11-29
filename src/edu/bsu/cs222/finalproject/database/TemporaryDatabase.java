@@ -300,4 +300,28 @@ public class TemporaryDatabase implements Database {
         }
         return output;
     }
+
+
+    public Repair getLatestRepair(){
+        Repair latestRepair = null;
+        for(Repair i : repairTable){
+            if(latestRepair == null){
+                latestRepair = i;
+            }
+            else if(i.dateStarted.compareTo(latestRepair.dateCompleted) > 0){
+                latestRepair = i;
+            }
+        }
+        return latestRepair;
+    }
+
+    public ArrayList<Repair> getInProgressRepairs(){
+        ArrayList<Repair> repairs = new ArrayList<>();
+        for(Repair i : repairTable){
+            if(i.dateCompleted == null){
+                repairs.add(i);
+            }
+        }
+        return repairs;
+    }
 }
