@@ -32,11 +32,6 @@ public class MainSelection {
     }
 
     @FXML
-    void itemLookup() throws Exception{
-        ItemLookup.showScene();
-    }
-
-    @FXML
     void repairQueue() throws Exception{
         RepairQueue.showScene();
     }

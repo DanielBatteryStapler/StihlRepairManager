@@ -9,7 +9,6 @@ public class Purchase {
         purchaserId = -1;
         itemId = -1;
         date = null;
-        notes = "";
     }
 
     public Purchase(Purchase cpy){
@@ -17,12 +16,10 @@ public class Purchase {
         purchaserId = cpy.purchaserId;
         itemId = cpy.itemId;
         date = cpy.date;
-        notes = cpy.notes;
     }
 
     public long id;
     public long purchaserId;
     public long itemId;
     public Date date;
-    public String notes;
 }

@@ -4,16 +4,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.PurchaseEditor" alignment="center">
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.ItemEditor" alignment="center">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
-    <Label text="Edit Purchase"
+    <Label text="Edit Item"
            GridPane.columnIndex="0" GridPane.rowIndex="0"
            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
-    <UserViewer fx:id="userViewer" fx:factory="instance"
-            GridPane.columnIndex="0" GridPane.rowIndex="1"
-            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
 
     <Label text="Item Model:"
            GridPane.columnIndex="0" GridPane.rowIndex="2"
@@ -30,13 +27,13 @@
     <Button onAction="#exit" text="Back"
             GridPane.columnIndex="0" GridPane.rowIndex="4"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button onAction="#updatePurchase" text="Update"
+    <Button onAction="#updateItem" text="Update"
             GridPane.columnIndex="1" GridPane.rowIndex="4"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button onAction="#createRepair" text="Create Repair Ticket"
             GridPane.columnIndex="2" GridPane.rowIndex="4"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button onAction="#deletePurchase" text="Delete"
-            GridPane.columnIndex="3" GridPane.rowIndex="4"
-            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <TableView fx:id="dataTable" minWidth="400"
+               GridPane.columnIndex="0" GridPane.rowIndex="5"
+               GridPane.columnSpan="2" GridPane.rowSpan="1"/>
 </GridPane>

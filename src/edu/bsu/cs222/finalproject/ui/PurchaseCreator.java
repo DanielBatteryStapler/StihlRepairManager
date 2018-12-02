@@ -63,8 +63,8 @@ public class PurchaseCreator {
         main.workingLayer.insertItem(item);
         Purchase purchase = main.workingLayer.makeNewPurchase(user, item);
 
-        PurchaseEditor editor = PurchaseEditor.createInstance(rootStage, purchase);
-        editor.setCallback(callback);
+        ItemEditor editor = ItemEditor.createInstance(rootStage, item);
+        editor.setCallback(item_ -> callback.accept(purchase));
         stage.close();
         editor.show();
     }

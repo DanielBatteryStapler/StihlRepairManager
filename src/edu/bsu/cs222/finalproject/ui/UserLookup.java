@@ -207,11 +207,11 @@ public class UserLookup {
             Main main = Main.getInstance();
             if(purchase != null) {
                 try {
-                    PurchaseEditor editor = PurchaseEditor.createInstance(main.stage, row.getItem().purchase);
+                    ItemEditor editor = ItemEditor.createInstance(main.stage, main.workingLayer.getItemWithId(row.getItem().purchase.itemId));
 
-                    editor.setCallback(purchase -> {
+                    editor.setCallback(item -> {
                         try {
-                            controller.userField.setUser(main.workingLayer.getUserWithId(purchase.purchaserId));
+                            controller.search();
                         } catch (Exception e) {
                             e.printStackTrace();//print any errors that occur
                         }
