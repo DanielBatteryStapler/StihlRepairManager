@@ -36,19 +36,13 @@ public class UserLookup {
             controller.userField.setCallback(user -> controller.search());
         }
         {//setup the table
-            TableColumn<UserLookupViewData, String> dateCol = new TableColumn<>("Date");
-            dateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
-
-            TableColumn<UserLookupViewData, String> typeCol = new TableColumn<>("Type");
-            typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
-
             TableColumn<UserLookupViewData, String> modelCol = new TableColumn<>("Model #");
             modelCol.setCellValueFactory(new PropertyValueFactory<>("ModelNumber"));
 
             TableColumn<UserLookupViewData, String> serialCol = new TableColumn<>("Serial #");
             serialCol.setCellValueFactory(new PropertyValueFactory<>("SerialNumber"));
 
-            controller.dataTable.getColumns().addAll(dateCol, typeCol, modelCol, serialCol);
+            controller.dataTable.getColumns().addAll(modelCol, serialCol);
 
             controller.dataTable.setRowFactory(table -> {
                 TableRow<UserLookupViewData> row = new TableRow<>();
@@ -88,23 +82,37 @@ public class UserLookup {
         {
             ArrayList<Purchase> rawPurchases = main.workingLayer.getPurchasesWithPurchaser(user.id);
             for (Purchase purchase : rawPurchases) {
-                viewData.add(UserLookupViewData.createFromPurchase(purchase));
+                boolean isDuplicate = false;
+                for (UserLookupViewData data : viewData) {
+                    if (purchase.itemId == data.item.id) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (isDuplicate == false) {
+                    viewData.add(UserLookupViewData.createFromItem(main.workingLayer.getItemWithId(purchase.itemId)));
+                }
             }
         }
         {
             ArrayList<Repair> rawRepairs = main.workingLayer.getRepairsWithUser(user.id);
             for (Repair repair : rawRepairs) {
-                viewData.add(UserLookupViewData.createFromRepair(repair));
+                boolean isDuplicate = false;
+                for (UserLookupViewData data : viewData) {
+                    if (repair.itemId == data.item.id) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (isDuplicate == false) {
+                    viewData.add(UserLookupViewData.createFromItem(main.workingLayer.getItemWithId(repair.itemId)));
+                }
             }
         }
 
 
         ObservableList<UserLookupViewData> observableListData = FXCollections.observableList(viewData);
         dataTable.setItems(observableListData);
-        dataTable.getSortOrder().add(dataTable.getColumns().get(0));//sort by the first  in the table
-        TableColumn<UserLookupViewData, ?> firstColumn = dataTable.getColumns().get(0);
-        firstColumn.setSortType(TableColumn.SortType.DESCENDING);
-        firstColumn.setSortable(true);
     }
 
     @FXML
@@ -141,10 +149,8 @@ public class UserLookup {
 
 
     static public class UserLookupViewData{
-        Purchase purchase;//one, and only one, of these{purchase, repair} must be null
-        Repair repair;
+        Item item;
 
-        String date;
         String modelNumber;
         String serialNumber;
 
@@ -152,47 +158,17 @@ public class UserLookup {
 
         }
 
-        static UserLookupViewData createFromPurchase(Purchase purchase){
+        static UserLookupViewData createFromItem(Item item){
             Main main = Main.getInstance();
 
             UserLookupViewData data = new UserLookupViewData();
 
-            data.purchase = new Purchase(purchase);
-            data.repair = null;//always set the other one to null
+            data.item = new Item(item);
 
-            data.date = purchase.date.toLocalDate().toString();
-            Item item = main.workingLayer.getItemWithId(purchase.itemId);
             data.modelNumber = item.modelNumber;
             data.serialNumber = item.serialNumber;
 
             return data;
-        }
-
-        static UserLookupViewData createFromRepair(Repair repair){
-            Main main = Main.getInstance();
-
-            UserLookupViewData data = new UserLookupViewData();
-
-            data.purchase = null;//always set the other one to null
-            data.repair = new Repair(repair);
-
-            data.date = repair.dateStarted.toLocalDate().toString();
-            Item item = main.workingLayer.getItemWithId(repair.itemId);
-            data.modelNumber = item.modelNumber;
-            data.serialNumber = item.serialNumber;
-
-            return data;
-        }
-
-        public String getType() {
-            if(purchase != null){
-                return "Purchase";
-            }//if purchase is null, it must be a repair
-            return "Repair";
-        }
-
-        public String getDate(){
-            return date;
         }
 
         public String getModelNumber(){
@@ -205,39 +181,13 @@ public class UserLookup {
 
         void onClick(UserLookup controller, TableRow<UserLookupViewData> row){
             Main main = Main.getInstance();
-            if(purchase != null) {
-                try {
-                    ItemEditor editor = ItemEditor.createInstance(main.stage, main.workingLayer.getItemWithId(row.getItem().purchase.itemId));
-
-                    editor.setCallback(item -> {
-                        try {
-                            controller.search();
-                        } catch (Exception e) {
-                            e.printStackTrace();//print any errors that occur
-                        }
-                    });
-
-                    editor.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            else{//if purchase is null, then it must be a repair
-                try {
-                    RepairEditor editor = RepairEditor.createInstance(main.stage, row.getItem().repair);
-
-                    editor.setCallback(repair -> {
-                        try {
-                            controller.userField.setUser(main.workingLayer.getUserWithId(repair.userId));
-                        } catch (Exception e) {
-                            e.printStackTrace();//print any errors that occur
-                        }
-                    });
-
-                    editor.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            
+            try {
+                ItemEditor editor = ItemEditor.createInstance(main.stage, row.getItem().item);
+                editor.setCallback(item -> controller.search());
+                editor.show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
