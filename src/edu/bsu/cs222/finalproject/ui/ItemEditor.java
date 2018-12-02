@@ -137,9 +137,7 @@ public class ItemEditor {
         Main main = Main.getInstance();
         RepairCreator creator = RepairCreator.createInstance(rootStage);
         creator.setItem(main.workingLayer.getItemWithId(item.id));
-        creator.setCallback(repair -> {
-            search();
-        });
+        creator.setCallback(repair -> search());
         stage.close();
         creator.show();
     }
