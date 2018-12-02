@@ -82,15 +82,14 @@ public class RepairEditor {
         stage.close();
     }
 
-    public void printRepair(ActionEvent actionEvent) {
+    public void printRepair(){
         Main main = Main.getInstance();
 
         repair.description = descriptionField.getText();
         repair.descriptionCompleted = descriptionCompletedField.getText();
 
         main.workingLayer.updateRepair(repair);
-        Print printer = new Print();
-        printer.printRepair(repair);
+        Print.printRepair(repair);
         if(callback != null){
             callback.accept(repair);
         }

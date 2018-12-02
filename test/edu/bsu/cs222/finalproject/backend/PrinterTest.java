@@ -14,8 +14,7 @@ public class PrinterTest {
         repair.itemId = 123456;
         repair.dateStarted = new Date(Calendar.getInstance().getTime().getTime());
         try {
-            Print printer = new Print();
-            Assert.assertTrue(printer.printRepair(repair));
+            Assert.assertTrue(Print.printRepair(repair));
         } catch(UnsupportedOperationException e){
             System.err.println("PRINT TEST FAILED BECAUSE OF THE HOST SYSTEM NOT SUPPORTING THE REQUIRED DESKTOP PRINT OPERATION");
             System.err.println("!!!!!!FORCING THE TEST TO PASS ANYWAYS, MIGHT BE DANGEROUS IF THERE IS ACTUALLY AN ERROR!!!!!!");

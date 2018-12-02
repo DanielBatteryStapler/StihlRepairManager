@@ -13,6 +13,11 @@ public class Main extends Application {
     private static Main singletonInstance = null;
 
     public static Main getInstance(){
+        if(singletonInstance == null){//if the singleton doesn't exist, that means that this is being run as a test, so just make one
+            System.out.println("Manually creating a 'Main' Instance, this should only happen when running tests");
+            singletonInstance = new Main();
+            return singletonInstance;
+        }
         return singletonInstance;
     }
 
@@ -21,21 +26,32 @@ public class Main extends Application {
     public Stage stage = null;
     public Employee currentEmployee = null;
 
+    public Main() {
+        try {
+            config.initialize(getClass().getResourceAsStream("/config.json"));
+        } catch (Exception e) {
+            System.err.println("Error when creating opening Config File as part of Main initialization");
+            e.printStackTrace();
+        }
+
+        Database database = TemporaryDatabase.createInstance();
+        database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+
+        workingLayer.initialize(database);
+    }
+
     public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
     public void start(Stage _stage) throws Exception{
-        config.initialize(getClass().getResourceAsStream("/config.json"));
-
+        if(singletonInstance != null){
+            throw new RuntimeException("JavaFX attempted to create the 'Main' singleton instance, but it somehow already exists!");
+        }
         singletonInstance = this;
+
         stage = _stage;
-
-        Database database = TemporaryDatabase.createInstance();
-        database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
-
-        workingLayer.initialize(database);
 
         User user = new User();
         {
