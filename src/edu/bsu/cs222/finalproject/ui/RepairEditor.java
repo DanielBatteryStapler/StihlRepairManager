@@ -82,18 +82,6 @@ public class RepairEditor {
         stage.close();
     }
 
-    @FXML
-    void deleteRepair(){
-        Main main = Main.getInstance();
-
-        main.workingLayer.deleteRepair(repair);
-
-        if(callback != null){
-            callback.accept(null);
-        }
-        stage.close();
-    }
-
     public void printRepair(ActionEvent actionEvent) {
         Main main = Main.getInstance();
 
