@@ -1,53 +1,142 @@
 body {
-    display:                grid;
-    grid-template-areas:
-                            "header header"
-                            "itemList customerInfo"
-                            "itemList description"
-                            "footer footer";
-    grid-template-columns:  60% 1fr;
+    display:                block;
 }
 
 #header {
-    grid-area:              header;
-    display:                grid;
-    grid-template-areas:
-                            "headerText headerImages";
-    grid-template-columns:  auto auto;
+    display:                block;
+    border-style:           solid;
+    border-width:           1px;
+    border-color:           #000000;
+}
+
+#headerTop {
+    display:                block;
+    border-style:           solid;
+    border-width:           0px 0px 1px 0px;
+    border-color:           #000000;
+    padding:                2px;
 }
 
 #headerImages {
-    grid-area:              headerImages;
-    display:                block;
+    display:                inline-block;
+    width:                  auto;
 }
 
-#headerText {
-    grid-area:              headerText;
-    display:                block;
-    text-align:             right;
-}
-
-img {
+#headerImages img {
     display:                inline-block;
     height:                 80px;
 }
 
-#itemList {
-    grid-area:              itemList;
+#headerText {
     display:                block;
+    text-align:             right;
+    float:                  right;
+}
+
+#headerBottom {
+    display:                block;
+    border-style:           none;
+    font-size:              12px;
+}
+
+#dateHeader {
+    display:                inline-block;
+    border-style:           solid;
+    border-width:           0px 1px 0px 0px;
+    border-color:           #000000;
+    padding:                15px;
+}
+
+#dateBox {
+    display:                inline-block;
+    border-style:           solid;
+    border-width:           0px 1px 0px 0px;
+    border-color:           #000000;
+    padding:                15px;
+}
+
+#contactCustomerHeader {
+    display:                inline-block;
+    border-style:           solid;
+    border-width:           0px 1px 0px 0px;
+    border-color:           #000000;
+    padding:                15px;
+}
+
+#contactCustomerBox {
+    display:                inline-block;
+    padding:                15px;
+}
+
+#posTableRoot {
+    width:                  100%;
+}
+
+.posTable {
+    border-style:           none;
+    padding:                0px;
+}
+
+#itemList {
+    display:                block;
+}
+
+table{
+    border-spacing:         0px;
+    padding:                0px;
+    border-collapse:        collapse;
+}
+
+td {
+    border-collapse:        collapse;
+    border-style:           solid;
+    border-width:           1px 1px 1px 1px;
+    border-color:           black;
+    padding:                4px 2px 4px 2px;
+    min-height:             12px;
+}
+
+.align-right {
+    text-align:             right;
 }
 
 #customerInfo {
-    grid-area:              customerInfo;
     display:                block;
+    float:                  right;
+    clear:                  right;
+}
+
+#customerInfo th{
+    text-align:             right;
 }
 
 #description {
-    grid-area:              description;
     display:                block;
+    width:                  270px;
+    top-margin:             30px;
+    float:                  right;
+    clear:                  right;
 }
 
-#footer {
-    grid-area:              footer;
+#descriptionTextBox {
     display:                block;
+    height:                 300px;
+    border-style:           solid;
+    border-width:           1px;
+    border-color:           black;
+}
+
+#repairsCompletedTextBox {
+    display:                block;
+    height:                 200px;
+    border-style:           solid;
+    border-width:           1px;
+    border-color:           black;
+}
+
+#legalBox {
+    display:                block;
+    border-style:           dashed;
+    border-width:           0px 1px 1px 1px;
+    border-color:           black;
 }
