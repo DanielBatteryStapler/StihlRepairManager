@@ -81,19 +81,30 @@ public class Print {
                     + "</div>"//header text
                     + "</div>"//headerTop
                     + "<div id='headerBottom'>"
-                    + "<div id ='dateHeader'>"
-                    + "Date"
-                    + "</div>"//dateHeader
-                    + "<div id='dateBox'>");
-                    output.append(repair.dateStarted.toLocaleString());
-                    output.append(""
-                    + "</div>"//dateBox
-                    + "<div id='contactCustomerHeader'>"
+                    + "<table>"
+                    + "<tr>"
+                    + "<td>"
+                    + "Date Started:<br />"
+                    + "Date Completed:"
+                    + "</td>"
+                    + "<td>");
+                    output.append(repair.dateStarted.toLocaleString()); output.append("<br />");
+                    if(repair.dateCompleted == null){
+                        output.append("Not Completed");
+                    }
+                    else{
+                        output.append(repair.dateCompleted.toLocaleString());
+                    }
+                    output.append( ""
+                    + "</td>"
+                    + "<td>"
                     + "MUST CONTACT CUSTOMER WITH ESTIMATE?"
-                    + "</div>"//contactCustomerHeader
-                    + "<div id='contactCustomerBox'>"
+                    + "</td>"
+                    + "<td>"
                     + "TEST"
-                    + "</div>"//contactCustomerBox
+                    + "</td>"
+                    + "</tr>"
+                    + "</table>"
                     + "</div>"//headerBottom
                     + "</div>"//header
             );

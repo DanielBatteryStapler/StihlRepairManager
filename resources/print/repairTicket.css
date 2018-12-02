@@ -4,15 +4,12 @@ body {
 
 #header {
     display:                block;
-    border-style:           solid;
-    border-width:           1px;
-    border-color:           #000000;
 }
 
 #headerTop {
     display:                block;
     border-style:           solid;
-    border-width:           0px 0px 1px 0px;
+    border-width:           1px 1px 0px 1px;
     border-color:           #000000;
     padding:                2px;
 }
@@ -39,33 +36,16 @@ body {
     font-size:              12px;
 }
 
-#dateHeader {
-    display:                inline-block;
-    border-style:           solid;
-    border-width:           0px 1px 0px 0px;
-    border-color:           #000000;
-    padding:                15px;
+#headerBottom table{
+    width:                  100%;
+    border-collapse:        collapse;
 }
 
-#dateBox {
-    display:                inline-block;
+#headerBottom td{
     border-style:           solid;
-    border-width:           0px 1px 0px 0px;
-    border-color:           #000000;
-    padding:                15px;
-}
-
-#contactCustomerHeader {
-    display:                inline-block;
-    border-style:           solid;
-    border-width:           0px 1px 0px 0px;
-    border-color:           #000000;
-    padding:                15px;
-}
-
-#contactCustomerBox {
-    display:                inline-block;
-    padding:                15px;
+    border-width:           1px;
+    border-color:           black;
+    padding:                4px 2px 4px 2px;
 }
 
 #posTableRoot {
@@ -90,7 +70,7 @@ table{
 td {
     border-collapse:        collapse;
     border-style:           solid;
-    border-width:           1px 1px 1px 1px;
+    border-width:           1px;
     border-color:           black;
     padding:                4px 2px 4px 2px;
     min-height:             12px;
