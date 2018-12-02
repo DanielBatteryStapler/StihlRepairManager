@@ -37,6 +37,11 @@ public class MainSelection {
     }
 
     @FXML
+    void repairQueue() throws Exception{
+        RepairQueue.showScene();
+    }
+
+    @FXML
     void addPurchase() throws Exception{
         Main main = Main.getInstance();
         PurchaseCreator creator = PurchaseCreator.createInstance(main.stage);

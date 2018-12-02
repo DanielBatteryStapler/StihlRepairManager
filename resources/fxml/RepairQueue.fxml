@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.RepairQueue" alignment="center">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+    <Button text="Back to Selection" onAction="#backToSelection"
+            GridPane.columnIndex="0" GridPane.rowIndex="0"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label text="Repair Queue"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <TableView fx:id="dataTable" minWidth="400"
+               GridPane.columnIndex="0" GridPane.rowIndex="5"
+               GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+</GridPane>
