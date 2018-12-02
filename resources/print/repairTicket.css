@@ -139,4 +139,5 @@ td {
     border-style:           dashed;
     border-width:           0px 1px 1px 1px;
     border-color:           black;
+    padding:                4px;
 }

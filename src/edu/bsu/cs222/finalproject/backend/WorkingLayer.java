@@ -81,6 +81,20 @@ public class WorkingLayer {
         repair.itemId = existingItem.id;
         repair.userId = existingUser.id;
         repair.dateStarted = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
+
+        Repair latestRepair = database.getLatestRepair();
+        if(latestRepair == null){
+            repair.repairNumber = 100;
+        }
+        else{
+            if(latestRepair.repairNumber == 999){
+                repair.repairNumber = 100;
+            }
+            else{
+                repair.repairNumber = latestRepair.repairNumber + 1;
+            }
+        }
+
         database.insertRepair(repair);
         return repair;
     }
