@@ -101,7 +101,8 @@ public class RepairEditor {
         repair.descriptionCompleted = descriptionCompletedField.getText();
 
         main.workingLayer.updateRepair(repair);
-        Print.printRepair(repair);
+        Print printer = new Print();
+        printer.printRepair(repair);
         if(callback != null){
             callback.accept(repair);
         }

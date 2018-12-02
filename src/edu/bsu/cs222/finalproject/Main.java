@@ -2,7 +2,6 @@ package edu.bsu.cs222.finalproject;
 
 import edu.bsu.cs222.finalproject.backend.Config;
 import edu.bsu.cs222.finalproject.backend.PhoneNumber;
-import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.backend.WorkingLayer;
 import edu.bsu.cs222.finalproject.database.*;
 import edu.bsu.cs222.finalproject.ui.Login;

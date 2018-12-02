@@ -11,7 +11,7 @@ import java.io.*;
 import java.net.URL;
 
 public class Print {
-    public static Boolean printRepair(Repair repair) {
+    public Boolean printRepair(Repair repair) {
 
         try {
             File ticketHtml = new File ("ticket.html");
@@ -36,9 +36,7 @@ public class Print {
         }
         return false;
     }
-    private static String generateRepairDoc(Repair repair) {
-        Main main = Main.getInstance();
-
+    private String generateRepairDoc(Repair repair) {
         StringBuilder output = new StringBuilder();
 
         //adding Strings together is usually a bad idea because Java uses copy-on-write with Strings, but the compiler will be able to figure out the string literals and make it efficient
@@ -49,7 +47,7 @@ public class Print {
                 + "<style>"
         );
         {//css file
-            InputStream cssFile = main.getClass().getResourceAsStream("/print/repairTicket.css");
+            InputStream cssFile = getClass().getResourceAsStream("/print/repairTicket.css");
             StringWriter writer = new StringWriter();
             try {
                 IOUtils.copy(cssFile, writer, "UTF-8");
@@ -64,8 +62,8 @@ public class Print {
                 + "<body>"
         );
         {//header
-            URL logoA = main.getClass().getResource("/print/logoA.png");
-            URL logoB = main.getClass().getResource("/print/logoB.png");
+            URL logoA = getClass().getResource("/print/logoA.png");
+            URL logoB = getClass().getResource("/print/logoB.png");
             output.append(""
                     + "<div id='header'>"
                     + "<div id='headerTop'>"

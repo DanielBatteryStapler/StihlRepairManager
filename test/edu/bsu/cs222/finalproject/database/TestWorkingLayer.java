@@ -15,19 +15,16 @@ public class TestWorkingLayer {
         Item itemA = new Item();
         itemA.id = 2;
         Date date = new Date(Calendar.getInstance().getTime().getTime());
-        String notes = "Notes";
 
         Purchase purchase = new Purchase();
         purchase.itemId = itemA.id;
         purchase.purchaserId = userA.id;
         purchase.date = date;
-        purchase.notes = notes;
         database.insertPurchase(purchase);
 
         Assert.assertEquals(purchase.itemId, itemA.id);
         Assert.assertEquals(purchase.purchaserId, userA.id);
-        Assert.assertEquals(purchase.date, date);
-        Assert.assertEquals(purchase.notes, "Notes");
+        Assert.assertEquals(purchase.date.toLocalDate().toString(), date.toLocalDate().toString());
 
 
     }

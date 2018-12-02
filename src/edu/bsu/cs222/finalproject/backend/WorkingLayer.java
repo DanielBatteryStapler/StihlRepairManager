@@ -135,8 +135,7 @@ public class WorkingLayer {
         Purchase purchase = new Purchase();
         purchase.itemId = existingItem.id;
         purchase.purchaserId = existingPurchaser.id;
-        purchase.date = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
-        purchase.notes = "";//right now there are no notes, this will be added to ui later
+        purchase.date = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now
         database.insertPurchase(purchase);
         return purchase;
     }
