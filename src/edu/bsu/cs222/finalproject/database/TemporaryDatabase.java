@@ -86,6 +86,14 @@ public class TemporaryDatabase implements Database {
         return null;
     }
 
+    public ArrayList<Employee> getAllEmployees(){
+        ArrayList<Employee> output = new ArrayList<>();
+        for(Employee i : employeeTable){
+            output.add(new Employee(i));
+        }
+        return output;
+    }
+
     public void insertUser(User newUser){
         newUser.id = userNextInsert;
         userNextInsert++;
@@ -192,17 +200,6 @@ public class TemporaryDatabase implements Database {
         newPurchase.id = purchaseNextInsert;
         purchaseNextInsert++;
         purchaseTable.add(new Purchase(newPurchase));
-    }
-
-    public void updatePurchase(Purchase purchase){
-        for(Purchase i : purchaseTable){
-            if(i.id == purchase.id){
-                purchaseTable.remove(i);
-                purchaseTable.add(new Purchase(purchase));
-                return;
-            }
-        }
-        throw new RuntimeException("Attempted to update a Purchase, but no purchase with that id exists");
     }
 
     public void dropPurchase(long purchaseId){

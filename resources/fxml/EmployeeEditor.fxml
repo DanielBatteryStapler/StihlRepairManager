@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.EmployeeEditor" alignment="center">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+    <Button text="Back to Selection" onAction="#backToSelection"
+            GridPane.columnIndex="0" GridPane.rowIndex="0"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label text="Employee Editor"
+            GridPane.columnIndex="0" GridPane.rowIndex="1"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label fx:id="errorLabel"
+            GridPane.columnIndex="0" GridPane.rowIndex="4"
+            GridPane.columnSpan="3" GridPane.rowSpan="1"/>
+    <TableView fx:id="dataTable" minWidth="400"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
+            GridPane.columnSpan="3" GridPane.rowSpan="1"/>
+    <TextField fx:id="employeeNameField"
+           GridPane.columnIndex="0" GridPane.rowIndex="6"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <TextField fx:id="employeeNumberField"
+           GridPane.columnIndex="1" GridPane.rowIndex="6"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Add New Employee" onAction="#newEmployee"
+           GridPane.columnIndex="2" GridPane.rowIndex="6"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+</GridPane>

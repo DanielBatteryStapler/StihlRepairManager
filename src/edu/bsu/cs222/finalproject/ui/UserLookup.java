@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 
 public class UserLookup {
+    //TODO: update this line number
     @SuppressWarnings("unchecked") //Needed for line 49 because it should be able to figure out type safety but decides that it can't
     //For a better explanation: https://stackoverflow.com/questions/1445233/is-it-possible-to-solve-the-a-generic-array-of-t-is-created-for-a-varargs-param
 
@@ -181,7 +182,7 @@ public class UserLookup {
 
         void onClick(UserLookup controller, TableRow<UserLookupViewData> row){
             Main main = Main.getInstance();
-            
+
             try {
                 ItemEditor editor = ItemEditor.createInstance(main.stage, row.getItem().item);
                 editor.setCallback(item -> controller.search());

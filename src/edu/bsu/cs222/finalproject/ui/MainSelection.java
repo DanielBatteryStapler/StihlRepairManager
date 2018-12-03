@@ -49,4 +49,9 @@ public class MainSelection {
         RepairCreator creator = RepairCreator.createInstance(main.stage);
         creator.show();
     }
+
+    @FXML
+    void employeeEditor() throws Exception {
+        EmployeeEditor.showScene();
+    }
 }

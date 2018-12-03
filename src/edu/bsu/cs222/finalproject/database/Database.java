@@ -8,10 +8,10 @@ public interface Database{
     String connectToServer(String address, String username, String password, String database);//returns a string with an error for the database, null on no error
 
     void insertEmployee(Employee newEmployee);
-    void updateEmployee(Employee employee);
     void dropEmployee(long employeeId);
     Employee getEmployeeWithId(long employeeId);
     Employee getEmployeeWithNumber(String employeeNumber);
+    ArrayList<Employee> getAllEmployees();
 
     void insertUser(User newUser);//sets the "id" of the user to match the internal database id
     void updateUser(User user);
@@ -27,7 +27,6 @@ public interface Database{
     ArrayList<Item> searchItemsWithSerial(String serialNumber);
 
     void insertPurchase(Purchase newPurchase);
-    void updatePurchase(Purchase purchase);
     void dropPurchase(long purchaseId);
     Purchase getPurchaseWithId(long purchaseId);
     ArrayList<Purchase> getPurchasesWithPurchaser(long purchaserId);

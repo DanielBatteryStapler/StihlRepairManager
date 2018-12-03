@@ -152,10 +152,6 @@ public class WorkingLayer {
         return database.getPurchaseWithId(purchaseId);
     }
 
-    public void updatePurchase(Purchase purchase) {
-        database.updatePurchase(purchase);
-    }
-
     public Purchase getPurchaseOnItem(long itemId) {
         return database.getPurchaseOnItem(itemId);
     }
@@ -180,7 +176,7 @@ public class WorkingLayer {
         database.dropEmployee(employee.id);
     }
 
-    public void updateEmployee(Employee employee) {
-        database.updateEmployee(employee);
+    public ArrayList<Employee> getAllEmployees() {
+        return database.getAllEmployees();
     }
 }

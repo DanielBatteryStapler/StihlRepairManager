@@ -79,12 +79,8 @@ public class TestTemporaryDatabase {
         Employee employeeG = database.getEmployeeWithNumber("2");
         Assert.assertEquals("EmployeeA", employeeF.name);
         Assert.assertEquals("EmployeeB", employeeG.name);
-        employeeC.name = "EmployeeNew";
-        database.updateEmployee(employeeC);
-        Employee employeeE = database.getEmployeeWithId(employeeC.id);
-        Assert.assertEquals("EmployeeNew", employeeE.name);
-        database.dropEmployee(employeeE.id);
-        Assert.assertNull(database.getItemWithId(employeeE.id));
+        database.dropEmployee(employeeC.id);
+        Assert.assertNull(database.getItemWithId(employeeC.id));
     }
 
     @Test
@@ -95,12 +91,8 @@ public class TestTemporaryDatabase {
         database.insertPurchase(purchaseA);
         Purchase purchaseB = database.getPurchaseWithId(purchaseA.id);
         Assert.assertEquals(24, purchaseB.itemId);
-        purchaseB.itemId = 26;//a different random number
-        database.updatePurchase(purchaseB);
-        Purchase purchaseC = database.getPurchaseWithId(purchaseB.id);
-        Assert.assertEquals(26, purchaseC.itemId);
-        database.dropPurchase(purchaseC.id);
-        Assert.assertNull(database.getPurchaseWithId(purchaseC.id));
+        database.dropPurchase(purchaseB.id);
+        Assert.assertNull(database.getPurchaseWithId(purchaseB.id));
     }
 
     @Test
