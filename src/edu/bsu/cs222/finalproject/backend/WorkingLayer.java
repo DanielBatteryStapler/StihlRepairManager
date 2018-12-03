@@ -99,6 +99,11 @@ public class WorkingLayer {
         return repair;
     }
 
+    public void completeRepair(User user, Item item, Repair repair) {
+        repair.dateCompleted = new Date(Calendar.getInstance().getTime().getTime());
+        updateRepair(repair);
+    }
+
     public Repair getRepairWithId(long repairId) {
         return database.getRepairWithId(repairId);
     }
