@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -41,14 +42,29 @@ public class UserCreator {
     void submit() throws Exception{
         User user = new User();
         user.name = nameField.getText();
-
-        user.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
         user.address = addressField.getText();
-        Main.getInstance().workingLayer.insertUser(user);
-        if (callback != null) {
-            callback.accept(user);
+
+        if (user.name.equals("")) {
+            nameField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
         }
-        stage.close();
+        else if (user.address.equals("")) {
+            addressField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+
+        try {
+            user.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
+
+            Main.getInstance().workingLayer.insertUser(user);
+            if (callback != null) {
+                callback.accept(user);
+            }
+            stage.close();
+        } catch (Exception e) {
+            phoneField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
     }
 
     void setCallback(Consumer<User> callback) {

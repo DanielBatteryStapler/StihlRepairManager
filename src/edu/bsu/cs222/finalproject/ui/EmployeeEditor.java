@@ -128,6 +128,7 @@ public class EmployeeEditor {
 
             if(row.getItem().employee.id == main.currentEmployee.id){
                 controller.errorLabel.setText("You cannot remove the employee that you are currently logged in as!");
+                controller.employeeNameField.setStyle("-fx-control-inner-background: #ff0000");
             }
             else{
                 try {

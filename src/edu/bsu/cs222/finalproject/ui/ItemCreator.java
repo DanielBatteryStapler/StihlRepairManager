@@ -48,13 +48,16 @@ public class ItemCreator {
 
     @FXML TextField modelField = null;
     @FXML TextField serialField = null;
-    @FXML Label errorLabel = null;
 
     @FXML
     void submit() {
 
-        if(modelField.getText().equals("") || serialField.getText().equals("")){
-            errorLabel.setText("Model # and Serial # Must Be Filled Out");
+        if(modelField.getText().equals("")){
+            modelField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+        else if (serialField.getText().equals("")) {
+            serialField.setStyle("-fx-control-inner-background: #ff0000");
             return;
         }
 

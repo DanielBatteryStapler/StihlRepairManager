@@ -67,14 +67,13 @@ public class UserLookup {
     }
 
     @FXML UserSelector userField = null;
-    @FXML Label errorLabel = null;
     @FXML TableView<UserLookupViewData> dataTable = null;
 
     @FXML
     void search() {
         User user = userField.getUser();
         if(user == null){
-            errorLabel.setText("You must Select a User First");
+            userField.setStyle("-fx-control-inner-background: #ff0000");
             return;
         }
         Main main = Main.getInstance();

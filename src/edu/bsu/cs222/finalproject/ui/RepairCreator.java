@@ -54,14 +54,17 @@ public class RepairCreator {
 
     @FXML ItemSelector itemField = null;
     @FXML UserSelector userField = null;
-    @FXML Label errorLabel = null;
 
     @FXML
     void submit() throws Exception{
         Item item = itemField.getItem();
         User user = userField.getUser();
-        if(item == null || user == null){
-            errorLabel.setText("You must Select an Item and a User First");
+        if(item == null){
+            itemField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+        else if (user == null) {
+            userField.setStyle("-fx-control-inner-background: #ff0000");
             return;
         }
 

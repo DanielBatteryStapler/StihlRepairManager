@@ -21,6 +21,7 @@ public class Login {
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);
         main.stage.show();
+        main.stage.toFront();
     }
 
     @FXML TextField employeeNumberField = null;
