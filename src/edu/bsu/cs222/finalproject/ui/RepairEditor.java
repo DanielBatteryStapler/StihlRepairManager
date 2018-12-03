@@ -118,20 +118,30 @@ public class RepairEditor {
     @FXML
     void finishRepair() {
         Main main = Main.getInstance();
-        repair.description = descriptionField.getText();
-        repair.descriptionCompleted = descriptionCompletedField.getText();
-        repair.dateCompleted = new Date(Calendar.getInstance().getTime().getTime());//add the time completed field to mark it as finished
+        try {
+            ConfirmationDialog confirm = ConfirmationDialog.createInstance(stage);
+            confirm.setQuestion("Are you sure you want to mark this Repair as Completed?\nYou can NOT undo this action.");
+            confirm.setCallback(() -> {
+                repair.description = descriptionField.getText();
+                repair.descriptionCompleted = descriptionCompletedField.getText();
+                repair.dateCompleted = new Date(Calendar.getInstance().getTime().getTime());//add the time completed field to mark it as finished
 
-        main.workingLayer.updateRepair(repair);
+                main.workingLayer.updateRepair(repair);
 
-        dateCompleted.setText("Completed: " + repair.dateCompleted.toLocaleString());
-        markFinishedButton.setDisable(true);
-        updateRepairButton.setDisable(true);
-        descriptionField.setEditable(false);
-        descriptionCompletedField.setEditable(false);
+                dateCompleted.setText("Completed: " + repair.dateCompleted.toLocaleString());
+                markFinishedButton.setDisable(true);
+                updateRepairButton.setDisable(true);
+                descriptionField.setEditable(false);
+                descriptionCompletedField.setEditable(false);
 
-        if(callback != null){
-            callback.accept(repair);
+                if(callback != null){
+                    callback.accept(repair);
+                }
+            });
+            confirm.show();
+        }catch(Exception e){
+            e.printStackTrace();
         }
+
     }
 }

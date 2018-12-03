@@ -127,8 +127,18 @@ public class EmployeeEditor {
                 controller.errorLabel.setText("You cannot remove the employee that you are currently logged in as!");
             }
             else{
-                main.workingLayer.deleteEmployee(row.getItem().employee);
-                controller.search();
+                try {
+                    ConfirmationDialog confirm = ConfirmationDialog.createInstance(main.stage);
+                    confirm.setQuestion("Are you sure you want to delete this Employee?\nYou can NOT undo this action.");
+                    confirm.setCallback(() -> {
+                        main.workingLayer.deleteEmployee(row.getItem().employee);
+                        controller.search();
+                    });
+                    confirm.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }

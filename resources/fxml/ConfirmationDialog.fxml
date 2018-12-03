@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.ConfirmationDialog" alignment="center">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+    <Label fx:id="questionLabel" text="ERROR: NO QUESTION SPECIFIED"
+            GridPane.columnIndex="0" GridPane.rowIndex="0"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"/>
+    <Button onAction="#yes" text="Yes"
+            GridPane.columnIndex="0" GridPane.rowIndex="1"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button onAction="#no" text="No"
+            GridPane.columnIndex="1" GridPane.rowIndex="1"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+</GridPane>
