@@ -28,4 +28,7 @@
     <Button text="Employee Edtior" onAction="#employeeEditor"
             GridPane.columnIndex="0" GridPane.rowIndex="6"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Log Out" onAction="#logout"
+            GridPane.columnIndex="0" GridPane.rowIndex="7"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

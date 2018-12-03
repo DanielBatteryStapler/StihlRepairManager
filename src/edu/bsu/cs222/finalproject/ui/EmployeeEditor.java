@@ -88,6 +88,9 @@ public class EmployeeEditor {
         Main main = Main.getInstance();
         main.workingLayer.insertEmployee(employee);
 
+        employeeNameField.clear();
+        employeeNumberField.clear();
+
         search();
     }
 

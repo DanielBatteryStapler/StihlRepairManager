@@ -54,4 +54,9 @@ public class MainSelection {
     void employeeEditor() throws Exception {
         EmployeeEditor.showScene();
     }
+
+    @FXML
+    void logout() throws Exception{
+        Login.showScene();
+    }
 }
