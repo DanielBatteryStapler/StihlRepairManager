@@ -123,7 +123,13 @@ public class EmployeeEditor {
         void onClick(EmployeeEditor controller, TableRow<EmployeeViewData> row){
             Main main = Main.getInstance();
 
-            //TODO: do something
+            if(row.getItem().employee.id == main.currentEmployee.id){
+                controller.errorLabel.setText("You cannot remove the employee that you are currently logged in as!");
+            }
+            else{
+                main.workingLayer.deleteEmployee(row.getItem().employee);
+                controller.search();
+            }
         }
     }
 }
