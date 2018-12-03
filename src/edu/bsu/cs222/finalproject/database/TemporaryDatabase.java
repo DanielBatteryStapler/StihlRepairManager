@@ -13,6 +13,8 @@ public class TemporaryDatabase implements Database {
     private long purchaseNextInsert;
     private ArrayList<Repair> repairTable;
     private long repairNextInsert;
+    private ArrayList<RepairPart> repairPartTable;
+    private long repairPartNextInsert;
 
     private TemporaryDatabase(){
         employeeTable = new ArrayList<>();
@@ -25,6 +27,8 @@ public class TemporaryDatabase implements Database {
         purchaseNextInsert = 0;
         repairTable = new ArrayList<>();
         repairNextInsert = 0;
+        repairPartTable = new ArrayList<>();
+        repairPartNextInsert = 0;
     }
 
     public static TemporaryDatabase createInstance(){
@@ -45,17 +49,6 @@ public class TemporaryDatabase implements Database {
         newEmployee.id = employeeNextInsert;
         employeeNextInsert++;
         employeeTable.add(new Employee(newEmployee));
-    }
-
-    public void updateEmployee(Employee employee){
-        for(Employee i : employeeTable){
-            if(i.id == employee.id){
-                employeeTable.remove(i);
-                employeeTable.add(new Employee(employee));
-                return;
-            }
-        }
-        throw new RuntimeException("Attempted to update an Employee, but no employee with that id exists");
     }
 
     public void dropEmployee(long employeeId){
@@ -256,7 +249,7 @@ public class TemporaryDatabase implements Database {
                 return;
             }
         }
-        throw new RuntimeException("Attempted to update a Repair, but no repair with that id exists");
+        throw new RuntimeException("Attempted to update a Repair, but no Repair with that id exists");
     }
 
     public void dropRepair(long repairId){
@@ -320,5 +313,52 @@ public class TemporaryDatabase implements Database {
             }
         }
         return repairs;
+    }
+
+    public void insertRepairPart(RepairPart newRepairPart){
+        newRepairPart.id = repairPartNextInsert;
+        repairPartNextInsert++;
+        repairPartTable.add(new RepairPart(newRepairPart));
+    }
+
+    public void updateRepairPart(RepairPart repairPart){
+        for(RepairPart i : repairPartTable){
+            if(i.id == repairPart.id){
+                repairPartTable.remove(i);
+                repairPartTable.add(new RepairPart(repairPart));
+                return;
+            }
+        }
+        throw new RuntimeException("Attempted to update a RepairPart, but no RepairPart with that id exists");
+    }
+
+    public void dropRepairPart(long repairPartId){
+        for(RepairPart i : repairPartTable){
+            if(i.id == repairPartId){
+                repairPartTable.remove(i);
+                return;
+            }
+        }
+        throw new RuntimeException("Attempted to remove a RepairPart, but no RepairPart with that id exists");
+    }
+
+    public ArrayList<RepairPart> getRepairPartsOnRepair(long repairId){
+        ArrayList<RepairPart> output = new ArrayList<>();
+        for(RepairPart i : repairPartTable){
+            if(i.repairId == repairId){
+                output.add(new RepairPart(i));
+            }
+        }
+        return output;
+    }
+
+    public ArrayList<RepairPart> getRepairPartsInQueue(){
+        ArrayList<RepairPart> output = new ArrayList<>();
+        for(RepairPart i : repairPartTable){
+            if(i.needToBuy){
+                output.add(new RepairPart(i));
+            }
+        }
+        return output;
     }
 }

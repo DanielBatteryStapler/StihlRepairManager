@@ -179,4 +179,29 @@ public class WorkingLayer {
     public ArrayList<Employee> getAllEmployees() {
         return database.getAllEmployees();
     }
+
+/*  RepairPart Methods
+----------------------------------
+*/
+
+    public void insertRepairPart(RepairPart newRepairPart){
+        database.insertRepairPart(newRepairPart);
+    }
+
+    public void updateRepairPart(RepairPart repairPart){
+        database.updateRepairPart(repairPart);
+    }
+
+    public void dropRepairPart(long repairPartId){
+        database.dropRepairPart(repairPartId);
+    }
+
+    public ArrayList<RepairPart> getRepairPartsOnRepair(long repairId){
+        return database.getRepairPartsOnRepair(repairId);
+    }
+
+    public ArrayList<RepairPart> getRepairPartsInQueue(){
+        return database.getRepairPartsInQueue();
+    }
+
 }

@@ -71,6 +71,14 @@ public class Main extends Application {
             Repair repair = workingLayer.makeNewRepair(user, item);
             repair.description = "description of needed repairs....";
             workingLayer.updateRepair(repair);
+
+            RepairPart repairPart = new RepairPart();
+            repairPart.needToBuy = true;
+            repairPart.repairId = repair.id;
+            repairPart.price = 6599;
+            repairPart.quantity = 3;
+            repairPart.name = "Some Screws";
+            workingLayer.insertRepairPart(repairPart);
         }
         {
             Employee employee = new Employee();

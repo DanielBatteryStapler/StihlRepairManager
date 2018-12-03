@@ -2,19 +2,24 @@ package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.backend.Print;
+import edu.bsu.cs222.finalproject.database.Employee;
 import edu.bsu.cs222.finalproject.database.Repair;
+import edu.bsu.cs222.finalproject.database.RepairPart;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.function.Consumer;
 
@@ -51,6 +56,29 @@ public class RepairEditor {
             editor.descriptionField.setText(repair.description);
             editor.descriptionCompletedField.setText(repair.descriptionCompleted);
         }
+        {//setup the table
+            TableColumn<RepairPartViewData, String> quantityCol = new TableColumn<>("QTY");
+            quantityCol.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+
+            TableColumn<RepairPartViewData, String> nameCol = new TableColumn<>("Name");
+            nameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+
+            TableColumn<RepairPartViewData, String> priceCol = new TableColumn<>("Price");
+            priceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
+
+            editor.repairPartsTable.getColumns().addAll(quantityCol, nameCol, priceCol);
+
+            editor.repairPartsTable.setRowFactory(table -> {
+                TableRow<RepairPartViewData> row = new TableRow<>();
+                row.setOnMouseClicked(mouseEvent -> {
+                    if(mouseEvent.getClickCount() == 2 && !row.isEmpty()){
+                        row.getItem().onClick(editor, row);
+                    }
+                });
+                return row;
+            });
+            editor.updateRepairPartsTable();
+        }
         {
             editor.stage = new Stage();
             editor.stage.initOwner(rootStage);
@@ -65,6 +93,8 @@ public class RepairEditor {
     @FXML ItemViewer itemViewer = null;
     @FXML Label dateStarted = null;
     @FXML Label dateCompleted = null;
+
+    @FXML TableView<RepairPartViewData> repairPartsTable = null;
 
     @FXML TextArea descriptionField = null;
     @FXML TextArea descriptionCompletedField = null;
@@ -143,5 +173,62 @@ public class RepairEditor {
             e.printStackTrace();
         }
 
+    }
+
+    public void updateRepairPartsTable(){
+        Main main = Main.getInstance();
+        ArrayList<RepairPartViewData> viewData = new ArrayList<>();
+
+        {
+            ArrayList<RepairPart> repairPartsData = main.workingLayer.getRepairPartsOnRepair(repair.id);
+            for(RepairPart i : repairPartsData){
+                viewData.add(RepairPartViewData.createFromRepairPart(i));
+            }
+        }
+
+        ObservableList<RepairPartViewData> observableListData = FXCollections.observableList(viewData);
+        repairPartsTable.setItems(observableListData);
+    }
+
+    static public class RepairPartViewData{
+        RepairPart repairPart;
+
+        String quantity;
+        String name;
+        String price;
+
+        private RepairPartViewData(){
+
+        }
+
+        static RepairPartViewData createFromRepairPart(RepairPart repairPart){
+            RepairPartViewData data = new RepairPartViewData();
+
+            data.repairPart = new RepairPart(repairPart);
+
+            data.quantity = "" + repairPart.quantity;
+            data.name = repairPart.name;
+            data.price = NumberFormat.getCurrencyInstance().format(repairPart.price / 100.0);
+
+            return data;
+        }
+
+        public String getQuantity(){
+            return quantity;
+        }
+
+        public String getName(){
+            return name;
+        }
+
+        public String getPrice(){
+            return price;
+        }
+
+        void onClick(RepairEditor controller, TableRow<RepairPartViewData> row){
+            Main main = Main.getInstance();
+
+            //TODO: do something
+        }
     }
 }

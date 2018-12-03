@@ -37,6 +37,11 @@ public class MainSelection {
     }
 
     @FXML
+    void repairPartsQueue() throws Exception{
+        RepairPartsQueue.showScene();
+    }
+
+    @FXML
     void addPurchase() throws Exception{
         Main main = Main.getInstance();
         PurchaseCreator creator = PurchaseCreator.createInstance(main.stage);
@@ -51,12 +56,12 @@ public class MainSelection {
     }
 
     @FXML
-    void employeeEditor() throws Exception {
+    void employeeEditor() throws Exception{
         EmployeeEditor.showScene();
     }
 
     @FXML
-    void logout() throws Exception{
+    void logout() throws Exception {
         Login.showScene();
     }
 }

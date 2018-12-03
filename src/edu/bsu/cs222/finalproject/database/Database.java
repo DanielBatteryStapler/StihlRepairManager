@@ -40,4 +40,10 @@ public interface Database{
     ArrayList<Repair> getRepairsWithUser(long userId);
     Repair getLatestRepair();
     ArrayList<Repair> getInProgressRepairs();
+
+    void insertRepairPart(RepairPart newRepairPart);
+    void updateRepairPart(RepairPart repairPart);
+    void dropRepairPart(long repairPartId);
+    ArrayList<RepairPart> getRepairPartsOnRepair(long repairId);
+    ArrayList<RepairPart> getRepairPartsInQueue();
 }

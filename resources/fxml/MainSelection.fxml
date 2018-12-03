@@ -25,10 +25,13 @@
     <Button text="Repair Queue" onAction="#repairQueue"
             GridPane.columnIndex="0" GridPane.rowIndex="5"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Employee Edtior" onAction="#employeeEditor"
+    <Button text="Repair Parts Queue" onAction="#repairPartsQueue"
             GridPane.columnIndex="0" GridPane.rowIndex="6"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Log Out" onAction="#logout"
+    <Button text="Employee Editor" onAction="#employeeEditor"
             GridPane.columnIndex="0" GridPane.rowIndex="7"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Log Out" onAction="#logout"
+            GridPane.columnIndex="0" GridPane.rowIndex="8"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

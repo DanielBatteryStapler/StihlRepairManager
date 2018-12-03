@@ -3,12 +3,15 @@ package edu.bsu.cs222.finalproject.backend;
 import com.lowagie.text.DocumentException;
 import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.database.Repair;
+import edu.bsu.cs222.finalproject.database.RepairPart;
 import org.apache.commons.io.IOUtils;
 import org.xhtmlrenderer.pdf.ToPDF;
 
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 
 public class Print {
     public static Boolean printRepair(Repair repair) {
@@ -125,7 +128,22 @@ public class Print {
                     + "<th style='width:50px;'>Amount</th>"
                     + "</tr>"
             );
-            for(int i = 0; i < 19; i++){//just fill the table with a bunch of empty elements for now
+            int extraEmptyRows = 19;//there are 19 rows in general, so that's the maximum number of empty rows
+            {
+                ArrayList<RepairPart> repairParts = main.workingLayer.getRepairPartsOnRepair(repair.id);
+                for(RepairPart part : repairParts){
+                    output.append(""
+                        + "<tr>"
+                        + "<td>" + part.quantity + "</td>"
+                        + "<td>" + part.name + "</td>"
+                        + "<td>" + NumberFormat.getCurrencyInstance().format(part.price / 100.0) + "</td>"
+                        + "<td></td>"
+                        + "</tr>"
+                    );
+                    extraEmptyRows--;
+                }
+            }
+            for(int i = 0; i < extraEmptyRows; i++){//put the rest as empty
                 output.append(""
                     + "<tr>"
                     + "<td></td>"
