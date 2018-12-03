@@ -6,14 +6,6 @@ body {
     display:                block;
 }
 
-#headerTop {
-    display:                block;
-    border-style:           solid;
-    border-width:           1px 1px 0px 1px;
-    border-color:           #000000;
-    padding:                2px;
-}
-
 #headerImages {
     display:                inline-block;
     width:                  auto;
@@ -30,22 +22,20 @@ body {
     float:                  right;
 }
 
-#headerBottom {
-    display:                block;
-    border-style:           none;
-    font-size:              12px;
-}
-
-#headerBottom table{
+#header table{
     width:                  100%;
     border-collapse:        collapse;
 }
 
-#headerBottom td{
+#header table td{
     border-style:           solid;
     border-width:           1px;
     border-color:           black;
     padding:                4px 2px 4px 2px;
+}
+
+#dateHeader {
+    text-align:             right;
 }
 
 #posTableRoot {

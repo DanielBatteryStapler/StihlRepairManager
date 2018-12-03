@@ -68,7 +68,9 @@ public class Print {
             URL logoB = main.getClass().getResource("/print/logoB.png");
             output.append(""
                     + "<div id='header'>"
-                    + "<div id='headerTop'>"
+                    + "<table>"
+                    + "<tr>"
+                    + "<td colspan='4'>"
                     + "<div id='headerImages'>"
                     + "<img src='"); output.append(logoA); output.append("' />"
                     + "<img src='"); output.append(logoB); output.append("' />"
@@ -78,12 +80,11 @@ public class Print {
                     + "Brazil, IN<br />"
                     + "47834<br />"
                     + "812-448-2877<br />"
-                    + "</div>"//header text
-                    + "</div>"//headerTop
-                    + "<div id='headerBottom'>"
-                    + "<table>"
+                    + "</div>"//headerText
+                    + "</td>"
+                    + "</tr>"
                     + "<tr>"
-                    + "<td>"
+                    + "<td class='align-right'>"
                     + "Date Started:<br />"
                     + "Date Completed:"
                     + "</td>"
@@ -97,7 +98,7 @@ public class Print {
                     }
                     output.append( ""
                     + "</td>"
-                    + "<td>"
+                    + "<td class='align-right'>"
                     + "MUST CONTACT CUSTOMER WITH ESTIMATE?"
                     + "</td>"
                     + "<td>"
@@ -105,7 +106,6 @@ public class Print {
                     + "</td>"
                     + "</tr>"
                     + "</table>"
-                    + "</div>"//headerBottom
                     + "</div>"//header
             );
         }
