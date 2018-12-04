@@ -66,7 +66,7 @@ public class RepairQueue {
     @FXML TableView<RepairQueue.RepairQueueViewData> dataTable = null;
 
     @FXML
-    void search() {
+    private void search() {
         Main main = Main.getInstance();
         ArrayList<RepairQueue.RepairQueueViewData> viewData = new ArrayList<>();
 

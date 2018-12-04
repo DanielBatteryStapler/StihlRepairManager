@@ -1,26 +1,16 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
-import edu.bsu.cs222.finalproject.backend.Print;
-import edu.bsu.cs222.finalproject.database.Employee;
-import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.sql.Date;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.function.Consumer;
 
 public class RepairPartEditor {
@@ -41,7 +31,7 @@ public class RepairPartEditor {
             editor.nameField.setText(repairPart.name);
             editor.priceField.setText(NumberFormat.getCurrencyInstance().format(repairPart.price / 100.0));
 
-            if(repairPart.needToBuy == false){
+            if(!repairPart.needToBuy){
                 editor.markAsBoughtButton.setDisable(true);
             }
         }

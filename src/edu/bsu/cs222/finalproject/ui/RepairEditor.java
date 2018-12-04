@@ -1,6 +1,7 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
+import edu.bsu.cs222.finalproject.backend.DateFormatter;
 import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
@@ -38,12 +39,12 @@ public class RepairEditor {
             editor.userViewer.setUser(main.workingLayer.getUserWithId(repair.userId));
             editor.itemViewer.setItem(main.workingLayer.getItemWithId(repair.itemId));
 
-            editor.dateStarted.setText("Started: " + repair.dateStarted.toLocaleString());
+            editor.dateStarted.setText("Started: " + DateFormatter.formatDate(repair.dateStarted));
             if(repair.dateCompleted == null){
                 editor.dateCompleted.setText("Completed: Not Complete");
             }
             else{
-                editor.dateCompleted.setText("Completed: " + repair.dateCompleted.toLocaleString());
+                editor.dateCompleted.setText("Completed: " + DateFormatter.formatDate(repair.dateCompleted));
                 editor.markFinishedButton.setDisable(true);
                 editor.updateRepairButton.setDisable(true);
                 editor.descriptionField.setEditable(false);
@@ -161,7 +162,7 @@ public class RepairEditor {
 
                 main.workingLayer.updateRepair(repair);
 
-                dateCompleted.setText("Completed: " + repair.dateCompleted.toLocaleString());
+                dateCompleted.setText("Completed: " + DateFormatter.formatDate(repair.dateCompleted));
                 markFinishedButton.setDisable(true);
                 updateRepairButton.setDisable(true);
                 descriptionField.setEditable(false);
@@ -179,7 +180,7 @@ public class RepairEditor {
 
     }
 
-    public void updateRepairPartsTable(){
+    private void updateRepairPartsTable(){
         Main main = Main.getInstance();
         ArrayList<RepairPartViewData> viewData = new ArrayList<>();
 

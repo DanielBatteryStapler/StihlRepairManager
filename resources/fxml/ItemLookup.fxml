@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import edu.bsu.cs222.finalproject.ui.UserSelector?>
 
 <?import edu.bsu.cs222.finalproject.ui.ItemSelector?>
 <GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.ItemLookup" alignment="center">

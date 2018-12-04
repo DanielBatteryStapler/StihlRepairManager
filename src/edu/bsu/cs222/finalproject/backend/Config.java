@@ -13,7 +13,6 @@ public class Config {
     }
 
     public void initialize(InputStream configFile) throws Exception{
-        // File file = new File(configFile.toURI());
         StringWriter writer = new StringWriter();
         IOUtils.copy(configFile, writer, "UTF-8");
         String jsonData = writer.toString();
@@ -23,6 +22,7 @@ public class Config {
         databaseUsername = pageJson.getString("databaseUsername");
         databasePassword = pageJson.getString("databasePassword");
         databaseName = pageJson.getString("databaseName");
+        databaseType = pageJson.getString("databaseType");
     }
 
 
@@ -30,6 +30,7 @@ public class Config {
     private String databaseUsername;
     private String databasePassword;
     private String databaseName;
+    private String databaseType;
 
     public String getDatabaseAddress() {
         return databaseAddress;
@@ -45,5 +46,9 @@ public class Config {
 
     public String getDatabaseName() {
         return databaseName;
+    }
+
+    public String getDatabaseType() {
+        return databaseType;
     }
 }

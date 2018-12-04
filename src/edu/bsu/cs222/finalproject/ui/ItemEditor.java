@@ -92,7 +92,7 @@ public class ItemEditor {
     }
 
     @FXML
-    void search(){
+    private void search(){
         Main main = Main.getInstance();
         ArrayList<ItemEditor.ItemViewData> viewData = new ArrayList<>();
 

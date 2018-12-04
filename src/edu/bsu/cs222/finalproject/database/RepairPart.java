@@ -13,6 +13,7 @@ public class RepairPart {
 
     public RepairPart(RepairPart cpy){
         id = cpy.id;
+        repairId = cpy.repairId;
         name = cpy.name;
         price = cpy.price;
         quantity = cpy.quantity;

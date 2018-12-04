@@ -21,7 +21,7 @@ public class Main extends Application {
         return singletonInstance;
     }
 
-    Config config = new Config();
+    private Config config = new Config();
     public WorkingLayer workingLayer = new WorkingLayer();
     public Stage stage = null;
     public Employee currentEmployee = null;
@@ -34,7 +34,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        Database database = TemporaryDatabase.createInstance();
+        Database database;
+        if(config.getDatabaseType().equals("temporary")) {
+            database = TemporaryDatabase.createInstance();
+        }
+        else{
+            throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
+        }
         database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
 
         workingLayer.initialize(database);
