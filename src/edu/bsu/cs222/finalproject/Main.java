@@ -39,7 +39,25 @@ public class Main extends Application {
             case "temporary":
                 database = TemporaryDatabase.createInstance();
                 //because the database is by default just blank, let's throw in some example values
-                User user = new User();
+            break;
+            case "mysql":
+                database = MySqlDatabase.createInstance();
+                database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+                break;
+            case "mysqlCreateTables":
+                MySqlDatabase mySqlDatabase = MySqlDatabase.createInstance();
+                mySqlDatabase.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+                mySqlDatabase.createDatabaseTables();
+                database = mySqlDatabase;
+                break;
+            default:
+                throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
+        }
+        
+        workingLayer.initialize(database);
+
+        if(config.getDatabaseType().equals("temporary")){
+            User user = new User();
             {
                 user.name = "John Smith";
                 user.phoneNumber = PhoneNumber.toNormalized("555-555-5555");
@@ -72,22 +90,7 @@ public class Main extends Application {
                 employee.number = "88";
                 workingLayer.insertEmployee(employee);
             }
-            break;
-            case "mysql":
-                database = MySqlDatabase.createInstance();
-                database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
-                break;
-            case "mysqlCreateTables":
-                MySqlDatabase mySqlDatabase = MySqlDatabase.createInstance();
-                mySqlDatabase.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
-                mySqlDatabase.createDatabaseTables();
-                database = mySqlDatabase;
-                break;
-            default:
-                throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
         }
-
-        workingLayer.initialize(database);
     }
 
     public static void main(String[] args) {
