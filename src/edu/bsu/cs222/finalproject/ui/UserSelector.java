@@ -46,7 +46,7 @@ public class UserSelector extends StackPane {
     }
 
     @FXML
-    void searchPhoneNumber() throws Exception{
+    void searchPhoneNumber() {
         Main main = Main.getInstance();
         if(!PhoneNumber.isValid(phoneField.getText())){
             setUser(null);

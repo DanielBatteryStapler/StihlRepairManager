@@ -2,7 +2,6 @@ package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.database.Item;
-import edu.bsu.cs222.finalproject.database.Purchase;
 import edu.bsu.cs222.finalproject.database.Repair;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
