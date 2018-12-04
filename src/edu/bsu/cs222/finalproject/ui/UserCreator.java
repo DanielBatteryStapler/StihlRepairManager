@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,7 +38,7 @@ public class UserCreator {
     @FXML TextField addressField = null;
 
     @FXML
-    void submit() throws Exception{
+    void submit() {
         User user = new User();
         user.name = nameField.getText();
         user.address = addressField.getText();
@@ -63,7 +62,6 @@ public class UserCreator {
             stage.close();
         } catch (Exception e) {
             phoneField.setStyle("-fx-control-inner-background: #ff0000");
-            return;
         }
     }
 

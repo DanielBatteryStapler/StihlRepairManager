@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -70,7 +69,7 @@ public class UserLookup {
     @FXML TableView<UserLookupViewData> dataTable = null;
 
     @FXML
-    void search() {
+    private void search() {
         User user = userField.getUser();
         if(user == null){
             userField.setStyle("-fx-control-inner-background: #ff0000");
@@ -89,7 +88,7 @@ public class UserLookup {
                         break;
                     }
                 }
-                if (isDuplicate == false) {
+                if (!isDuplicate) {
                     viewData.add(UserLookupViewData.createFromItem(main.workingLayer.getItemWithId(purchase.itemId)));
                 }
             }
@@ -104,7 +103,7 @@ public class UserLookup {
                         break;
                     }
                 }
-                if (isDuplicate == false) {
+                if (!isDuplicate) {
                     viewData.add(UserLookupViewData.createFromItem(main.workingLayer.getItemWithId(repair.itemId)));
                 }
             }
@@ -159,8 +158,6 @@ public class UserLookup {
         }
 
         static UserLookupViewData createFromItem(Item item){
-            Main main = Main.getInstance();
-
             UserLookupViewData data = new UserLookupViewData();
 
             data.item = new Item(item);
