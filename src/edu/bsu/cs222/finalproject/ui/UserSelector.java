@@ -59,13 +59,11 @@ public class UserSelector extends StackPane {
     @FXML
     private void searchPhoneNumber() {
         Main main = Main.getInstance();
-        try {
-            PhoneNumber.toNormalized(phoneField.getText());
-        } catch (Exception e) {
+
+        if (!PhoneNumber.isValid(phoneField.getText())) {
             phoneField.setStyle("-fx-control-inner-background: #ff0000");
             setUser(null);
-
-            presentingPane.getChildren().clear();
+            return;
         }
 
         User user = main.workingLayer.getUserWithPhoneNumber(PhoneNumber.toNormalized(phoneField.getText()));

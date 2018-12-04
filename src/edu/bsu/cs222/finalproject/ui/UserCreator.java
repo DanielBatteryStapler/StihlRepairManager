@@ -36,38 +36,48 @@ public class UserCreator {
     @FXML TextField nameField = null;
     @FXML TextField phoneField = null;
     @FXML TextField addressField = null;
+    @FXML TextField stateField = null;
+    @FXML TextField cityField = null;
 
     @FXML
     void submit() {
         User user = new User();
-        user.name = nameField.getText();
-        user.address = addressField.getText();
 
         //reset boxes to white so it's not persistent
         nameField.setStyle("-fx-control-inner-background: #ffffff");
         phoneField.setStyle("-fx-control-inner-background: #ffffff");
         addressField.setStyle("-fx-control-inner-background: #ffffff");
 
-        if (user.name.equals("")) {
+        if (nameField.getText().equals("")) {
             nameField.setStyle("-fx-control-inner-background: #ff0000");
             return;
         }
-        else if (user.address.equals("")) {
+        else if (addressField.getText().equals("")) {
             addressField.setStyle("-fx-control-inner-background: #ff0000");
             return;
         }
-
-        try {
-            user.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
-
-            Main.getInstance().workingLayer.insertUser(user);
-            if (callback != null) {
-                callback.accept(user);
-            }
-            stage.close();
-        } catch (Exception e) {
-            phoneField.setStyle("-fx-control-inner-background: #ff0000");
+        else if (stateField.getText().equals("")) {
+            stateField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
         }
+        else if (cityField.getText().equals("")) {
+            cityField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+        else if (!PhoneNumber.isValid(phoneField.getText())) {
+            phoneField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+
+        user.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
+        user.name = nameField.getText();
+        user.address = addressField.getText() + "\n" + cityField.getText() + "\n" + stateField.getText();
+
+        Main.getInstance().workingLayer.insertUser(user);
+        if (callback != null) {
+            callback.accept(user);
+        }
+        stage.close();
     }
 
     void setCallback(Consumer<User> callback) {

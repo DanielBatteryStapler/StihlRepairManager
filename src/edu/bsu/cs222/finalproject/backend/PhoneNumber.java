@@ -38,8 +38,7 @@ public class PhoneNumber {
             StringBuilder mutableNumber = new StringBuilder(phoneNumber);
             mutableNumber.insert(0, '(');
             mutableNumber.insert(4, ')');
-            mutableNumber.insert(5,'-');
-            mutableNumber.insert(9,'-');
+            mutableNumber.insert(8,'-');
             return (mutableNumber.toString());
         }
        else {
