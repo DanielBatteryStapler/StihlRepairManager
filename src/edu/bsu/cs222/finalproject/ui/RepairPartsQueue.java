@@ -121,7 +121,13 @@ public class RepairPartsQueue {
         void onClick(RepairPartsQueue controller, TableRow<RepairPartViewData> row){
             Main main = Main.getInstance();
 
-            //TODO: do something
+            try {
+                RepairPartEditor editor = RepairPartEditor.createInstance(main.stage, row.getItem().repairPart);
+                editor.setCallback(repairPart -> controller.search());
+                editor.show();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

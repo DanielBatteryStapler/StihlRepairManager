@@ -50,6 +50,7 @@ public class RepairEditor {
                 editor.updateRepairButton.setDisable(true);
                 editor.descriptionField.setEditable(false);
                 editor.descriptionCompletedField.setEditable(false);
+                editor.newRepairPartButton.setDisable(true);
             }
 
 
@@ -95,6 +96,8 @@ public class RepairEditor {
     @FXML Label dateCompleted = null;
 
     @FXML TableView<RepairPartViewData> repairPartsTable = null;
+    @FXML Button newRepairPartButton = null;
+
 
     @FXML TextArea descriptionField = null;
     @FXML TextArea descriptionCompletedField = null;
@@ -163,6 +166,7 @@ public class RepairEditor {
                 updateRepairButton.setDisable(true);
                 descriptionField.setEditable(false);
                 descriptionCompletedField.setEditable(false);
+                newRepairPartButton.setDisable(true);
 
                 if(callback != null){
                     callback.accept(repair);
@@ -188,6 +192,24 @@ public class RepairEditor {
 
         ObservableList<RepairPartViewData> observableListData = FXCollections.observableList(viewData);
         repairPartsTable.setItems(observableListData);
+    }
+
+    @FXML
+    void newRepairPart() {
+        Main main = Main.getInstance();
+
+        try {
+            RepairPart part = new RepairPart();
+            part.repairId = repair.id;
+
+            main.workingLayer.insertRepairPart(part);
+
+            RepairPartEditor editor = RepairPartEditor.createInstance(stage, part);
+            editor.setCallback(repairPart -> updateRepairPartsTable());
+            editor.show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     static public class RepairPartViewData{
@@ -226,9 +248,15 @@ public class RepairEditor {
         }
 
         void onClick(RepairEditor controller, TableRow<RepairPartViewData> row){
-            Main main = Main.getInstance();
-
-            //TODO: do something
+            try {
+                RepairPartEditor editor = RepairPartEditor.createInstance(controller.stage, row.getItem().repairPart);
+                editor.setCallback(repairPart -> {
+                    controller.updateRepairPartsTable();
+                });
+                editor.show();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }
