@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Login {
+    @FXML TextField employeeNumberField = null;
+    @FXML Label errorText = null;
+
     public static void showScene() throws Exception{
         Main main = Main.getInstance();
 
@@ -21,11 +24,7 @@ public class Login {
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);
         main.stage.show();
-        main.stage.toFront();
     }
-
-    @FXML TextField employeeNumberField = null;
-    @FXML Label errorText = null;
 
     @FXML
     void submit() throws Exception{

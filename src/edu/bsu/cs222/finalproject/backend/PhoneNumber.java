@@ -36,8 +36,10 @@ public class PhoneNumber {
     public static String toFormatted(String phoneNumber) throws IllegalArgumentException{
         if (isValid(phoneNumber)) {
             StringBuilder mutableNumber = new StringBuilder(phoneNumber);
-            mutableNumber.insert(3,'-');
-            mutableNumber.insert(7,'-');
+            mutableNumber.insert(0, '(');
+            mutableNumber.insert(4, ')');
+            mutableNumber.insert(5,'-');
+            mutableNumber.insert(9,'-');
             return (mutableNumber.toString());
         }
        else {

@@ -43,6 +43,11 @@ public class UserCreator {
         user.name = nameField.getText();
         user.address = addressField.getText();
 
+        //reset boxes to white so it's not persistent
+        nameField.setStyle("-fx-control-inner-background: #ffffff");
+        phoneField.setStyle("-fx-control-inner-background: #ffffff");
+        addressField.setStyle("-fx-control-inner-background: #ffffff");
+
         if (user.name.equals("")) {
             nameField.setStyle("-fx-control-inner-background: #ff0000");
             return;
