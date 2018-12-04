@@ -94,6 +94,37 @@ public class EmployeeEditor {
         search();
     }
 
+    @FXML
+    public void removeEmployee() {
+        Main main = Main.getInstance();
+
+        if (dataTable == null) {
+            errorLabel.setText("Select an employee before trying to remove");
+            return;
+        }
+
+        ObservableList<EmployeeViewData> row = dataTable.getSelectionModel().getSelectedItems();
+
+        if(row.iterator().next().employee.id == main.currentEmployee.id){
+            errorLabel.setText("You cannot remove the employee that you are currently logged in as!");
+            employeeNameField.setStyle("-fx-control-inner-background: #ff0000");
+        }
+        else{
+            try {
+                ConfirmationDialog confirm = ConfirmationDialog.createInstance(main.stage);
+                confirm.setQuestion("Are you sure you want to delete this Employee?\nYou can NOT undo this action.");
+                confirm.setCallback(() -> {
+                    main.workingLayer.deleteEmployee(row.get(0).employee);
+                    search();
+                });
+                confirm.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
     static public class EmployeeViewData{
         Employee employee;
 
