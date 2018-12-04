@@ -26,11 +26,11 @@ public class MySqlDatabase implements Database {
 
     public void connectToServer(String address, String username, String password, String database) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-
             String databaseConnectionURI = "jdbc:mysql://" + address + "/" + database + "?user=" + username + "&password=" + password;
 
             connection = DriverManager.getConnection(databaseConnectionURI);
+            connection.setAutoCommit(true);
+            statement = connection.createStatement();
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -58,8 +58,6 @@ public class MySqlDatabase implements Database {
         }
 
         try {
-            statement = connection.createStatement();
-
             statement.execute(""
                     + "CREATE TABLE employee("
                     + "id BIGINT NOT NULL AUTO_INCREMENT,"
@@ -80,7 +78,7 @@ public class MySqlDatabase implements Database {
             );
 
             statement.execute(""
-                    + "CREATE TABLE user("
+                    + "CREATE TABLE item("
                     + "id BIGINT NOT NULL AUTO_INCREMENT,"
                     + "PRIMARY KEY (id),"
                     + "modelNumber TEXT NOT NULL,"
@@ -128,6 +126,8 @@ public class MySqlDatabase implements Database {
                     + "needToBuy BOOL NOT NULL"
                     + ") ENGINE = InnoDB"
             );
+
+            connection.commit();
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -153,8 +153,11 @@ public class MySqlDatabase implements Database {
             prepStmt.close();
 
             ResultSet res = statement.executeQuery("SELECT LAST_INSERT_ID()");
+            res.first();
             newEmployee.id = res.getLong(1);
             res.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -166,6 +169,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(1, employeeId);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -177,7 +182,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, number FROM employee WHERE id = ?");
             prepStmt.setLong(1, employeeId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -187,6 +191,7 @@ public class MySqlDatabase implements Database {
                 employee.number = res.getString("number");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -199,7 +204,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, number FROM employee WHERE number = ?");
             prepStmt.setString(1, employeeNumber);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -209,6 +213,7 @@ public class MySqlDatabase implements Database {
                 employee.number = res.getString("number");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -248,8 +253,11 @@ public class MySqlDatabase implements Database {
             prepStmt.close();
 
             ResultSet res = statement.executeQuery("SELECT LAST_INSERT_ID()");
+            res.first();
             newUser.id = res.getLong(1);
             res.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -264,6 +272,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(4, user.id);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -276,6 +286,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(1, userId);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -287,7 +299,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, address, phoneNumber FROM user WHERE id = ?");
             prepStmt.setLong(1, userId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -298,6 +309,7 @@ public class MySqlDatabase implements Database {
                 user.phoneNumber = res.getString("phoneNumber");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -310,7 +322,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, address, phoneNumber FROM user WHERE phoneNumber = ?");
             prepStmt.setString(1, phoneNumber);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -321,6 +332,7 @@ public class MySqlDatabase implements Database {
                 user.phoneNumber = res.getString("phoneNumber");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -332,10 +344,9 @@ public class MySqlDatabase implements Database {
         ArrayList<User> output = new ArrayList<>();
 
         try {
-            PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, address, phoneNumber FROM user WHERE MATCH(name) AGAINST (?)");
-            prepStmt.setString(1, name);
+            PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, address, phoneNumber FROM user WHERE name LIKE ? ESCAPE '!'");
+            prepStmt.setString(1, "%" + escapeForLike(name) + "%");
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             while(res.next()){
@@ -347,6 +358,7 @@ public class MySqlDatabase implements Database {
                 output.add(user);
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -363,8 +375,11 @@ public class MySqlDatabase implements Database {
             prepStmt.close();
 
             ResultSet res = statement.executeQuery("SELECT LAST_INSERT_ID()");
+            res.first();
             newItem.id = res.getLong(1);
             res.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -378,6 +393,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(3, item.id);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -389,6 +406,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(1, itemId);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -400,7 +419,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, modelNumber, serialNumber FROM item WHERE id = ?");
             prepStmt.setLong(1, itemId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -410,6 +428,7 @@ public class MySqlDatabase implements Database {
                 item.serialNumber = res.getString("serialNumber");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -420,10 +439,10 @@ public class MySqlDatabase implements Database {
         ArrayList<Item> output = new ArrayList<>();
 
         try {
-            PreparedStatement prepStmt = connection.prepareStatement("SELECT id, modelNumber, serialNumber FROM item WHERE MATCH(serialNumber) AGAINST (?)");
-            prepStmt.setString(1, serialNumber);
+
+            PreparedStatement prepStmt = connection.prepareStatement("SELECT id, modelNumber, serialNumber FROM item WHERE serialNumber LIKE ? ESCAPE '!'");
+            prepStmt.setString(1, "%" + escapeForLike(serialNumber) + "%");
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             while(res.next()){
@@ -434,6 +453,7 @@ public class MySqlDatabase implements Database {
                 output.add(item);
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -451,8 +471,11 @@ public class MySqlDatabase implements Database {
             prepStmt.close();
 
             ResultSet res = statement.executeQuery("SELECT LAST_INSERT_ID()");
+            res.first();
             newPurchase.id = res.getLong(1);
             res.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -464,6 +487,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(1, purchaseId);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -475,7 +500,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, purchaserId, itemId, date FROM purchase WHERE id = ?");
             prepStmt.setLong(1, purchaseId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -486,6 +510,7 @@ public class MySqlDatabase implements Database {
                 purchase.date = res.getDate("date");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -499,7 +524,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, purchaserId, itemId, date FROM purchase WHERE purchaserId = ?");
             prepStmt.setLong(1, purchaserId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             while(res.next()){
@@ -511,6 +535,7 @@ public class MySqlDatabase implements Database {
                 output.add(purchase);
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -524,7 +549,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, purchaserId, itemId, date FROM purchase WHERE itemId = ?");
             prepStmt.setLong(1, itemId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             if(res.next()){
@@ -535,6 +559,7 @@ public class MySqlDatabase implements Database {
                 purchase.date = res.getDate("date");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -555,8 +580,11 @@ public class MySqlDatabase implements Database {
             prepStmt.close();
 
             ResultSet res = statement.executeQuery("SELECT LAST_INSERT_ID()");
+            res.first();
             newRepair.id = res.getLong(1);
             res.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -575,6 +603,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(8, repair.id);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -586,6 +616,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(1, repairId);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -597,8 +629,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, repairNumber, userId, itemId, dateStarted, dateCompleted, description, descriptionCompleted FROM repair WHERE id = ?");
             prepStmt.setLong(1, repairId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
-
             res.beforeFirst();
             if(res.next()){
                 repair = new Repair();
@@ -612,6 +642,7 @@ public class MySqlDatabase implements Database {
                 repair.descriptionCompleted = res.getString("descriptionCompleted");
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -624,7 +655,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, repairNumber, userId, itemId, dateStarted, dateCompleted, description, descriptionCompleted FROM repair WHERE itemId = ?");
             prepStmt.setLong(1, itemId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             while(res.next()){
@@ -640,6 +670,7 @@ public class MySqlDatabase implements Database {
                 output.add(repair);
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -652,7 +683,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, repairNumber, userId, itemId, dateStarted, dateCompleted, description, descriptionCompleted FROM repair WHERE userId = ?");
             prepStmt.setLong(1, userId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             while(res.next()){
@@ -668,6 +698,7 @@ public class MySqlDatabase implements Database {
                 output.add(repair);
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -735,8 +766,11 @@ public class MySqlDatabase implements Database {
             prepStmt.close();
 
             ResultSet res = statement.executeQuery("SELECT LAST_INSERT_ID()");
+            res.first();
             newRepairPart.id = res.getLong(1);
             res.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -753,6 +787,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(6, repairPart.id);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -764,6 +800,8 @@ public class MySqlDatabase implements Database {
             prepStmt.setLong(1, repairPartId);
             prepStmt.execute();
             prepStmt.close();
+
+            connection.commit();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -775,7 +813,6 @@ public class MySqlDatabase implements Database {
             PreparedStatement prepStmt = connection.prepareStatement("SELECT id, name, price, quantity, needToBuy FROM repairPart WHERE repairId = ?");
             prepStmt.setLong(1, repairId);
             ResultSet res = prepStmt.executeQuery();
-            prepStmt.close();
 
             res.beforeFirst();
             while(res.next()){
@@ -788,6 +825,7 @@ public class MySqlDatabase implements Database {
                 output.add(repairPart);
             }
             res.close();
+            prepStmt.close();
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -814,5 +852,9 @@ public class MySqlDatabase implements Database {
             e.printStackTrace();
         }
         return output;
+    }
+
+    private String escapeForLike(String string) {
+        return string.replaceAll("!", "!!").replaceAll("%", "!%").replaceAll("_", "!_").replace("[", "![");
     }
 }

@@ -35,22 +35,56 @@ public class Main extends Application {
         }
 
         Database database;
-        if(config.getDatabaseType().equals("temporary")) {
-            database = TemporaryDatabase.createInstance();
-            //we don't need to login to a temporary database, so just don't
-        }
-        else if(config.getDatabaseType().equals("mysql")) {
-            database = MySqlDatabase.createInstance();
-            database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
-        }
-        else if(config.getDatabaseType().equals("mysqlCreateTables")){
-            MySqlDatabase mySqlDatabase = MySqlDatabase.createInstance();
-            mySqlDatabase.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
-            mySqlDatabase.createDatabaseTables();
-            database = mySqlDatabase;
-        }
-        else{
-            throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
+        switch (config.getDatabaseType()) {
+            case "temporary":
+                database = TemporaryDatabase.createInstance();
+                //because the database is by default just blank, let's throw in some example values
+                User user = new User();
+            {
+                user.name = "John Smith";
+                user.phoneNumber = PhoneNumber.toNormalized("555-555-5555");
+                user.address = "555 Fifth Avenue";
+                workingLayer.insertUser(user);
+            }
+            Item item = new Item();
+            {
+                item.serialNumber = "#5555";
+                item.modelNumber = "#5555";
+                workingLayer.insertItem(item);
+                workingLayer.makeNewPurchase(user, item);
+            }
+            {
+                Repair repair = workingLayer.makeNewRepair(user, item);
+                repair.description = "description of needed repairs....";
+                workingLayer.updateRepair(repair);
+
+                RepairPart repairPart = new RepairPart();
+                repairPart.needToBuy = true;
+                repairPart.repairId = repair.id;
+                repairPart.price = 6599;
+                repairPart.quantity = 3;
+                repairPart.name = "Some Screws";
+                workingLayer.insertRepairPart(repairPart);
+            }
+            {
+                Employee employee = new Employee();
+                employee.name = "Eugene Smithson";
+                employee.number = "88";
+                workingLayer.insertEmployee(employee);
+            }
+            break;
+            case "mysql":
+                database = MySqlDatabase.createInstance();
+                database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+                break;
+            case "mysqlCreateTables":
+                MySqlDatabase mySqlDatabase = MySqlDatabase.createInstance();
+                mySqlDatabase.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+                mySqlDatabase.createDatabaseTables();
+                database = mySqlDatabase;
+                break;
+            default:
+                throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
         }
 
         workingLayer.initialize(database);
@@ -68,40 +102,6 @@ public class Main extends Application {
         singletonInstance = this;
 
         stage = _stage;
-
-        User user = new User();
-        {
-            user.name = "John Smith";
-            user.phoneNumber = PhoneNumber.toNormalized("555-555-5555");
-            user.address = "555 Fifth Avenue";
-            workingLayer.insertUser(user);
-        }
-        Item item = new Item();
-        {
-            item.serialNumber = "#5555";
-            item.modelNumber = "#5555";
-            workingLayer.insertItem(item);
-            workingLayer.makeNewPurchase(user, item);
-        }
-        {
-            Repair repair = workingLayer.makeNewRepair(user, item);
-            repair.description = "description of needed repairs....";
-            workingLayer.updateRepair(repair);
-
-            RepairPart repairPart = new RepairPart();
-            repairPart.needToBuy = true;
-            repairPart.repairId = repair.id;
-            repairPart.price = 6599;
-            repairPart.quantity = 3;
-            repairPart.name = "Some Screws";
-            workingLayer.insertRepairPart(repairPart);
-        }
-        {
-            Employee employee = new Employee();
-            employee.name = "Eugene Smithson";
-            employee.number = "88";
-            workingLayer.insertEmployee(employee);
-        }
 
         Login.showScene();
     }
