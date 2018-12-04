@@ -7,26 +7,33 @@
 <?import javafx.scene.layout.StackPane?>
 
 <?import edu.bsu.cs222.finalproject.ui.UserViewer?>
+<?import javafx.scene.control.TableView?>
 <GridPane xmlns:fx="http://javafx.com/fxml" vgap="10" hgap="10" fx:controller="edu.bsu.cs222.finalproject.ui.UserSelector" alignment="TOP_CENTER"
           style="-fx-border-color: lightgray; -fx-border-width: 2; -fx-border-style: dashed;" minHeight="210">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <Label text="Select a User"
+    <Label text="Select a User by name or phone number"
            GridPane.columnIndex="0" GridPane.rowIndex="0"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Label text="Phone Number:"
            GridPane.columnIndex="0" GridPane.rowIndex="1"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Label text="Name:"
+           GridPane.columnIndex="0" GridPane.rowIndex="2"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <TextField fx:id="phoneField" onAction="#searchPhoneNumber"
            GridPane.columnIndex="1" GridPane.rowIndex="1"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Search" onAction="#searchPhoneNumber"
-            GridPane.columnIndex="0" GridPane.rowIndex="2"
+    <TextField fx:id="nameField" onAction="#searchName"
+               GridPane.columnIndex="1" GridPane.rowIndex="2"
+               GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Search" onAction="#search"
+            GridPane.columnIndex="0" GridPane.rowIndex="3"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <!--dummy pane that is empty by default, is populated by UserDataPane and NewUserPane by the controller-->
     <StackPane fx:id="presentingPane"
-               GridPane.columnIndex="0" GridPane.rowIndex="3"
+               GridPane.columnIndex="0" GridPane.rowIndex="4"
                GridPane.columnSpan="2" GridPane.rowSpan="1"/>
 
     <!--removed by the controller and moved into the PresentingPane when showing user data-->
@@ -44,5 +51,10 @@
                 GridPane.columnIndex="0" GridPane.rowIndex="1"
                 GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     </GridPane>
+
+    <!--Like the above two, but is a table that contains users with a certain name-->
+    <TableView fx:id="userTable" minWidth="400"
+               GridPane.columnIndex="0" GridPane.rowIndex="5"
+               GridPane.columnSpan="4" GridPane.rowSpan="1"/>
 
 </GridPane>

@@ -51,6 +51,11 @@ public class ItemSelector extends StackPane {
 
         ArrayList<Item> items = main.workingLayer.searchItemsWithSerial(serialField.getText());
 
+        if (serialField.getText().equals("")) {
+            serialField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+
         if(items.size() == 0){
             setItem(null);
 
