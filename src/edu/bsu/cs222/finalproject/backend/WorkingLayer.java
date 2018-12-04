@@ -20,6 +20,11 @@ public class WorkingLayer {
         database = workingDatabase;
     }
 
+    public void close(){
+        database.close();
+        database = null;
+    }
+
 /*  User Methods
 -------------------------------------------------------------------------------------------------
 */
