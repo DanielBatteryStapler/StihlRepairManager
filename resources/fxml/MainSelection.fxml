@@ -16,22 +16,25 @@
     <Button text="User Lookup" onAction="#userLookup"
             GridPane.columnIndex="0" GridPane.rowIndex="2"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Add Purchase" onAction="#addPurchase"
+    <Button text="Item Lookup" onAction="#itemLookup"
             GridPane.columnIndex="0" GridPane.rowIndex="3"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Add Repair" onAction="#addRepair"
+    <Button text="Add Purchase" onAction="#addPurchase"
             GridPane.columnIndex="0" GridPane.rowIndex="4"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Repair Queue" onAction="#repairQueue"
+    <Button text="Add Repair" onAction="#addRepair"
             GridPane.columnIndex="0" GridPane.rowIndex="5"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Repair Parts Queue" onAction="#repairPartsQueue"
+    <Button text="Repair Queue" onAction="#repairQueue"
             GridPane.columnIndex="0" GridPane.rowIndex="6"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Employee Editor" onAction="#employeeEditor"
+    <Button text="Repair Parts Queue" onAction="#repairPartsQueue"
             GridPane.columnIndex="0" GridPane.rowIndex="7"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Button text="Log Out" onAction="#logout"
+    <Button text="Employee Editor" onAction="#employeeEditor"
             GridPane.columnIndex="0" GridPane.rowIndex="8"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Log Out" onAction="#logout"
+            GridPane.columnIndex="0" GridPane.rowIndex="9"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>

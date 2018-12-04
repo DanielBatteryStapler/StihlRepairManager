@@ -32,6 +32,13 @@ public class MainSelection {
     }
 
     @FXML
+    void itemLookup() throws Exception {
+        Main main = Main.getInstance();
+        ItemLookup lookup = ItemLookup.createInstance(main.stage);
+        lookup.show();
+    }
+
+    @FXML
     void repairQueue() throws Exception{
         RepairQueue.showScene();
     }
