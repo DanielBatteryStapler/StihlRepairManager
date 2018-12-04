@@ -18,14 +18,19 @@
             GridPane.columnSpan="3" GridPane.rowSpan="1"/>
     <TableView fx:id="dataTable" minWidth="400"
             GridPane.columnIndex="0" GridPane.rowIndex="5"
-            GridPane.columnSpan="3" GridPane.rowSpan="1"/>
+            GridPane.columnSpan="4" GridPane.rowSpan="1"/>
     <TextField fx:id="employeeNameField"
            GridPane.columnIndex="0" GridPane.rowIndex="6"
-           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+           GridPane.columnSpan="1" GridPane.rowSpan="1"
+    promptText="Employee Name"/>
     <TextField fx:id="employeeNumberField"
            GridPane.columnIndex="1" GridPane.rowIndex="6"
-           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+           GridPane.columnSpan="1" GridPane.rowSpan="1"
+    promptText="Employee Number"/>
     <Button text="Add New Employee" onAction="#newEmployee"
            GridPane.columnIndex="2" GridPane.rowIndex="6"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button text="Remove Employee" onAction="#removeEmployee"
+            GridPane.columnIndex="3" GridPane.rowIndex="6"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>
