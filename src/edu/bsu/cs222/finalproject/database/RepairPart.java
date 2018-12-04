@@ -6,8 +6,8 @@ public class RepairPart {
         id = -1;
         repairId = -1;
         name = "";
-        price = -1;
-        quantity = -1;
+        price = 0;
+        quantity = 0;
         needToBuy = true;
     }
 

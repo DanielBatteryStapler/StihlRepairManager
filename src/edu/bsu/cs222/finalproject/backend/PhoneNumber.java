@@ -23,17 +23,17 @@ public class PhoneNumber {
         return numOfNums == 10;
     }
 
-    public static String toNormalized(String phoneNumber) throws Exception{
+    public static String toNormalized(String phoneNumber) throws IllegalArgumentException{
         if(isValid(phoneNumber)){
             phoneNumber = phoneNumber.replaceAll("\\D", "");
             return phoneNumber;
         }
         else{
-            throw new Exception("Attempted to normalize an invalid phone number");
+            throw new IllegalArgumentException("Attempted to normalize an invalid phone number");
         }
     }
 
-    public static String toFormatted(String phoneNumber) throws Exception{
+    public static String toFormatted(String phoneNumber) throws IllegalArgumentException{
         if (isValid(phoneNumber)) {
             StringBuilder mutableNumber = new StringBuilder(phoneNumber);
             mutableNumber.insert(3,'-');
@@ -41,7 +41,7 @@ public class PhoneNumber {
             return (mutableNumber.toString());
         }
        else {
-            throw new Exception("Attempted to format an invalid phone number");
+            throw new IllegalArgumentException("Attempted to format an invalid phone number");
         }
     }
 }

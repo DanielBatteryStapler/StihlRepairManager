@@ -2,8 +2,10 @@ package edu.bsu.cs222.finalproject.backend;
 
 import com.lowagie.text.DocumentException;
 import edu.bsu.cs222.finalproject.Main;
+import edu.bsu.cs222.finalproject.database.Item;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
+import edu.bsu.cs222.finalproject.database.User;
 import org.apache.commons.io.IOUtils;
 import org.xhtmlrenderer.pdf.ToPDF;
 
@@ -36,10 +38,13 @@ public class Print {
         } catch (DocumentException e) {
             System.err.println("error in PDF creation");
             e.printStackTrace();
+        } catch (IllegalArgumentException e){
+            System.err.println("error in PDF creation");
+            e.printStackTrace();
         }
         return false;
     }
-    private static String generateRepairDoc(Repair repair) {
+    private static String generateRepairDoc(Repair repair) throws IllegalArgumentException{
         Main main = Main.getInstance();
 
         StringBuilder output = new StringBuilder();
@@ -194,6 +199,8 @@ public class Print {
                 + "<td class='posTable'>"
         );
         {//customerInfo
+            User user = main.workingLayer.getUserWithId(repair.userId);
+            Item item = main.workingLayer.getItemWithId(repair.itemId);
             output.append(""
                     + "<div id='customerInfo'>"
                     + "<b>&nbsp;&nbsp;&nbsp;Customer Information</b>"
@@ -201,12 +208,12 @@ public class Print {
 
                     + "<tr>"
                     + "<th>Name</th>"
-                    + "<td style='width:210px;'></td>"
+                    + "<td style='width:210px;'>" + user.name + "</td>"
                     + "</tr>"
 
                     + "<tr>"
                     + "<th>Address</th>"
-                    + "<td></td>"
+                    + "<td>" + user.address + "</td>"
                     + "</tr>"
 
                     + "<tr>"
@@ -221,12 +228,12 @@ public class Print {
 
                     + "<tr>"
                     + "<th>Phone</th>"
-                    + "<td></td>"
+                    + "<td>" + PhoneNumber.toFormatted(user.phoneNumber) + "</td>"
                     + "</tr>"
 
                     + "<tr>"
                     + "<th>Model #</th>"
-                    + "<td></td>"
+                    + "<td>" + item.modelNumber + "</td>"
                     + "</tr>"
 
                     + "</table>"
@@ -244,6 +251,7 @@ public class Print {
                     + "<div id='description'>"
                     + "Description of Issue or Repairs Needed:"
                     + "<div id='descriptionTextBox'>"
+                    + repair.description
                     + "</div>"//descriptionTextBox
                     + "</div>"//description
             );
@@ -257,6 +265,7 @@ public class Print {
             output.append(""
                     + "Repairs Completed:"
                     + "<div id='repairsCompletedTextBox'>"
+                    + repair.descriptionCompleted
                     + "</div>"//repairsCompletedTextBox
                     + "<div id='legalBox'>"
                     + "By signing below, I agree to allow Brazil ACE Hardware to complete the work as described in the notes section of this work "

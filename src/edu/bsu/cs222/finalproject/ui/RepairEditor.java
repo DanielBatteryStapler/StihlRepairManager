@@ -2,12 +2,10 @@ package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.backend.Print;
-import edu.bsu.cs222.finalproject.database.Employee;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -252,9 +250,7 @@ public class RepairEditor {
         void onClick(RepairEditor controller, TableRow<RepairPartViewData> row){
             try {
                 RepairPartEditor editor = RepairPartEditor.createInstance(controller.stage, row.getItem().repairPart);
-                editor.setCallback(repairPart -> {
-                    controller.updateRepairPartsTable();
-                });
+                editor.setCallback(repairPart -> controller.updateRepairPartsTable());
                 editor.show();
             } catch (Exception e){
                 e.printStackTrace();
