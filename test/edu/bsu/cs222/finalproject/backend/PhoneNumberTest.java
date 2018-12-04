@@ -31,7 +31,7 @@ public class PhoneNumberTest {
 
     @Test
     public void testToFormatted() throws Exception{
-        assertEquals("555-555-5555", PhoneNumber.toFormatted("5555555555"));
-        assertEquals("123-456-7890", PhoneNumber.toFormatted("1234567890"));
+        assertEquals("(555)-555-5555", PhoneNumber.toFormatted("5555555555"));
+        assertEquals("(123)-456-7890", PhoneNumber.toFormatted("1234567890"));
     }
 }

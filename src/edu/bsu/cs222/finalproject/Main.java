@@ -53,7 +53,7 @@ public class Main extends Application {
             default:
                 throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
         }
-        
+
         workingLayer.initialize(database);
 
         if(config.getDatabaseType().equals("temporary")){
