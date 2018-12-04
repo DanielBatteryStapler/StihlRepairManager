@@ -3,8 +3,8 @@ package edu.bsu.cs222.finalproject.ui;
 import edu.bsu.cs222.finalproject.Main;
 import edu.bsu.cs222.finalproject.backend.PhoneNumber;
 import edu.bsu.cs222.finalproject.database.User;
+
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
@@ -78,7 +77,7 @@ public class UserSelector extends StackPane {
     }
 
 
-    @FXML TableView userTable = null;
+    @FXML TableView<User> userTable = null;
 
     @FXML
     private void searchName() {
@@ -98,30 +97,15 @@ public class UserSelector extends StackPane {
 
         TableColumn<User, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        nameCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<User, String> param) {
-                return new SimpleObjectProperty<>(param.getValue().name);
-            }
-        });
+        nameCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().name));
 
         TableColumn<User, String> phoneCol = new TableColumn<>("Phone Number");
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("Phone Number"));
-        phoneCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<User, String> param) {
-                return new SimpleObjectProperty<>(PhoneNumber.toFormatted(param.getValue().phoneNumber));
-            }
-        });
+        phoneCol.setCellValueFactory(param -> new SimpleObjectProperty<>(PhoneNumber.toFormatted(param.getValue().phoneNumber)));
 
         TableColumn<User, String> addressCol = new TableColumn<>("Address");
         addressCol.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        addressCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<User, String> param) {
-                return new SimpleObjectProperty<>(param.getValue().address);
-            }
-        });
+        addressCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().address));
 
         userTable.getColumns().addAll(nameCol, phoneCol, addressCol);
 
