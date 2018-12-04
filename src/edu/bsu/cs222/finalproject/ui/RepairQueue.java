@@ -66,7 +66,7 @@ public class RepairQueue {
     @FXML TableView<RepairQueue.RepairQueueViewData> dataTable = null;
 
     @FXML
-    void search() {
+    private void search() {
         Main main = Main.getInstance();
         ArrayList<RepairQueue.RepairQueueViewData> viewData = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class RepairQueue {
 
         ObservableList<RepairQueue.RepairQueueViewData> observableListData = FXCollections.observableList(viewData);
         dataTable.setItems(observableListData);
-        dataTable.getSortOrder().add(dataTable.getColumns().get(0));//sort by the second column in the table
+        dataTable.getSortOrder().add(dataTable.getColumns().get(1));//sort by the second column in the table
         TableColumn<RepairQueue.RepairQueueViewData, ?> secondColumn = dataTable.getColumns().get(1);
         secondColumn.setSortType(TableColumn.SortType.DESCENDING);
         secondColumn.setSortable(true);

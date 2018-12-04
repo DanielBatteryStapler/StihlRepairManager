@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public interface Database{
     boolean isUsable();
 
-    String connectToServer(String address, String username, String password, String database);//returns a string with an error for the database, null on no error
+    void connectToServer(String address, String username, String password, String database);
+    void close();
 
     void insertEmployee(Employee newEmployee);
     void dropEmployee(long employeeId);
@@ -32,9 +33,9 @@ public interface Database{
     ArrayList<Purchase> getPurchasesWithPurchaser(long purchaserId);
     Purchase getPurchaseOnItem(long itemId);
 
-    void insertRepair(Repair newPurchase);
-    void updateRepair(Repair purchase);
-    void dropRepair(long purchaseId);
+    void insertRepair(Repair newRepair);
+    void updateRepair(Repair repair);
+    void dropRepair(long repairId);
     Repair getRepairWithId(long repairId);
     ArrayList<Repair> getRepairsOnItem(long itemId);
     ArrayList<Repair> getRepairsWithUser(long userId);

@@ -19,7 +19,6 @@ public class Login {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(main.getClass().getResource("/fxml/Login.fxml"));
         Parent loadedPane = loader.load();
-        //Login controller = loader.getController();
 
         Scene scene = new Scene(loadedPane);
         main.stage.setScene(scene);

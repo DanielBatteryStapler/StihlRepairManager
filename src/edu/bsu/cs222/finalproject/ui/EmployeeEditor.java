@@ -5,7 +5,6 @@ import edu.bsu.cs222.finalproject.database.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -64,7 +63,7 @@ public class EmployeeEditor {
 
 
     @FXML
-    void search() {
+    private void search() {
         Main main = Main.getInstance();
         ArrayList<EmployeeViewData> viewData = new ArrayList<>();
 

@@ -21,12 +21,12 @@ public class Main extends Application {
         return singletonInstance;
     }
 
-    Config config = new Config();
     public WorkingLayer workingLayer = new WorkingLayer();
     public Stage stage = null;
     public Employee currentEmployee = null;
 
     public Main() {
+        Config config = new Config();
         try {
             config.initialize(getClass().getResourceAsStream("/config.json"));
         } catch (Exception e) {
@@ -34,8 +34,24 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        Database database = TemporaryDatabase.createInstance();
-        database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+        Database database;
+        if(config.getDatabaseType().equals("temporary")) {
+            database = TemporaryDatabase.createInstance();
+            //we don't need to login to a temporary database, so just don't
+        }
+        else if(config.getDatabaseType().equals("mysql")) {
+            database = MySqlDatabase.createInstance();
+            database.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+        }
+        else if(config.getDatabaseType().equals("mysqlCreateTables")){
+            MySqlDatabase mySqlDatabase = MySqlDatabase.createInstance();
+            mySqlDatabase.connectToServer(config.getDatabaseAddress(), config.getDatabaseUsername(), config.getDatabasePassword(), config.getDatabaseName());
+            mySqlDatabase.createDatabaseTables();
+            database = mySqlDatabase;
+        }
+        else{
+            throw new RuntimeException("Error when creating database, invalid database type '" + config.getDatabaseType() + "' specified in configuration file");
+        }
 
         workingLayer.initialize(database);
     }
@@ -88,5 +104,10 @@ public class Main extends Application {
         }
 
         Login.showScene();
+    }
+
+    @Override
+    public void stop(){
+        workingLayer.close();
     }
 }

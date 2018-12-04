@@ -20,6 +20,11 @@ public class WorkingLayer {
         database = workingDatabase;
     }
 
+    public void close(){
+        database.close();
+        database = null;
+    }
+
 /*  User Methods
 -------------------------------------------------------------------------------------------------
 */
@@ -30,10 +35,6 @@ public class WorkingLayer {
 
     public void updateUser(User user) {
         database.updateUser(user);
-    }
-
-    public void deleteUser(User user) {
-        database.dropUser(user.id);
     }
 
     public User getUserWithPhoneNumber(String phoneNumber){
@@ -64,10 +65,6 @@ public class WorkingLayer {
         database.insertItem(item);
     }
 
-    public void deleteItem(Item item) {
-        database.dropItem(item.id);
-    }
-
     public ArrayList<Item> searchItemsWithSerial(String serialNumber) {
         return database.searchItemsWithSerial(serialNumber);
     }
@@ -82,7 +79,7 @@ public class WorkingLayer {
         repair.userId = existingUser.id;
         repair.dateStarted = new Date(Calendar.getInstance().getTime().getTime());//make it the current time for now, this will be added to the ui later
 
-        Repair latestRepair = database.getLatestRepair();
+        Repair latestRepair = getLatestRepair();
         if(latestRepair == null){
             repair.repairNumber = 100;
         }
@@ -99,11 +96,6 @@ public class WorkingLayer {
         return repair;
     }
 
-    public void completeRepair(User user, Item item, Repair repair) {
-        repair.dateCompleted = new Date(Calendar.getInstance().getTime().getTime());
-        updateRepair(repair);
-    }
-
     public Repair getRepairWithId(long repairId) {
         return database.getRepairWithId(repairId);
     }
@@ -118,10 +110,6 @@ public class WorkingLayer {
 
     public void updateRepair(Repair repair) {
         database.updateRepair(repair);
-    }
-
-    public void deleteRepair(Repair repair) {
-        database.dropRepair(repair.id);
     }
 
     public Repair getLatestRepair(){
@@ -147,10 +135,6 @@ public class WorkingLayer {
 
     public ArrayList<Purchase> getPurchasesWithPurchaser(long purchaser) {
         return database.getPurchasesWithPurchaser(purchaser);
-    }
-
-    public void deletePurchase(Purchase purchase) {
-        database.dropPurchase(purchase.purchaserId);
     }
 
     public Purchase getPurchaseWithId(long purchaseId) {

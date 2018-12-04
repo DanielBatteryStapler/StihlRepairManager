@@ -35,10 +35,7 @@ public class Print {
         } catch (IOException e) {
             System.err.println("ticket writer fault");
             e.printStackTrace();
-        } catch (DocumentException e) {
-            System.err.println("error in PDF creation");
-            e.printStackTrace();
-        } catch (IllegalArgumentException e){
+        } catch (DocumentException | IllegalArgumentException e) {
             System.err.println("error in PDF creation");
             e.printStackTrace();
         }
@@ -80,8 +77,8 @@ public class Print {
                     + "<tr>"
                     + "<td colspan='4'>"
                     + "<div id='headerImages'>"
-                    + "<img src='"); output.append(logoA); output.append("' />"
-                    + "<img src='"); output.append(logoB); output.append("' />"
+                    + "<img src='").append(logoA).append("' />"
+                    + "<img src='").append(logoB).append("' />"
                     + "</div>"//headerImages
                     + "<div id='headerText'>"
                     + "105 S. Forest Ave.<br />"
@@ -96,13 +93,12 @@ public class Print {
                     + "Date Started:<br />"
                     + "Date Completed:"
                     + "</td>"
-                    + "<td>");
-                    output.append(repair.dateStarted.toLocaleString()); output.append("<br />");
+                    + "<td>").append(DateFormatter.formatDate(repair.dateStarted)).append("<br />");
                     if(repair.dateCompleted == null){
                         output.append("Not Completed");
                     }
                     else{
-                        output.append(repair.dateCompleted.toLocaleString());
+                        output.append(DateFormatter.formatDate(repair.dateCompleted));
                     }
                     output.append( ""
                     + "</td>"
@@ -139,9 +135,9 @@ public class Print {
                 for(RepairPart part : repairParts){
                     output.append(""
                         + "<tr>"
-                        + "<td>" + part.quantity + "</td>"
-                        + "<td>" + part.name + "</td>"
-                        + "<td>" + NumberFormat.getCurrencyInstance().format(part.price / 100.0) + "</td>"
+                        + "<td>").append(part.quantity).append("</td>"
+                        + "<td>").append(part.name).append("</td>"
+                        + "<td>").append(NumberFormat.getCurrencyInstance().format(part.price / 100.0)).append("</td>"
                         + "<td></td>"
                         + "</tr>"
                     );
@@ -208,12 +204,12 @@ public class Print {
 
                     + "<tr>"
                     + "<th>Name</th>"
-                    + "<td style='width:210px;'>" + user.name + "</td>"
+                    + "<td style='width:210px;'>").append(user.name).append("</td>"
                     + "</tr>"
 
                     + "<tr>"
                     + "<th>Address</th>"
-                    + "<td>" + user.address + "</td>"
+                    + "<td>").append(user.address).append("</td>"
                     + "</tr>"
 
                     + "<tr>"
@@ -228,12 +224,17 @@ public class Print {
 
                     + "<tr>"
                     + "<th>Phone</th>"
-                    + "<td>" + PhoneNumber.toFormatted(user.phoneNumber) + "</td>"
+                    + "<td>").append(PhoneNumber.toFormatted(user.phoneNumber)).append("</td>"
                     + "</tr>"
 
                     + "<tr>"
                     + "<th>Model #</th>"
-                    + "<td>" + item.modelNumber + "</td>"
+                    + "<td>").append(item.modelNumber).append("</td>"
+                    + "</tr>"
+
+                    + "<tr>"
+                    + "<th>Serial #</th>"
+                    + "<td>").append(item.serialNumber).append("</td>"
                     + "</tr>"
 
                     + "</table>"
@@ -250,9 +251,7 @@ public class Print {
             output.append(""
                     + "<div id='description'>"
                     + "Description of Issue or Repairs Needed:"
-                    + "<div id='descriptionTextBox'>"
-                    + repair.description
-                    + "</div>"//descriptionTextBox
+                    + "<div id='descriptionTextBox'>").append(repair.description).append("</div>"
                     + "</div>"//description
             );
         }
@@ -264,9 +263,7 @@ public class Print {
         {//footer
             output.append(""
                     + "Repairs Completed:"
-                    + "<div id='repairsCompletedTextBox'>"
-                    + repair.descriptionCompleted
-                    + "</div>"//repairsCompletedTextBox
+                    + "<div id='repairsCompletedTextBox'>").append(repair.descriptionCompleted).append("</div>"
                     + "<div id='legalBox'>"
                     + "By signing below, I agree to allow Brazil ACE Hardware to complete the work as described in the notes section of this work "
                     + "order. I also agree to pay for all Parts and Labor charges, not covered under warranty, associated with any repairs "

@@ -2,5 +2,7 @@
   "databaseAddress": "example ip",
   "databaseUsername": "example name",
   "databasePassword": "example password",
-  "databaseName": "example database name"
+  "databaseName": "example database name",
+  "databaseType": "temporary",
+  "_comment": "Valid database types are: temporary, mysql, mysqlCreateTables"
 }

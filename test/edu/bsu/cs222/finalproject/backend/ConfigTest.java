@@ -13,5 +13,6 @@ public class ConfigTest {
         Assert.assertEquals("exampleUsername", config.getDatabaseUsername());
         Assert.assertEquals("examplePassword", config.getDatabasePassword());
         Assert.assertEquals("exampleName", config.getDatabaseName());
+        Assert.assertEquals("exampleType", config.getDatabaseType());
     }
 }
