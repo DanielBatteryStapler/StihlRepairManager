@@ -53,8 +53,10 @@ public class RepairEditor {
                 editor.newRepairPartButton.setDisable(true);
             }
 
-
+            editor.descriptionField.setWrapText(true);
             editor.descriptionField.setText(repair.description);
+
+            editor.descriptionCompletedField.setWrapText(true);
             editor.descriptionCompletedField.setText(repair.descriptionCompleted);
         }
         {//setup the table
