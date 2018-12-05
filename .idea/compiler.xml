@@ -9,5 +9,8 @@
         <module name="final-project-dkscott-dhkaragory-stguernsey-jmwilson2" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="final-project-dkscott-dhkaragory-stguernsey-jmwilson2" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
