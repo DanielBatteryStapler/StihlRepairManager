@@ -7,9 +7,6 @@ import edu.bsu.cs222.finalproject.database.User;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 public class PrinterTest {
    @Test
    public void printTest() {
@@ -23,7 +20,7 @@ public class PrinterTest {
         User user = new User();
         user.name = "John Smith";
         user.phoneNumber = "5555555555";
-        user.address = "123 First Drive";
+        user.address = "123 First Drive\nMuncie\nIndiana";
         main.workingLayer.insertUser(user);
 
         Repair repair = main.workingLayer.makeNewRepair(user, item);

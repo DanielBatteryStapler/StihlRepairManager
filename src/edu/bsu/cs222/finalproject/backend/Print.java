@@ -197,6 +197,7 @@ public class Print {
         {//customerInfo
             User user = main.workingLayer.getUserWithId(repair.userId);
             Item item = main.workingLayer.getItemWithId(repair.itemId);
+            String[] address = user.address.split("\n");
             output.append(""
                     + "<div id='customerInfo'>"
                     + "<b>&nbsp;&nbsp;&nbsp;Customer Information</b>"
@@ -209,17 +210,17 @@ public class Print {
 
                     + "<tr>"
                     + "<th>Address</th>"
-                    + "<td>").append(user.address).append("</td>"
+                    + "<td>").append(address[0]).append("</td>"
                     + "</tr>"
 
                     + "<tr>"
                     + "<th>City</th>"
-                    + "<td></td>"
+                    + "<td>").append(address[1]).append("</td>"
                     + "</tr>"
 
                     + "<tr>"
                     + "<th>State</th>"
-                    + "<td></td>"
+                    + "<td>").append(address[2]).append("</td>"
                     + "</tr>"
 
                     + "<tr>"
