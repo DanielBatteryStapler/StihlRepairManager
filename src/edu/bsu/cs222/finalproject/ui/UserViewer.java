@@ -45,8 +45,7 @@ public class UserViewer extends StackPane {
                 e.printStackTrace();
             }
             nameData.setText("Name: " + user.name);
-            String[] addressArray = user.address.split("\\n");
-            addressData.setText("Address: " + addressArray[0] + ", " + addressArray[1] + ", " + addressArray[2]);
+            addressData.setText("Address: " + user.address.replaceAll("\\n", ", "));
         }
     }
 }

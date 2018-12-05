@@ -108,7 +108,7 @@ public class UserSelector extends StackPane {
 
         TableColumn<User, String> addressCol = new TableColumn<>("Address");
         addressCol.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        addressCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().address));
+        addressCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().address.replaceAll("\\n", ", ")));
 
         userTable.getColumns().addAll(nameCol, phoneCol, addressCol);
 
