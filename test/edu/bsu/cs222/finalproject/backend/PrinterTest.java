@@ -7,9 +7,6 @@ import edu.bsu.cs222.finalproject.database.User;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 public class PrinterTest {
    @Test
    public void printTest() {
