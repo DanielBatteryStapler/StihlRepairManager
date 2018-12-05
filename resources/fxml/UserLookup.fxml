@@ -11,7 +11,7 @@
     <Button text="Back to Selection" onAction="#backToSelection"
             GridPane.columnIndex="0" GridPane.rowIndex="0"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
-    <Label text="Lookup User"
+    <Label text="Lookup Customer"
             GridPane.columnIndex="0" GridPane.rowIndex="1"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <UserSelector fx:id="userField" fx:factory="instance"
