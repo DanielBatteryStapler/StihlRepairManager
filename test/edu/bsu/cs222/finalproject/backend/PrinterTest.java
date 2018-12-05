@@ -23,7 +23,7 @@ public class PrinterTest {
         User user = new User();
         user.name = "John Smith";
         user.phoneNumber = "5555555555";
-        user.address = "123 First Drive";
+        user.address = "123 First Drive\nMuncie\nIndiana";
         main.workingLayer.insertUser(user);
 
         Repair repair = main.workingLayer.makeNewRepair(user, item);
