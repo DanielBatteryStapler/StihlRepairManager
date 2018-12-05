@@ -102,9 +102,9 @@ public class EmployeeEditor {
             return;
         }
 
-        ObservableList<EmployeeViewData> row = dataTable.getSelectionModel().getSelectedItems();
+        EmployeeViewData employeeViewData = dataTable.getSelectionModel().getSelectedItem();
 
-        if(row.iterator().next().employee.id == main.currentEmployee.id){
+        if(employeeViewData.employee.id == main.currentEmployee.id){
             errorLabel.setText("You cannot remove the employee that you are currently logged in as!");
             employeeNameField.setStyle("-fx-control-inner-background: #ff0000");
         }
@@ -113,7 +113,7 @@ public class EmployeeEditor {
                 ConfirmationDialog confirm = ConfirmationDialog.createInstance(main.stage);
                 confirm.setQuestion("Are you sure you want to delete this Employee?\nYou can NOT undo this action.");
                 confirm.setCallback(() -> {
-                    main.workingLayer.deleteEmployee(row.get(0).employee);
+                    main.workingLayer.deleteEmployee(employeeViewData.employee);
                     search();
                 });
                 confirm.show();

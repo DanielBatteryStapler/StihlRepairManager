@@ -88,6 +88,10 @@ public class UserCreator {
         phoneField.setText(number);
     }
 
+    void setName(String name) {
+        nameField.setText(name);
+    }
+
     void show() {
         stage.show();
     }

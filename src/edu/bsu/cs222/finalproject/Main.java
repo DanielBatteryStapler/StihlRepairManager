@@ -61,7 +61,7 @@ public class Main extends Application {
             {
                 user.name = "John Smith";
                 user.phoneNumber = PhoneNumber.toNormalized("555-555-5555");
-                user.address = "555 Fifth Avenue";
+                user.address = "555 Fifth Avenue\nMuncie\nIndiana";
                 workingLayer.insertUser(user);
             }
             Item item = new Item();

@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -33,7 +34,7 @@ public class UserSelector extends StackPane {
 
         rootGrid.getChildren().remove(controller.userDataPane);
         rootGrid.getChildren().remove(controller.newUserPane);
-        rootGrid.getChildren().remove(controller.userTable);
+        rootGrid.getChildren().remove(controller.userSelectionPane);
 
         return controller;
     }
@@ -50,6 +51,8 @@ public class UserSelector extends StackPane {
     @FXML UserViewer userViewer = null;
 
     @FXML Node newUserPane = null;
+
+    @FXML GridPane userSelectionPane = null;
 
     void setCallback(Consumer<User> callback){
         this.callback = callback;
@@ -109,7 +112,10 @@ public class UserSelector extends StackPane {
 
         userTable.getColumns().addAll(nameCol, phoneCol, addressCol);
 
-        presentingPane.getChildren().add(userTable);
+        userSelectionPane.getChildren().set(0, userTable);
+
+        presentingPane.getChildren().clear();
+        presentingPane.getChildren().addAll(userSelectionPane);
     }
 
     @FXML
@@ -136,10 +142,16 @@ public class UserSelector extends StackPane {
     }
 
     @FXML
+    void selectUserByName() {
+        setUser(userTable.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
     void createNewUser() throws Exception{
         Main main = Main.getInstance();
         UserCreator userCreator = UserCreator.createInstance(main.stage);
         userCreator.setCallback(this::setUser);
+        userCreator.setName(nameField.getText());
         userCreator.setPhoneNumber(phoneField.getText());
         userCreator.show();
     }
