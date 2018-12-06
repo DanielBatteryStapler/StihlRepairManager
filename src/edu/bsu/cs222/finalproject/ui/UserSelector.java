@@ -82,6 +82,7 @@ public class UserSelector extends StackPane {
 
     @FXML TableView<User> userTable = null;
 
+    @SuppressWarnings("unchecked") //the reason this is used is for the same reason it's used in another place in the project, refer to that comment for why this is here
     @FXML
     private void searchName() {
         Main main = Main.getInstance();

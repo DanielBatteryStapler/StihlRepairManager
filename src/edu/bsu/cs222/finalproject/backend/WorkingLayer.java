@@ -37,7 +37,7 @@ public class WorkingLayer {
         database.updateUser(user);
     }
 
-    public void dropUser(User user) {
+    void dropUser(User user) {
         database.dropUser(user.id);
     }
 
@@ -69,7 +69,7 @@ public class WorkingLayer {
         database.insertItem(item);
     }
 
-    public void dropItem(Item item) {
+    void dropItem(Item item) {
         database.dropItem(item.id);
     }
 
@@ -116,7 +116,7 @@ public class WorkingLayer {
         return database.getRepairsOnItem(itemId);
     }
 
-    public void dropRepair(Repair repair) {
+    void dropRepair(Repair repair) {
         database.dropRepair(repair.id);
     }
 
@@ -124,7 +124,7 @@ public class WorkingLayer {
         database.updateRepair(repair);
     }
 
-    public Repair getLatestRepair(){
+    private Repair getLatestRepair(){
         return database.getLatestRepair();
     }
 
@@ -149,6 +149,8 @@ public class WorkingLayer {
         return database.getPurchasesWithPurchaser(purchaser);
     }
 
+    //This method is actually used in at least TestWorkingLayer in testMakeNewPurchase()
+    @SuppressWarnings("unused")
     public Purchase getPurchaseWithId(long purchaseId) {
         return database.getPurchaseWithId(purchaseId);
     }
@@ -165,7 +167,7 @@ public class WorkingLayer {
         return database.getEmployeeWithNumber(employeeNumber);
     }
 
-    public Employee getEmployeeWithId(long employeeId) {
+    Employee getEmployeeWithId(long employeeId) {
         return database.getEmployeeWithId(employeeId);
     }
 
@@ -193,7 +195,7 @@ public class WorkingLayer {
         database.updateRepairPart(repairPart);
     }
 
-    public void dropRepairPart(long repairPartId){
+    void dropRepairPart(long repairPartId){
         database.dropRepairPart(repairPartId);
     }
 

@@ -4,6 +4,7 @@ import edu.bsu.cs222.finalproject.database.*;
 
 import java.lang.reflect.Field;
 import java.lang.Class;
+import java.util.ArrayList;
 
 import org.junit.*;
 
@@ -118,6 +119,9 @@ public class TestWorkingLayer {
         workingLayer.insertUser(user);
         workingLayer.insertRepairPart(part);
         workingLayer.insertEmployee(employee);
+        workingLayer.makeNewRepair(user, item);
+
+        ArrayList<Repair> repair = workingLayer.getRepairsWithUser(user.id);
 
         Assert.assertEquals(item.id, workingLayer.getItemWithId(item.id).id);
         Assert.assertEquals(user.id, workingLayer.getUserWithId(user.id).id);
@@ -127,6 +131,9 @@ public class TestWorkingLayer {
         Assert.assertEquals(1, workingLayer.getRepairPartsInQueue().size());
         Assert.assertEquals(1, workingLayer.getAllEmployees().size());
 
+        for (Repair r : repair) {
+            workingLayer.dropRepair(r);
+        }
         workingLayer.dropRepairPart(part.id);
         workingLayer.deleteEmployee(employee);
         workingLayer.dropUser(user);
@@ -134,7 +141,8 @@ public class TestWorkingLayer {
 
         Assert.assertEquals(0, workingLayer.getRepairPartsInQueue().size());
         Assert.assertEquals(0, workingLayer.getAllEmployees().size());
-        Assert.assertEquals(null, workingLayer.getUserWithId(user.id));
-        Assert.assertEquals(null, workingLayer.getItemWithId(item.id));
+        Assert.assertNull(workingLayer.getUserWithId(user.id));
+        Assert.assertNull(workingLayer.getItemWithId(item.id));
+        Assert.assertEquals(0, workingLayer.getRepairsWithUser(user.id).size());
     }
 }

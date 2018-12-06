@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 
 public class MainSelection {
     static void showScene() throws Exception{
@@ -73,7 +72,7 @@ public class MainSelection {
         Login.showScene();
     }
     @FXML
-     void checkPermissions(KeyEvent keyEvent)
+     void checkPermissions()
     {
         if(Main.getInstance().currentEmployee.number.equals("88"))
         editButton.setDisable(false);

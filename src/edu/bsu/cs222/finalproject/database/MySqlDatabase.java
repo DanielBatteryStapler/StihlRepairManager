@@ -150,7 +150,7 @@ public class MySqlDatabase implements Database {
         statement.execute("RESET QUERY CACHE;");
     }
 
-    static public String escapeForLike(String string) {
+    static String escapeForLike(String string) {
         return string.replaceAll("!", "!!").replaceAll("%", "!%").replaceAll("_", "!_").replace("[", "![");
     }
 

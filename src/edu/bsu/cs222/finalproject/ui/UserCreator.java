@@ -118,7 +118,7 @@ public class UserCreator {
     }
 
     void show() {
-        if (MODE == "CREATE")
+        if (MODE.equals("CREATE"))
             headerText.setText("Create New Customer");
         else
             headerText.setText("Edit Customer");
