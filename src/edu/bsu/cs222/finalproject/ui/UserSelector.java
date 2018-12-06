@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class UserSelector extends StackPane {
+
     public static UserSelector instance() throws Exception{
         Main main = Main.getInstance();
 
@@ -81,8 +82,6 @@ public class UserSelector extends StackPane {
 
     @FXML TableView<User> userTable = null;
 
-    @SuppressWarnings("unchecked") //Needed for "userTable.getColumns().addAll(...)" because it should be able to figure out type safety but decides that it can't
-    //For a better explanation: https://stackoverflow.com/questions/1445233/is-it-possible-to-solve-the-a-generic-array-of-t-is-created-for-a-varargs-param
     @FXML
     private void searchName() {
         Main main = Main.getInstance();
@@ -112,8 +111,6 @@ public class UserSelector extends StackPane {
         addressCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().address.replaceAll("\\n", ", ")));
 
         userTable.getColumns().addAll(nameCol, phoneCol, addressCol);
-        userTable.setMinWidth(470);
-        userTable.setMinHeight(100);
 
         userSelectionPane.getChildren().set(0, userTable);
 
@@ -151,16 +148,50 @@ public class UserSelector extends StackPane {
 
     @FXML
     void selectUserByName() {
-        User selectedUser = userTable.getSelectionModel().getSelectedItem();
-        if(selectedUser != null) {
-            setUser(selectedUser);
+        if (userTable.getSelectionModel().getSelectedItem() == null)
+            return;
+
+        setUser(userTable.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void editSelectedUser() throws Exception {
+        Main main = Main.getInstance();
+        UserCreator userCreator = UserCreator.createInstance(main.stage, "EDIT", getUser());
+        userCreator.setCallback(this::setUser);
+
+        User temp = getUser();
+        if (temp == null)
+            return;
+
+        userCreator.setName(temp.name);
+        userCreator.setPhoneNumber(temp.phoneNumber);
+
+        //this is to make sure that if there's an improperly entered address it won't throw an IndexOutOfBounds exception
+        String[] fullAddress = temp.address.split("\\n");
+        for (int i = 0; i < fullAddress.length; i++) {
+            switch (i) {
+                case 0:
+                    userCreator.setAddress(fullAddress[0]);
+                    break;
+                case 1:
+                    userCreator.setCity(fullAddress[1]);
+                    break;
+                case 2:
+                    userCreator.setState(fullAddress[2]);
+                    break;
+                default:
+                    break;
+            }
         }
+
+        userCreator.show();
     }
 
     @FXML
     void createNewUser() throws Exception{
         Main main = Main.getInstance();
-        UserCreator userCreator = UserCreator.createInstance(main.stage);
+        UserCreator userCreator = UserCreator.createInstance(main.stage, "CREATE", new User());
         userCreator.setCallback(this::setUser);
         userCreator.setName(nameField.getText());
         userCreator.setPhoneNumber(phoneField.getText());

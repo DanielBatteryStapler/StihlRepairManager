@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,14 +17,19 @@ import java.util.function.Consumer;
 public class UserCreator {
     private Stage stage;
     private Consumer<User> callback = null;
+    private static String MODE = "";
+    private static User USER = null;
 
-    static UserCreator createInstance(Stage rootStage) throws Exception {
+    static UserCreator createInstance(Stage rootStage, String mode, User user) throws Exception {
         Main main = Main.getInstance();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(main.getClass().getResource("/fxml/UserCreator.fxml"));
         Parent loadedPane = loader.load();
         UserCreator creator = loader.getController();
+
+        MODE = mode;
+        USER = user;
 
         creator.stage = new Stage();
         creator.stage.initOwner(rootStage);
@@ -39,10 +45,10 @@ public class UserCreator {
     @FXML TextField stateField = null;
     @FXML TextField cityField = null;
 
+    @FXML Label headerText = new Label();
+
     @FXML
     void submit() {
-        User user = new User();
-
         //reset boxes to white so it's not persistent
         nameField.setStyle("-fx-control-inner-background: #ffffff");
         phoneField.setStyle("-fx-control-inner-background: #ffffff");
@@ -69,14 +75,21 @@ public class UserCreator {
             return;
         }
 
-        user.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
-        user.name = nameField.getText();
-        user.address = addressField.getText() + "\n" + cityField.getText() + "\n" + stateField.getText();
+        USER.phoneNumber = PhoneNumber.toNormalized(phoneField.getText());
+        USER.name = nameField.getText();
+        USER.address = addressField.getText() + "\n" + cityField.getText() + "\n" + stateField.getText();
 
-        Main.getInstance().workingLayer.insertUser(user);
-        if (callback != null) {
-            callback.accept(user);
+        if (MODE.equals("CREATE")) {
+            Main.getInstance().workingLayer.insertUser(USER);
         }
+        else {
+            Main.getInstance().workingLayer.updateUser(USER);
+        }
+
+        if (callback != null) {
+            callback.accept(USER);
+        }
+
         stage.close();
     }
 
@@ -92,7 +105,24 @@ public class UserCreator {
         nameField.setText(name);
     }
 
+    void setAddress(String address) {
+        addressField.setText(address);
+    }
+
+    void setCity(String city) {
+        cityField.setText(city);
+    }
+
+    void setState(String state) {
+        stateField.setText(state);
+    }
+
     void show() {
+        if (MODE == "CREATE")
+            headerText.setText("Create New Customer");
+        else
+            headerText.setText("Edit Customer");
+
         stage.show();
     }
 }

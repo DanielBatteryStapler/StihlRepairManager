@@ -25,6 +25,7 @@
     <!--removed by the controller and moved into the PresentingPane when showing user data-->
     <GridPane fx:id="userDataPane" alignment="center" hgap="10" vgap="10">
         <UserViewer fx:id="userViewer" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1" fx:factory="instance" />
+        <Button onAction="#editSelectedUser" text="Edit Customer" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.rowSpan="1"/>
     </GridPane>
 
     <!--also controlled by the controller, just like the UserDataPane-->

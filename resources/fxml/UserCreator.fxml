@@ -12,7 +12,7 @@
     <padding>
         <Insets bottom="25" left="25" right="25" top="25" />
     </padding>
-    <Label text="Create New Customer" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.rowSpan="1" />
+    <Label fx:id="headerText" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.rowSpan="1" />
     <Label text="Name:" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.rowSpan="1" />
     <Label text="Phone Number:" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2" GridPane.rowSpan="1" />
     <Label text="Address:" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
