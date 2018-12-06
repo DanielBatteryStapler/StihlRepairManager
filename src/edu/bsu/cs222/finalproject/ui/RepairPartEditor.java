@@ -31,7 +31,7 @@ public class RepairPartEditor {
         {
             editor.quantityField.setText("" + repairPart.quantity);
             editor.nameField.setText(repairPart.name);
-            editor.priceField.setText(NumberFormat.getCurrencyInstance().format(repairPart.price / 100.0));
+            editor.priceField.setText(Currency.toFormatted(repairPart.price));
 
             if(!repairPart.needToBuy){
                 editor.markAsBoughtButton.setDisable(true);

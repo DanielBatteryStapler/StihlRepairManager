@@ -40,7 +40,7 @@ public class Currency {
         return (int)(Double.parseDouble(dollars) * 100);//isValid makes sure it only goes to cents, so int casting is fine
     }
 
-    static String toFormatted(int cents){
+    public static String toFormatted(int cents){
         return NumberFormat.getCurrencyInstance().format(cents / 100.0);
     }
 }

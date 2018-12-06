@@ -22,36 +22,40 @@
 
     <UserViewer fx:id="userViewer" fx:factory="instance"
             GridPane.columnIndex="0" GridPane.rowIndex="2"
-            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+            GridPane.columnSpan="1" GridPane.rowSpan="2"/>
     <ItemViewer fx:id="itemViewer" fx:factory="instance"
             GridPane.columnIndex="1" GridPane.rowIndex="2"
             GridPane.columnSpan="2" GridPane.rowSpan="1"/>
 
+    <Button onAction="#viewItem" text="View Item"
+           GridPane.columnIndex="1" GridPane.rowIndex="3"
+           GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+
     <TableView fx:id="repairPartsTable" minWidth="300"
-           GridPane.columnIndex="0" GridPane.rowIndex="3"
+           GridPane.columnIndex="0" GridPane.rowIndex="4"
            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 
     <Button fx:id="newRepairPartButton" onAction="#newRepairPart" text="New Part"
-            GridPane.columnIndex="0" GridPane.rowIndex="4"
+            GridPane.columnIndex="0" GridPane.rowIndex="5"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 
     <TextArea fx:id="descriptionField"
-            GridPane.columnIndex="1" GridPane.rowIndex="3"
+            GridPane.columnIndex="1" GridPane.rowIndex="4"
             GridPane.columnSpan="2" GridPane.rowSpan="2"/>
     <TextArea fx:id="descriptionCompletedField"
-          GridPane.columnIndex="0" GridPane.rowIndex="5"
+          GridPane.columnIndex="0" GridPane.rowIndex="6"
           GridPane.columnSpan="3" GridPane.rowSpan="1"/>
 
     <Button onAction="#exit" text="Back"
-            GridPane.columnIndex="0" GridPane.rowIndex="6"
+            GridPane.columnIndex="0" GridPane.rowIndex="7"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button fx:id="updateRepairButton" onAction="#updateRepair" text="Update"
-            GridPane.columnIndex="1" GridPane.rowIndex="6"
+            GridPane.columnIndex="1" GridPane.rowIndex="7"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button onAction="#printRepair" text="Print"
-            GridPane.columnIndex="2" GridPane.rowIndex="6"
+            GridPane.columnIndex="2" GridPane.rowIndex="7"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button fx:id="markFinishedButton" onAction="#finishRepair" text="Mark Finished"
-            GridPane.columnIndex="3" GridPane.rowIndex="6"
+            GridPane.columnIndex="3" GridPane.rowIndex="7"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>
