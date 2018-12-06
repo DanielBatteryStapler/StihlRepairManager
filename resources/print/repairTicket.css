@@ -90,7 +90,7 @@ td {
 
 #descriptionTextBox {
     display:                block;
-    height:                 300px;
+    min-height:             300px;
     border-style:           solid;
     border-width:           1px;
     border-color:           black;
@@ -98,7 +98,7 @@ td {
 
 #repairsCompletedTextBox {
     display:                block;
-    height:                 190px;
+    min-height:                 180px;
     border-style:           solid;
     border-width:           1px;
     border-color:           black;
