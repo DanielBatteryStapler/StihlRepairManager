@@ -124,6 +124,7 @@ public class UserSelector extends StackPane {
         phoneField.setStyle("-fx-control-inner-background: #ffffff");
         nameField.setStyle("-fx-control-inner-background: #ffffff");
 
+
         if (nameField.getText().equals("")) {
             try {
                 PhoneNumber.toNormalized(phoneField.getText());
@@ -135,10 +136,18 @@ public class UserSelector extends StackPane {
         else if (phoneField.getText().equals("")) {
             searchName();
         }
-        else if (phoneField.getText().equals("") && nameField.getText().equals("")) {
+        if (phoneField.getText().equals("") && nameField.getText().equals("")) {
             phoneField.setStyle("-fx-control-inner-background: #ff0000");
             nameField.setStyle("-fx-control-inner-background: #ff0000");
         }
+        else if (!phoneField.getText().equals("") && !nameField.getText().equals("")) {
+            phoneField.setStyle("-fx-control-inner-background: #ff0000");
+            nameField.setStyle("-fx-control-inner-background: #ff0000");
+        }
+        /*else if (phoneField.getText().equals("") && nameField.getText().equals("")) {
+            phoneField.setStyle("-fx-control-inner-background: #ff0000");
+            nameField.setStyle("-fx-control-inner-background: #ff0000");
+        }*/
     }
 
     @FXML
