@@ -29,6 +29,29 @@ public class TestWorkingLayer {
         return item;
     }
 
+    private RepairPart initExampleRepairPart() {
+        RepairPart part = new RepairPart();
+
+        part.id = 1234;
+        part.repairId = 5678;
+        part.name = "name";
+        part.price = 10;
+        part.quantity = 5;
+        part.needToBuy = true;
+
+        return part;
+    }
+
+    private Employee initExampleEmployee() {
+        Employee employee = new Employee();
+
+        employee.id = 1234;
+        employee.name = "John Smith";
+        employee.number = "123";
+
+        return employee;
+    }
+
     @Test
     public void testInit() {
         try {
@@ -81,10 +104,13 @@ public class TestWorkingLayer {
         Assert.assertEquals(outOfDatabaseRepair.id, temp.getRepairWithId(outOfDatabaseRepair.id).id);
     }
 
+
     @Test
     public void testInsertAndDrop() {
         User user = initExampleUser();
         Item item = initExampleItem();
+        RepairPart part = initExampleRepairPart();
+        Employee employee = initExampleEmployee();
 
         WorkingLayer workingLayer = new WorkingLayer();
         TemporaryDatabase temp = TemporaryDatabase.createInstance();
@@ -93,10 +119,22 @@ public class TestWorkingLayer {
 
         workingLayer.insertItem(item);
         workingLayer.insertUser(user);
+        workingLayer.insertRepairPart(part);
+        workingLayer.insertEmployee(employee);
 
         Assert.assertEquals(item.id, workingLayer.getItemWithId(item.id).id);
         Assert.assertEquals(user.id, workingLayer.getUserWithId(user.id).id);
+        Assert.assertEquals(part.id, workingLayer.getRepairPartsInQueue().get(0).id);
+        Assert.assertEquals(employee.id, workingLayer.getEmployeeWithId(employee.id).id);
 
+        Assert.assertEquals(1, workingLayer.getRepairPartsInQueue().size());
+        Assert.assertEquals(1, workingLayer.getAllEmployees().size());
+
+        workingLayer.dropRepairPart(part.id);
+        workingLayer.deleteEmployee(employee);
+
+        Assert.assertEquals(0, workingLayer.getRepairPartsInQueue().size());
+        Assert.assertEquals(0, workingLayer.getAllEmployees().size());
         //TODO: Add drop tests
     }
 }

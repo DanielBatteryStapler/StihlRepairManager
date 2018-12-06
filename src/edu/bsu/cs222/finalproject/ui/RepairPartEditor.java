@@ -1,6 +1,7 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
+import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,7 @@ public class RepairPartEditor {
     @FXML TextField priceField = null;
 
     @FXML Button markAsBoughtButton = null;
+    @FXML Button viewRepairButton = null;
 
     void setCallback(Consumer<RepairPart> callback){
         this.callback = callback;
@@ -57,6 +59,10 @@ public class RepairPartEditor {
 
     void show(){
         stage.show();
+    }
+
+    void disableViewingRepair(boolean disable){
+        viewRepairButton.setDisable(disable);
     }
 
     @FXML
@@ -90,5 +96,20 @@ public class RepairPartEditor {
     void markAsBought(){
         repairPart.needToBuy = false;//this will be pushed to the database once the user hits "update"
         markAsBoughtButton.setDisable(true);
+    }
+
+    @FXML
+    public void viewRepair() throws Exception{
+        Main main = Main.getInstance();
+
+        Repair repair = main.workingLayer.getRepairWithId(repairPart.repairId);
+        RepairEditor editor = RepairEditor.createInstance(stage, repair);
+        stage.close();
+        editor.setCallback(repair_ -> {
+            if(callback != null){
+                callback.accept(null);
+            }
+        });
+        editor.show();
     }
 }

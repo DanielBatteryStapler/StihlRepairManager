@@ -252,6 +252,7 @@ public class RepairEditor {
             try {
                 RepairPartEditor editor = RepairPartEditor.createInstance(controller.stage, row.getItem().repairPart);
                 editor.setCallback(repairPart -> controller.updateRepairPartsTable());
+                editor.disableViewingRepair(true);
                 editor.show();
             } catch (Exception e){
                 e.printStackTrace();

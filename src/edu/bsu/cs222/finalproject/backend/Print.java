@@ -89,7 +89,7 @@ public class Print {
                     + "</td>"
                     + "</tr>"
                     + "<tr>"
-                    + "<td class='align-right'>"
+                    + "<td class='align-right' style='width:150px;'>"
                     + "Date Started:<br />"
                     + "Date Completed:"
                     + "</td>"
@@ -101,12 +101,6 @@ public class Print {
                         output.append(DateFormatter.formatDate(repair.dateCompleted));
                     }
                     output.append( ""
-                    + "</td>"
-                    + "<td class='align-right'>"
-                    + "MUST CONTACT CUSTOMER WITH ESTIMATE?"
-                    + "</td>"
-                    + "<td>"
-                    + "TEST"
                     + "</td>"
                     + "</tr>"
                     + "</table>"
@@ -130,15 +124,18 @@ public class Print {
                     + "</tr>"
             );
             int extraEmptyRows = 19;//there are 19 rows in general, so that's the maximum number of empty rows
+            int totalMaterialCost = 0;
             {
                 ArrayList<RepairPart> repairParts = main.workingLayer.getRepairPartsOnRepair(repair.id);
                 for(RepairPart part : repairParts){
+                    int totalPartCast = part.quantity * part.price;
+                    totalMaterialCost += totalPartCast;
                     output.append(""
                         + "<tr>"
                         + "<td>").append(part.quantity).append("</td>"
                         + "<td>").append(part.name).append("</td>"
                         + "<td>").append(NumberFormat.getCurrencyInstance().format(part.price / 100.0)).append("</td>"
-                        + "<td></td>"
+                        + "<td>").append(NumberFormat.getCurrencyInstance().format(totalPartCast / 100.0)).append("</td>"
                         + "</tr>"
                     );
                     extraEmptyRows--;
@@ -160,7 +157,7 @@ public class Print {
                 + "<th></th>"
                 + "<th class='align-right'>Total Materials</th>"
                 + "<td></td>"
-                + "<td></td>"
+                + "<td>").append(NumberFormat.getCurrencyInstance().format(totalMaterialCost / 100.0)).append("</td>"
                 + "</tr>"
 
                 + "<tr>"

@@ -36,6 +36,9 @@
             GridPane.columnIndex="1" GridPane.rowIndex="5"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
     <Button fx:id="markAsBoughtButton" onAction="#markAsBought" text="Mark as Bought"
-            GridPane.columnIndex="2" GridPane.rowIndex="5"
+            GridPane.columnIndex="0" GridPane.rowIndex="6"
+            GridPane.columnSpan="1" GridPane.rowSpan="1"/>
+    <Button fx:id="viewRepairButton" onAction="#viewRepair" text="View Repair"
+            GridPane.columnIndex="1" GridPane.rowIndex="6"
             GridPane.columnSpan="1" GridPane.rowSpan="1"/>
 </GridPane>
