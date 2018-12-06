@@ -128,14 +128,14 @@ public class Print {
             {
                 ArrayList<RepairPart> repairParts = main.workingLayer.getRepairPartsOnRepair(repair.id);
                 for(RepairPart part : repairParts){
-                    int singleCost = part.quantity * part.price;
-                    totalMaterialCost += singleCost;
+                    int totalPartCast = part.quantity * part.price;
+                    totalMaterialCost += totalPartCast;
                     output.append(""
                         + "<tr>"
                         + "<td>").append(part.quantity).append("</td>"
                         + "<td>").append(part.name).append("</td>"
                         + "<td>").append(NumberFormat.getCurrencyInstance().format(part.price / 100.0)).append("</td>"
-                        + "<td>").append(NumberFormat.getCurrencyInstance().format(singleCost / 100.0)).append("</td>"
+                        + "<td>").append(NumberFormat.getCurrencyInstance().format(totalPartCast / 100.0)).append("</td>"
                         + "</tr>"
                     );
                     extraEmptyRows--;
