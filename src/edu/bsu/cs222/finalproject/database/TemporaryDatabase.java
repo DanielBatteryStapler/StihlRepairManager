@@ -301,7 +301,7 @@ public class TemporaryDatabase implements Database {
             if(latestRepair == null){
                 latestRepair = i;
             }
-            else if(i.dateStarted.compareTo(latestRepair.dateCompleted) > 0){
+            else if(i.dateStarted.compareTo(latestRepair.dateStarted) > 0){
                 latestRepair = i;
             }
         }

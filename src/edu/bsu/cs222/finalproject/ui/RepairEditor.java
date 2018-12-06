@@ -1,6 +1,7 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
+import edu.bsu.cs222.finalproject.backend.Currency;
 import edu.bsu.cs222.finalproject.backend.DateFormatter;
 import edu.bsu.cs222.finalproject.backend.Print;
 import edu.bsu.cs222.finalproject.database.Repair;
@@ -231,7 +232,7 @@ public class RepairEditor {
 
             data.quantity = "" + repairPart.quantity;
             data.name = repairPart.name;
-            data.price = NumberFormat.getCurrencyInstance().format(repairPart.price / 100.0);
+            data.price = Currency.toFormatted(repairPart.price);
 
             return data;
         }
