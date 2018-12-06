@@ -3,7 +3,9 @@ package edu.bsu.cs222.finalproject.database;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TestTemporaryDatabase {
     @Test
@@ -80,7 +82,7 @@ public class TestTemporaryDatabase {
         Assert.assertEquals("EmployeeA", employeeF.name);
         Assert.assertEquals("EmployeeB", employeeG.name);
         database.dropEmployee(employeeC.id);
-        Assert.assertNull(database.getItemWithId(employeeC.id));
+        Assert.assertNull(database.getEmployeeWithId(employeeC.id));
     }
 
     @Test
@@ -93,6 +95,70 @@ public class TestTemporaryDatabase {
         Assert.assertEquals(24, purchaseB.itemId);
         database.dropPurchase(purchaseB.id);
         Assert.assertNull(database.getPurchaseWithId(purchaseB.id));
+    }
+
+    @Test
+    public void testRepairTableInTemporaryDatabase(){
+        Database database = TemporaryDatabase.createInstance();
+        Assert.assertNull(database.getLatestRepair());
+
+        Repair repairA = new Repair();
+        repairA.dateStarted = new Date(Calendar.getInstance().getTime().getTime());
+        repairA.description = "RepairA";
+        Repair repairB = new Repair();
+        repairB.dateStarted = new Date(Calendar.getInstance().getTime().getTime() + 100);//make this one happen after repairA
+        repairB.dateCompleted = new Date(Calendar.getInstance().getTime().getTime() + 200);
+        repairB.description = "RepairB";
+        database.insertRepair(repairA);
+        database.insertRepair(repairB);
+        Repair repairC = database.getRepairWithId(repairA.id);
+        Repair repairD = database.getRepairWithId(repairB.id);
+        Assert.assertEquals("RepairA", repairC.description);
+        Assert.assertEquals("RepairB", repairD.description);
+        Repair repairF = database.getInProgressRepairs().get(0);
+        Assert.assertEquals("RepairA", repairF.description);
+        Assert.assertEquals("RepairB", database.getLatestRepair().description);
+        repairF.description = "RepairAUpdated";
+        database.updateRepair(repairF);
+        Repair repairG = database.getRepairWithId(repairF.id);
+        Assert.assertEquals("RepairAUpdated", repairG.description);
+        database.dropRepair(repairC.id);
+        Assert.assertNull(database.getRepairWithId(repairC.id));
+    }
+
+    @Test
+    public void testRepairPartTableInTemporaryDatabase(){
+        Database database = TemporaryDatabase.createInstance();
+        Assert.assertNull(database.getLatestRepair());
+
+        Repair repair = new Repair();
+        repair.dateStarted = new Date(Calendar.getInstance().getTime().getTime());
+        database.insertRepair(repair);
+
+        RepairPart repairPartA = new RepairPart();
+        repairPartA.name = "RepairPartA";
+        repairPartA.needToBuy = true;
+        RepairPart repairPartB = new RepairPart();
+        repairPartB.name = "RepairPartB";
+        repairPartB.needToBuy = false;
+        repairPartB.repairId = repair.id;
+        database.insertRepairPart(repairPartA);
+        database.insertRepairPart(repairPartB);
+
+        Assert.assertEquals(1, database.getRepairPartsInQueue().size());
+
+        RepairPart repairPartC = database.getRepairPartsInQueue().get(0);
+        Assert.assertEquals("RepairPartA", repairPartC.name);
+        repairPartC.name = "RepairPartAUpdated";
+        database.updateRepairPart(repairPartC);
+        RepairPart repairPartD = database.getRepairPartsInQueue().get(0);
+        Assert.assertEquals("RepairPartAUpdated", repairPartD.name);
+
+        RepairPart repairPartE = database.getRepairPartsOnRepair(repair.id).get(0);
+        Assert.assertEquals("RepairPartB", repairPartE.name);
+
+        database.dropRepairPart(repairPartA.id);
+        Assert.assertEquals(0, database.getRepairPartsInQueue().size());
     }
 
     @Test

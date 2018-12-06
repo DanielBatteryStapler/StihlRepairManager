@@ -104,6 +104,8 @@ public class RepairPartsQueue {
             return data;
         }
 
+        @SuppressWarnings("unused")//it claims that this is unused, but it is definitely used by the JavaFX TableView
+        //removing this method results in the TableView having missing values
         public String getQuantity(){
             return quantity;
         }
