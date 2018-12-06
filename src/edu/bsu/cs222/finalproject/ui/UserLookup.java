@@ -38,6 +38,7 @@ public class UserLookup {
         {//setup the table
             TableColumn<UserLookupViewData, String> modelCol = new TableColumn<>("Model #");
             modelCol.setCellValueFactory(new PropertyValueFactory<>("ModelNumber"));
+            modelCol.setMinWidth(150);
 
             TableColumn<UserLookupViewData, String> serialCol = new TableColumn<>("Serial #");
             serialCol.setCellValueFactory(new PropertyValueFactory<>("SerialNumber"));
