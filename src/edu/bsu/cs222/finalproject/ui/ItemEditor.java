@@ -24,6 +24,8 @@ public class ItemEditor {
     private Item item;
     private Consumer<Item> callback = null;
 
+    @SuppressWarnings("unchecked") //Needed for "editor.dataTable.getColumns().addAll(...)" because it should be able to figure out type safety but decides that it can't
+    //For a better explanation: https://stackoverflow.com/questions/1445233/is-it-possible-to-solve-the-a-generic-array-of-t-is-created-for-a-varargs-param
     static ItemEditor createInstance(Stage rootStage, Item item) throws Exception{
         Main main = Main.getInstance();
 
@@ -182,6 +184,8 @@ public class ItemEditor {
             return date;
         }
 
+        @SuppressWarnings("unused")//it claims that this is unused, but it is definitely used by the JavaFX TableView
+        //removing this method results in the TableView not being properly filled out
         public String getType() {
             if(purchase != null){
                 return "Purchase";

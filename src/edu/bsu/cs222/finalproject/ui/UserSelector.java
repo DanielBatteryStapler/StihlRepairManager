@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class UserSelector extends StackPane {
-
     public static UserSelector instance() throws Exception{
         Main main = Main.getInstance();
 
@@ -82,6 +81,8 @@ public class UserSelector extends StackPane {
 
     @FXML TableView<User> userTable = null;
 
+    @SuppressWarnings("unchecked") //Needed for "userTable.getColumns().addAll(...)" because it should be able to figure out type safety but decides that it can't
+    //For a better explanation: https://stackoverflow.com/questions/1445233/is-it-possible-to-solve-the-a-generic-array-of-t-is-created-for-a-varargs-param
     @FXML
     private void searchName() {
         Main main = Main.getInstance();

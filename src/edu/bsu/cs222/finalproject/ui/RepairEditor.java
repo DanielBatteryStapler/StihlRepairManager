@@ -8,7 +8,6 @@ import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.sql.Date;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.function.Consumer;
@@ -30,6 +28,8 @@ public class RepairEditor {
     private Repair repair;
     private Consumer<Repair> callback = null;
 
+    @SuppressWarnings("unchecked") //Needed for "editor.repairPartsTable.getColumns().addAll(...)" because it should be able to figure out type safety but decides that it can't
+    //For a better explanation: https://stackoverflow.com/questions/1445233/is-it-possible-to-solve-the-a-generic-array-of-t-is-created-for-a-varargs-param
     static RepairEditor createInstance(Stage rootStage, Repair repair) throws Exception{
         Main main = Main.getInstance();
         FXMLLoader loader = new FXMLLoader();
@@ -248,6 +248,8 @@ public class RepairEditor {
             return data;
         }
 
+        @SuppressWarnings("unused")//it claims that this is unused, but it is definitely used by the JavaFX TableView
+        //removing this method results in the TableView having missing values
         public String getQuantity(){
             return quantity;
         }

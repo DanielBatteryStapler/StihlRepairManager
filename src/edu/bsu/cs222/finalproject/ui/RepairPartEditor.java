@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.text.NumberFormat;
 import java.util.function.Consumer;
 
 public class RepairPartEditor {
