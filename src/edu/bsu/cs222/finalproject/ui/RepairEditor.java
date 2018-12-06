@@ -8,6 +8,7 @@ import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ import java.util.function.Consumer;
 
 public class RepairEditor {
     private Stage stage;
+    private Stage rootStage;
     private Repair repair;
     private Consumer<Repair> callback = null;
 
@@ -34,6 +36,7 @@ public class RepairEditor {
         loader.setLocation(main.getClass().getResource("/fxml/RepairEditor.fxml"));
         Parent loadedPane = loader.load();
         RepairEditor editor = loader.getController();
+        editor.rootStage = rootStage;
         editor.repair = new Repair(repair);
 
         {
@@ -212,6 +215,14 @@ public class RepairEditor {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void viewItem() throws Exception{
+        Main main = Main.getInstance();
+        ItemEditor editor = ItemEditor.createInstance(rootStage, main.workingLayer.getItemWithId(repair.itemId));
+        stage.close();
+        editor.show();
     }
 
     static public class RepairPartViewData{
