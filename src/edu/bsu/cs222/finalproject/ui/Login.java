@@ -35,6 +35,7 @@ public class Login {
         }
         else {
             main.currentEmployee = employee;
+            Thread.sleep(1000);
             MainSelection.showScene();
         }
     }
