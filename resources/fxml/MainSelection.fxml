@@ -12,16 +12,16 @@
         <Insets bottom="25" left="25" right="25" top="25" />
     </padding>
     <Label fx:id="welcomeText" alignment="CENTER" prefHeight="21.0" prefWidth="137.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="6" GridPane.rowSpan="1" />
-    <Label text="Select an Action" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2" GridPane.rowSpan="1" />
-    <Button managed="false" onKeyTyped="#checkPermissions" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-    <Button onAction="#userLookup" onKeyTyped="#userLookup" text="Customer Lookup" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
-    <Button onAction="#itemLookup" onKeyTyped="#itemLookup" prefHeight="31.0" prefWidth="139.0" text="Item Lookup" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
-    <Button onAction="#addPurchase" onKeyTyped="#addPurchase" prefHeight="31.0" prefWidth="119.0" text="New Purchase" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
-    <Button onAction="#addRepair" onKeyTyped="#addRepair" prefHeight="31.0" prefWidth="118.0" text="New Repair" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
-    <Button onAction="#repairQueue" onKeyTyped="#repairQueue" prefHeight="31.0" prefWidth="124.0" text="Repair Queue" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
-    <Button onAction="#repairPartsQueue" onKeyTyped="#repairPartsQueue" prefHeight="31.0" prefWidth="123.0" text="Parts to order" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
-    <Button fx:id="editButton" disable="true" onAction="#employeeEditor" onKeyTyped="#employeeEditor" prefHeight="31.0" prefWidth="137.0" text="Employee Editor" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="16" GridPane.rowSpan="1" />
-    <Button onAction="#logout" onKeyTyped="#logout" text="Log Out" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="16" GridPane.rowSpan="1" />
+    <Label text="Select an Action" alignment="CENTER" maxWidth="Infinity" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2" GridPane.rowSpan="1" />
+    <Button managed="false" onKeyTyped="#checkPermissions" maxWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <Button onAction="#userLookup" onKeyTyped="#userLookup" text="Customer Lookup" maxWidth="Infinity" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
+    <Button onAction="#itemLookup" onKeyTyped="#itemLookup" text="Item Lookup" maxWidth="Infinity" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+    <Button onAction="#addPurchase" onKeyTyped="#addPurchase" text="New Purchase" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+    <Button onAction="#addRepair" onKeyTyped="#addRepair" text="New Repair" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
+    <Button onAction="#repairQueue" onKeyTyped="#repairQueue" text="Repair Queue" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
+    <Button onAction="#repairPartsQueue" onKeyTyped="#repairPartsQueue" text="Parts to order" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+    <Button fx:id="editButton" disable="true" onAction="#employeeEditor" onKeyTyped="#employeeEditor" text="Employee Editor" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="16" GridPane.rowSpan="1" />
+    <Button onAction="#logout" onKeyTyped="#logout" text="Log Out" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="16" GridPane.rowSpan="1" />
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />

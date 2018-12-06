@@ -37,6 +37,10 @@ public class WorkingLayer {
         database.updateUser(user);
     }
 
+    public void dropUser(User user) {
+        database.dropUser(user.id);
+    }
+
     public User getUserWithPhoneNumber(String phoneNumber){
         return database.getUserWithPhoneNumber(phoneNumber);
     }
@@ -63,6 +67,10 @@ public class WorkingLayer {
 
     public void insertItem(Item item) {
         database.insertItem(item);
+    }
+
+    public void dropItem(Item item) {
+        database.dropItem(item.id);
     }
 
     public ArrayList<Item> searchItemsWithSerial(String serialNumber) {
@@ -106,6 +114,10 @@ public class WorkingLayer {
 
     public ArrayList<Repair> getRepairsOnItem(long itemId) {
         return database.getRepairsOnItem(itemId);
+    }
+
+    public void dropRepair(Repair repair) {
+        database.dropRepair(repair.id);
     }
 
     public void updateRepair(Repair repair) {

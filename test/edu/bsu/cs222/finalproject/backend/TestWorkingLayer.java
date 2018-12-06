@@ -13,7 +13,7 @@ public class TestWorkingLayer {
 
         user.id = 1234;
         user.name = "John Doe";
-        user.address = "123 Cherry Road";
+        user.address = "123 Cherry Road\nMuncie\nIndiana";
         user.phoneNumber = "123-123-1234";
 
         return user;
@@ -129,9 +129,12 @@ public class TestWorkingLayer {
 
         workingLayer.dropRepairPart(part.id);
         workingLayer.deleteEmployee(employee);
+        workingLayer.dropUser(user);
+        workingLayer.dropItem(item);
 
         Assert.assertEquals(0, workingLayer.getRepairPartsInQueue().size());
         Assert.assertEquals(0, workingLayer.getAllEmployees().size());
-        //TODO: Add drop tests
+        Assert.assertEquals(null, workingLayer.getUserWithId(user.id));
+        Assert.assertEquals(null, workingLayer.getItemWithId(item.id));
     }
 }
