@@ -7,25 +7,35 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.finalproject.ui.MainSelection">
+<GridPane alignment="center" hgap="10" prefHeight="325.0" prefWidth="621.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.finalproject.ui.MainSelection">
     <padding>
         <Insets bottom="25" left="25" right="25" top="25" />
     </padding>
-    <Label fx:id="welcomeText" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1" />
-    <Label text="Select an Action" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.rowSpan="1" />
-    <Button managed="false"/>
-    <Button onAction="#userLookup" onKeyTyped="#userLookup" text="Customer Lookup" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2" GridPane.rowSpan="1" />
-    <Button onAction="#itemLookup" onKeyTyped="#itemLookup" text="Item Lookup" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
-    <Button onAction="#addPurchase" onKeyTyped="#addPurchase" text="Add Purchase" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
-    <Button onAction="#addRepair" onKeyTyped="#addRepair" text="Add Repair" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="5" GridPane.rowSpan="1" />
-    <Button onAction="#repairQueue" onKeyTyped="#repairQueue" text="Repair Queue" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="6" GridPane.rowSpan="1" />
-    <Button onAction="#repairPartsQueue" onKeyTyped="#repairPartsQueue" text="Repair Parts Queue" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="7" GridPane.rowSpan="1" />
-    <Button onAction="#employeeEditor" onKeyTyped="#employeeEditor" text="Employee Editor" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="8" GridPane.rowSpan="1" />
-    <Button onAction="#logout" onKeyTyped="#logout" text="Log Out" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="9" GridPane.rowSpan="1" />
+    <Label fx:id="welcomeText" alignment="CENTER" prefHeight="21.0" prefWidth="137.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="6" GridPane.rowSpan="1" />
+    <Label text="Select an Action" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="2" GridPane.rowSpan="1" />
+    <Button managed="false" onKeyTyped="#checkPermissions" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <Button onAction="#userLookup" onKeyTyped="#userLookup" text="Customer Lookup" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
+    <Button onAction="#itemLookup" onKeyTyped="#itemLookup" prefHeight="31.0" prefWidth="139.0" text="Item Lookup" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+    <Button onAction="#addPurchase" onKeyTyped="#addPurchase" prefHeight="31.0" prefWidth="119.0" text="New Purchase" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+    <Button onAction="#addRepair" onKeyTyped="#addRepair" prefHeight="31.0" prefWidth="118.0" text="New Repair" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
+    <Button onAction="#repairQueue" onKeyTyped="#repairQueue" prefHeight="31.0" prefWidth="124.0" text="Repair Queue" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
+    <Button onAction="#repairPartsQueue" onKeyTyped="#repairPartsQueue" prefHeight="31.0" prefWidth="123.0" text="Parts to order" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
+    <Button fx:id="editButton" disable="true" onAction="#employeeEditor" onKeyTyped="#employeeEditor" prefHeight="31.0" prefWidth="137.0" text="Employee Editor" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="16" GridPane.rowSpan="1" />
+    <Button onAction="#logout" onKeyTyped="#logout" text="Log Out" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="16" GridPane.rowSpan="1" />
    <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />

@@ -5,26 +5,27 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 
 public class MainSelection {
     static void showScene() throws Exception{
         Main main = Main.getInstance();
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(main.getClass().getResource("/fxml/MainSelection.fxml"));
         Parent loadedPane = loader.load();
         MainSelection controller = loader.getController();
-        
         controller.welcomeText.setText("Welcome, " + main.currentEmployee.name + "!");
         Scene scene = new Scene(loadedPane);
+
         main.stage.setScene(scene);
         main.stage.show();
     }
-
     @FXML
     Label welcomeText = null;
-
+    @FXML
+    Button editButton = null;
     @FXML
     void userLookup() throws Exception{
         UserLookup.showScene();
@@ -36,6 +37,7 @@ public class MainSelection {
         ItemLookup lookup = ItemLookup.createInstance(main.stage);
         lookup.show();
     }
+
 
     @FXML
     void repairQueue() throws Exception{
@@ -69,5 +71,11 @@ public class MainSelection {
     @FXML
     void logout() throws Exception {
         Login.showScene();
+    }
+    @FXML
+     void checkPermissions(KeyEvent keyEvent)
+    {
+        if(Main.getInstance().currentEmployee.number.equals("88"))
+        editButton.setDisable(false);
     }
 }
