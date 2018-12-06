@@ -12,7 +12,6 @@ import org.xhtmlrenderer.pdf.ToPDF;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Print {
@@ -134,8 +133,8 @@ public class Print {
                         + "<tr>"
                         + "<td>").append(part.quantity).append("</td>"
                         + "<td>").append(part.name).append("</td>"
-                        + "<td>").append(NumberFormat.getCurrencyInstance().format(part.price / 100.0)).append("</td>"
-                        + "<td>").append(NumberFormat.getCurrencyInstance().format(totalPartCast / 100.0)).append("</td>"
+                        + "<td>").append(Currency.toFormatted(part.price)).append("</td>"
+                        + "<td>").append(Currency.toFormatted(totalPartCast)).append("</td>"
                         + "</tr>"
                     );
                     extraEmptyRows--;
@@ -157,7 +156,7 @@ public class Print {
                 + "<th></th>"
                 + "<th class='align-right'>Total Materials</th>"
                 + "<td></td>"
-                + "<td>").append(NumberFormat.getCurrencyInstance().format(totalMaterialCost / 100.0)).append("</td>"
+                + "<td>").append(Currency.toFormatted(totalMaterialCost)).append("</td>"
                 + "</tr>"
 
                 + "<tr>"

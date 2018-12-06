@@ -12,7 +12,7 @@ public class PhoneNumber {
 
         for (char iterator : phoneCheck){
             if (("" + iterator).matches("\\D")) {
-                if(iterator != '-' && iterator != '(' && iterator != ')') {//if it is not one of the special allowed characters
+                if(iterator != '-' && iterator != '(' && iterator != ')' && iterator != ' ') {//if it is not one of the special allowed characters
                     return false;
                 }
             }
