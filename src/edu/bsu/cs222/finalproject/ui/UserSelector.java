@@ -112,6 +112,8 @@ public class UserSelector extends StackPane {
         addressCol.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().address.replaceAll("\\n", ", ")));
 
         userTable.getColumns().addAll(nameCol, phoneCol, addressCol);
+        userTable.setMinWidth(490);
+        userTable.setMinHeight(100);
 
         userSelectionPane.getChildren().set(0, userTable);
 
