@@ -13,6 +13,7 @@
     </padding>
     <Label fx:id="welcomeText" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0" GridPane.rowSpan="1" />
     <Label text="Select an Action" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1" GridPane.rowSpan="1" />
+    <Button managed="false"/>
     <Button onAction="#userLookup" onKeyTyped="#userLookup" text="Customer Lookup" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2" GridPane.rowSpan="1" />
     <Button onAction="#itemLookup" onKeyTyped="#itemLookup" text="Item Lookup" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="3" GridPane.rowSpan="1" />
     <Button onAction="#addPurchase" onKeyTyped="#addPurchase" text="Add Purchase" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="4" GridPane.rowSpan="1" />
