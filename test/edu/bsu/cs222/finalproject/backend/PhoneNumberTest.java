@@ -12,6 +12,10 @@ public class PhoneNumberTest {
         assertEquals(true, PhoneNumber.isValid("555-555-5555"));
         assertEquals(true, PhoneNumber.isValid("(555)555-5555"));
 
+        assertEquals(true, PhoneNumber.isValid("  5555555555"));
+        assertEquals(true, PhoneNumber.isValid("55555  55555  "));
+
+        assertEquals(false, PhoneNumber.isValid(""));
         assertEquals(false, PhoneNumber.isValid("555555555"));
         assertEquals(false, PhoneNumber.isValid("55555555555"));
         assertEquals(false, PhoneNumber.isValid("555-5555-5555"));
@@ -22,15 +26,16 @@ public class PhoneNumberTest {
     }
 
     @Test
-    public void testToNormalized() throws Exception{
+    public void testToNormalized() {
         assertEquals("5555555555", PhoneNumber.toNormalized("5555555555"));
         assertEquals("5555555555", PhoneNumber.toNormalized("555-555-5555"));
         assertEquals("5555555555", PhoneNumber.toNormalized("(555)-555-5555"));
         assertEquals("5555555555", PhoneNumber.toNormalized("5-5-5-5-5-55-5-55"));
+        assertEquals("5555555555", PhoneNumber.toNormalized("  555  5555555  "));
     }
 
     @Test
-    public void testToFormatted() throws Exception{
+    public void testToFormatted() {
         assertEquals("(555)555-5555", PhoneNumber.toFormatted("5555555555"));
         assertEquals("(123)456-7890", PhoneNumber.toFormatted("1234567890"));
     }

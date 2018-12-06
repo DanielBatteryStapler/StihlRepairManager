@@ -1,6 +1,7 @@
 package edu.bsu.cs222.finalproject.ui;
 
 import edu.bsu.cs222.finalproject.Main;
+import edu.bsu.cs222.finalproject.backend.Currency;
 import edu.bsu.cs222.finalproject.database.Repair;
 import edu.bsu.cs222.finalproject.database.RepairPart;
 import javafx.fxml.FXML;
@@ -61,8 +62,8 @@ public class RepairPartEditor {
         stage.show();
     }
 
-    void disableViewingRepair(boolean disable){
-        viewRepairButton.setDisable(disable);
+    void disableViewingRepair(){
+        viewRepairButton.setDisable(true);
     }
 
     @FXML
@@ -71,17 +72,35 @@ public class RepairPartEditor {
     }
 
     @FXML
-    void updateRepairPart(){
+    void updateRepairPart() {
         Main main = Main.getInstance();
 
-        repairPart.quantity = Integer.parseInt(quantityField.getText());
-        repairPart.name = nameField.getText();
-        String priceText = priceField.getText();
-        //TODO: split all of this dealing with price parsing stuff into a separate file, just like how PhoneNumbers work
-        if(priceText.length() > 1 && priceText.charAt(0) == '$'){
-            priceText = priceText.substring(1);
+        quantityField.setStyle("-fx-control-inner-background: #ffffff");
+        nameField.setStyle("-fx-control-inner-background: #ffffff");
+        priceField.setStyle("-fx-control-inner-background: #ffffff");
+
+        try {
+            repairPart.quantity = Integer.parseInt(quantityField.getText());
+            if(repairPart.quantity < 0){
+                throw new NumberFormatException("Number cannot be negative");
+            }
         }
-        repairPart.price = (int)(Double.parseDouble(priceText) * 100);//explicitly cast this down to an int
+        catch(NumberFormatException e){
+            quantityField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+
+        if(nameField.getText().isEmpty()){
+            nameField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+        repairPart.name = nameField.getText();
+
+        if(!Currency.isValid(priceField.getText())){
+            priceField.setStyle("-fx-control-inner-background: #ff0000");
+            return;
+        }
+        repairPart.price = Currency.toNormalized(priceField.getText());
 
         main.workingLayer.updateRepairPart(repairPart);
 

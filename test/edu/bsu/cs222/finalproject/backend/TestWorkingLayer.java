@@ -61,15 +61,12 @@ public class TestWorkingLayer {
             workingLayer.initialize(temp);
     
             Class<WorkingLayer> workingLayerClass = WorkingLayer.class;
-            Field field = null;
+            Field field = workingLayerClass.getDeclaredField("database");
 
-            field = workingLayerClass.getDeclaredField("database");
             field.setAccessible(true);
 
             Assert.assertEquals(temp, field.get(workingLayer));
-        } catch (NoSuchFieldException e) {
-            Assert.fail();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             Assert.fail();
         }
     }
