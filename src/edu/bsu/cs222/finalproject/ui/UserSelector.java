@@ -150,7 +150,10 @@ public class UserSelector extends StackPane {
 
     @FXML
     void selectUserByName() {
-        setUser(userTable.getSelectionModel().getSelectedItem());
+        User selectedUser = userTable.getSelectionModel().getSelectedItem();
+        if(selectedUser != null) {
+            setUser(selectedUser);
+        }
     }
 
     @FXML
